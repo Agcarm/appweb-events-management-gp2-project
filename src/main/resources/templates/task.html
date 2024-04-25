@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Form</title>
+    <link rel="stylesheet" th:href="@{css/styles.css}">
+    <link rel="stylesheet" th:href="@{css/dashboard.css}">
+
+</head>
+<style>
+              /* Reset some default styling */
+body, div, h1, form, label, input, select, textarea, button {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+}
+</style>
+<body>
+    <div id="overlayTask" class="overlayTask"  th:fragment="task">
+        <div class="container">
+            <h1>Task Form</h1>
+            <form action="#" th:action="@{/save}" th:object="${task}" method="post" onsubmit="return confirm('Are you sure you wish to submit?');">
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" required>
+
+
+                <label for="deadline">Deadline:</label>
+                <input type="date" id="deadline" name="deadline" required>
+
+
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="Pending">Pending</option>
+                    <option value="In Progress">In Progress</option>
+                    <option value="Completed">Completed</option>
+                </select>
+
+
+                <label for="personInCharge">Person in Charge:</label>
+                <input type="text" id="personInCharge" name="personInCharge">
+
+
+                <label for="registrationDate">Registration Date:</label>
+                <input type="date" id="registrationDate" name="registrationDate">
+
+
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" rows="4"></textarea>
+
+            <div class="formbuto">
+                <button type="submit" class="fbtn">Submit</button>
+                <button id="closeFormBtnTask" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
+            </div>
+
+            </form>
+        </div>
+    </div>
+</body>
+</html>

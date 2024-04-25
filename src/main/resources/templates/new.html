@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Create New Product</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+    <div align="center">
+        <h1>Create New venue</h1>
+        <br />
+        <div class="col-sm-4">
+            <form action="#" th:action="@{/save}" th:object="${venue}" method="post">
+
+                <div alight="left">
+                    <tr>
+                        <label class="form-label">Name</label>
+                        <td>
+                            <input type="hidden" />
+                            <input type="text" th:field="*{name}" class="form-control" placeholder="venue Name" />
+                        </td>
+                    </tr>
+                </div>
+                <div alight="left">
+                    <tr>
+                        <label class="form-label">Country</label>
+                        <td>
+                            <input type="hidden" />
+                            <input type="text" th:field="*{country}" class="form-control" placeholder="venue Country" />
+                        </td>
+                    </tr>
+                </div>
+
+                <div alight="left">
+
+                    <tr>
+                        <label class="form-label">City</label>
+                        <td><input type="text" th:field="*{city}" class="form-control" placeholder="City" /></td>
+                    </tr>
+                </div>
+                <div alight="left">
+                    <tr>
+                        <label class="form-label">Address</label>
+                        <td><input type="text" th:field="*{address}" class="form-control" placeholder="Address" /></td>
+                    </tr>
+                    <div alight="left">
+                        <tr>
+                            <label class="form-label">Longitude</label>
+                            <td>
+                            <td><input type="number" th:field="*{longitude}" class="form-control" placeholder="long" />
+                            </td>
+                            </td>
+
+                        </tr>
+                        <div alight="left">
+                            <tr>
+                                <label class="form-label">Latitude</label>
+                                <td><input type="number" th:field="*{latitude}" class="form-control"
+                                        placeholder="lqt" /></td>
+                            </tr>
+
+                            </tr>
+                            <label class="form-label">Upload Image</label>
+                            <td><input type="file" th:field="*{image}" class="form-control" accept="image/*" /></td>
+                        </tr>
+                    </div>
+                            <br>
+                            <tr>
+                                <td colspan="2"><button type="submit" class="btn btn-info">Save</button> </td>
+                            </tr>
+                            </table>
+            </form>
+        </div>
+</body>
+
+</html>

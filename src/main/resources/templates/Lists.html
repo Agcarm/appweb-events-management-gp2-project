@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EMS</title>
+</head>
+<body>
+    <table class="tabTable active" th:fragment="eventList">
+        <thead class="tablehead">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Type</th>
+                <th>Venue</th>
+                <th>Status</th>
+                <th>Start Date</th>
+                <th>Estimated Budget</th>
+                <th>Date Modified</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr class="table-primary" th:each="event : ${eventList}">
+                <td scope="row" class="check">
+                    <label for="row-1"></label>
+                    <input type="radio" name="row-1" id="row-1" title="selectRow" th:checked="${event.getId()==1}">
+                </td>
+                <td th:text="${event.getName()}" ></td>
+                <td th:text="${event.getType()}"></td>
+                <td th:text="${event.getEventVenue().getName()}"></td>
+                <td th:text="${event.getStatus()}"></td>
+                <td th:text="${event.getStartDate()}"></td>
+                <td th:text="${event.getName()}"></td>
+                <td th:text="${event.getDateModified()}"></td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="tabTable" th:fragment="taskList">
+        <thead class="tablehead">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Status</th>
+                <th>In charge</th>
+                <th>DeadLine</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr class="table-primary" th:each="event : ${eventList}">
+                <td scope="row" class="check">
+                    <label for="row-1"></label>
+                    <input type="radio" name="row-1" id="row-1" title="selectRow">
+                </td>
+                <td th:text="${event.getName()}"></td>
+                <td th:text="${event.getEventVenue().getName()}"></td>
+                <td th:text="${event.getEstimatedAttendees()}"></td>
+                <td th:text="${event.getDescription()}"></td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <table class="tabTable" th:fragment="venueList">
+        <thead class="tablehead">
+            <tr>
+                <th></th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>City</th>
+                <th>Address</th>
+                <th>Latitude</th>
+                <th>Longitude</th>
+                <th>Edit</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody class="table-group-divider">
+            <tr class="table-primary" th:each="venue : ${venueList}">
+                <td scope="row" class="check">
+                    <label for="row-1"></label>
+                    <input type="radio" name="row-1" id="row-1" title="selectRow">
+                </td>
+                <td th:text="${venue.getName()}"></td>
+                <td th:text="${venue.getCountry()}"></td>
+                <td th:text="${venue.getCity()}"></td>
+                <td th:text="${venue.getAddress()}"></td>
+                <td th:text="${venue.getLongitude()}"></td>
+                <td th:text="${venue.getLatitude()}"></td>                
+
+
+                <td><a th:href="@{'/edit/' + ${venue.id}}">Edit</a></td>
+                <td><a th:href="@{'/delete/' + ${venue.id}}">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+</body></html>

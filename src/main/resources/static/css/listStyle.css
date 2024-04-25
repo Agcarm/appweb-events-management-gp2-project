@@ -1,0 +1,6 @@
+@import url("styles.css");
+
+.selected {
+    background-color: #d1f0ff;
+    border: #4AA3FC 1px solid;
+}

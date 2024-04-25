@@ -1,0 +1,184 @@
+*{
+    margin: 0;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 14px;
+}
+
+/*--------------------------------------------------------*/
+/*First Shape*/
+div .topShape{
+    position: absolute;
+    top: -4%;
+    background-color: transparent;
+    z-index: 1;
+}
+
+div .cls-2{
+    fill: rgba(158,255,236,0.24);
+}
+/*--------------------------------------------------------*/
+/*Bottom Shape*/
+div .bottomShape{
+    position: fixed;
+    right: 0;
+    bottom: -5%;
+    background-color: transparent;
+}
+
+div .cls-1 {
+    fill: #4aa3fc;
+    stroke: #4aa3fc;
+    opacity: 0.22;
+    width: 70%;
+}
+/*--------------------------------------------------------*/
+
+/*Header Section*/
+/*--------------------------------------------------------*/
+header .logo{
+    position: absolute;
+    font-weight: bold;
+    font-size: 20px;
+    left: 50px;
+    top: 20px;
+    z-index: 3;
+    background-color: transparent;
+}
+
+.logo::before{
+    content: '';
+    display: inline-block;
+    background: url(../images/logo.svg);
+    width: 10px;
+    height: 10px;
+}
+
+header nav{
+    float: right;
+    margin: 25px 50px 0 0;
+}
+header nav ul li a{
+    text-decoration: none;
+    padding: 5px 10px;
+}
+header nav ul li{
+    display: inline;
+    margin: 10px;
+}
+.secondary{
+    border: #16B1FF solid 2px;
+    color: #16B1FF;
+}
+.secondary:hover{
+    color: white;
+    background-color: #16B1FF;
+}
+/*--------------------------------------------------------*/
+
+main.formContainer{
+    display: grid;
+    position: absolute;
+    top: 18%;
+    left: 35%;
+    width: 35%;
+    border: #4aa3fc;
+    border-radius: 20px;
+    box-shadow: 0px 0px 13px rgba(0, 0, 0, 0.16);
+    z-index: -1;
+}
+
+form{
+    width: 50%;
+    justify-self: center;
+}
+
+form *{
+    border: none;
+    margin: 10px 0;
+    width: 100%;
+}
+/*Title*/
+/*--------------------------------------------------------*/
+div.title{
+    text-align: center;
+    margin: 40px 0 20px 0;
+    display: grid;
+}
+h1{
+    font-size: 45px;
+}
+
+div.bar{
+    margin-top: 10px;
+    background: linear-gradient(to right,#9EFFEC 30%,#16B1FF 70%);
+    width: 50%;
+    height: 8px;
+    justify-self: center;
+    border-radius: 20px;
+}
+
+div.text{
+    text-align: center;
+    color: #4B4B4B;
+    font-size: 16px;
+}
+
+form input{
+    color: #4B4B4B;
+    border-bottom: solid 2px #70707035;
+    padding: 0;
+    margin-top: 0;
+}
+
+form label{
+    color: #A6A6A6;
+}
+
+div.namediv{
+    margin-top: 20px;
+}
+
+form div{
+    margin: 0;
+}
+
+form div.btn{
+    display: grid;
+}
+
+input[type="submit"]{
+    color: white;
+    justify-self: center;
+    width: 50%;
+    border: transparent 1px ;
+    border-radius: 8px;
+    padding: 8px;
+    background: linear-gradient(to top, #3888D9 , #63FFE0);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+form div.input{
+    padding: 20px 0;
+}
+
+.message {
+    background-color: #45b6fe;
+    color: white;
+    padding: 10px;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+@keyframes tide {
+    0% {
+      transform: translateY(30px);
+    }
+    100% {
+      transform: translateX(15px);
+    }
+  }
+  svg{
+    animation: tide 2s infinite alternate;
+  }

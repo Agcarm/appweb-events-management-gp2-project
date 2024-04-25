@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Event Management</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+	<div class="container mt-5">
+		<h2>Event Management</h2>
+		<hr>
+		<h4>List of Events</h4>
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Start Date</th>
+					<th>End Date</th>
+					<th>Venue</th>
+					<th>Description</th>
+					<th>Estimated Attendees</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="event : ${events}">
+					<td th:text="${event.name}" />
+					<td th:text="${event.startDate}" />
+					<td th:text="${event.endDate}" />
+					<td th:text="${event.idvenues}" /> <!-- Assuming eventVenue has a name attribute -->
+					<td th:text="${event.description}" />
+					<td th:text="${event.estimatedAttendees}" />
+
+					<td>
+						<a th:href="@{'/events/' + ${event.id} + '/edit'}" class="btn btn-primary btn-sm">Edit</a>
+						<form th:action="@{'/events/' + ${event.id} + '/delete'}" method="post" style="display: inline;" onsubmit="return confirm('Are you sure ?');">
+							<button type="submit" class="btn btn-danger btn-sm">Delete</button>
+						</form>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<div th:if="${event != null}">
+			<h4>Edit Event</h4>
+			<form th:action="@{'/event/' + ${event.id} + '/update'}" method="post">
+				<div class="form-group">
+					<label for="name">Name:</label>
+					<input type="text" class="form-control" id="name" th:field="*{event.name}">
+				</div>
+				<div class="form-group">
+					<label for="startDate">Start Date:</label>
+					<input type="datetime-local" class="form-control" id="startDate" th:field="*{event.startDate}">
+				</div>
+				<div class="form-group">
+					<label for="endDate">End Date:</label>
+					<input type="datetime-local" class="form-control" id="endDate" th:field="*{event.endDate}">
+				</div>
+				<div class="form-group">
+					<label for="eventVenue">Venue:</label>
+					<input type="text" class="form-control" id="eventVenue" th:field="*{event.eventVenue}">
+				</div>
+				<div class="form-group">
+					<label for="description">Description:</label>
+					<textarea class="form-control" id="description" th:field="*{event.description}"></textarea>
+				</div>
+				<div class="form-group">
+					<label for="estimatedAttendees">Estimated Attendees:</label>
+					<input type="number" class="form-control" id="estimatedAttendees" th:field="*{event.estimatedAttendees}">
+				</div>
+				<button type="submit" class="btn btn-success">Update</button>
+				<a th:href="@{/event/{id}/delete(id=${event.id})}" class="btn btn-success" style="background-color:red;">Delete</a>
+			</form>
+		</div>
+	</div>
+
+</body>
+</html>

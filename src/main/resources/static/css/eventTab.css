@@ -1,0 +1,125 @@
+/* @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,700&display=swap');
+
+:root{
+    --main-color:#4AA3FC;
+    --main-color-variation1:#16B1FF;
+    --main-color1-low-opacity:#d1f0ff;
+    --main-color-variation2:#37BAFD;
+    --mint-accent-color:#9EFFEC;
+    --greyish-color:#A6A6A6;
+    --blackish-color:#4B4B4B;
+    --body-color:#FCFCFC;
+    --side-color:#F4F8F9;
+}
+
+*{
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", 'Segoe UI', sans-serif,  Tahoma, Geneva, Verdana;
+    overflow-wrap: break-word;
+    overflow: hidden;
+} */
+
+a{
+    text-decoration: none;
+}
+/*Main Body stylization*/
+.table-tabs{
+    margin-top: 50px;
+    height: 80vh;
+    padding: 10px 30px;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    border-radius: 20px;
+}
+.table-lists{
+    position: relative;
+    margin: 20px 0;
+}
+.table-lists .tab{
+    color: #4B4B4B;
+    border: none;
+    background-color: transparent;
+    font-weight: bold;
+    margin-right: 20px;
+    margin-bottom: 10px;
+}
+.table-lists .tab:hover{ 
+    cursor: pointer;
+}
+.table-lists .tab.active{
+    color: var(--blue);
+}
+.line{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 65px;
+    height: 4px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    transition: all 0.3s ease-in-out;
+}
+.tabTable{
+    display: none;
+}
+.tabTable.active{
+    display: table;
+    animation: moving 0.8s ease;
+}
+@keyframes moving{
+    from{transform: translateX(40px); opacity: 0; }
+    to{transform: translateX(0px); opacity: 1;}
+}
+table *{
+    padding: 10px;
+}
+table{
+    border-spacing: 0;
+}
+.tablehead{
+    background-color: var(--blue);
+    color: white;
+    th{
+        font-weight: 600;
+    }
+}
+
+main{
+    padding: 0 20px;
+}
+.main{
+    width: calc(100% - 300px - 400px) !important;
+}
+.main.active {
+    width: calc(100% - 80px - 400px);
+    left: 80px;
+}
+aside{
+    position: absolute;
+    width: 400px;
+    height: 100vh;
+    background: var(--white);
+    box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
+    right: 0;
+
+    .info{
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+}
+
+.myprimarybtn{
+    background-color: var(--blue);
+    color: var(--white);
+    border: transparent;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+}
+.myprimarybtn:hover{
+    cursor: pointer;
+}

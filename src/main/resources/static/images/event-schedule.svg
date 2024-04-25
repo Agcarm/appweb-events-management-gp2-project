@@ -1,0 +1,6 @@
+<svg id="event-schedule" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28">
+  <path id="Path_1" data-name="Path 1" d="M21,30a8,8,0,1,1,8-8A8,8,0,0,1,21,30Zm0-14a6,6,0,1,0,6,6A6,6,0,0,0,21,16Z" transform="translate(-4 -4)" fill="#5887b3"/>
+  <path id="Path_2" data-name="Path 2" d="M22.59,25,20,22.41V18h2v3.59l2,2Z" transform="translate(-2.857 -2.88)" fill="#5887b3"/>
+  <path id="Path_3" data-name="Path 3" d="M24,5.357a1.673,1.673,0,0,0-1.667-1.678H19V2H17.333V3.678H10.667V2H9V3.678H5.667A1.673,1.673,0,0,0,4,5.357V22.14a1.673,1.673,0,0,0,1.667,1.678H9V22.14H5.667V5.357H9V7.035h1.667V5.357h6.667V7.035H19V5.357h3.333v5.035H24Z" fill="#5887b3"/>
+  <path id="Path_4" data-name="Path 4" d="M0,0H28V28H0Z" fill="none"/>
+</svg>

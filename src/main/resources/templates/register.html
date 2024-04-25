@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/signup.css">
+    <title>EMS-SignUp</title>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../images/logo.png" alt="" width="80px">
+            Event Management System
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#" class="secondary">Learn more</a></li>
+                <li><a th:href= "@{/login}" class="primary" >Log In</a></li>
+            </ul>
+        </nav>
+    </header>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" width="45%" viewBox="0 0 998.187 463.343" class="topShape">
+            <path id="Path_6" data-name="Path 6" class="cls-2" d="M6000,428.083s202.391-106.123,500.277-104.75S6960.147,99.574,6997.212,6.227s-997.213,0-997.213,0Z" transform="translate(-5999.999 35.26)"/>
+        </svg>
+    </div>
+    <div>
+        <svg xmlns="http://www.w3.org/2000/svg" height="90%" viewBox="0 0 1109.956 1015.98" class="bottomShape">
+            <path id="Path_7" data-name="Path 7" class="cls-1" d="M8076.352,204.072s-187.4,43.992-334.172,210.7,29.85,268.581-233.837,453.808S7137.69,988.976,6980.97,1144.1s1095.381,20.838,1095.381,20.838Z" transform="translate(-6966.896 -203.441)"/>
+        </svg>
+    </div>
+    <main class="formContainer">
+        <div class="title">
+            <h1>Sign Up</h1>
+            <div class="bar"></div>
+        </div>
+        <form th:action="@{/registration}"
+        method="post"
+        role="form"
+        th:object="${user}">
+            <div class="text">
+                <div class="message" th:if="${message != null}">
+                    [[${message}]]
+                 </div>
+                Welcome. Please fill the form to get access to the app
+            </div>
+            <div class=" input namediv">
+                <div>
+                    <label for="fullname">Full Name</label>
+                </div>
+                <input th:field="*{fullname}" type="text" name="fullname" id="fullname" >
+            </div>
+            <div class="input emaildiv">
+                <div>
+                    <label for="email">Email</label>
+                </div>
+                <input th:field="*{email}" type="email" name="email" id="email" >
+            </div>
+            <div class="input passworddiv">
+                <div>
+                    <label for="password">Password</label>
+                </div>
+                <input th:field="*{password}" type="password" name="password" id="password" >
+            </div>
+           
+            <div class="btn">
+                <input type="submit" value="sign up">
+            </div>
+        </form>
+    </main>
+
+</body>
+</html>
