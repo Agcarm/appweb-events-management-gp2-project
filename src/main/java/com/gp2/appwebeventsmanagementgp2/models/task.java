@@ -1,20 +1,20 @@
 package com.gp2.appwebeventsmanagementgp2.models;
 
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.AllArgsConstructor;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name = "task1")
+@Table(name = "task")
 public class task {
 
     @Id
@@ -22,32 +22,31 @@ public class task {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "title")
+    @Column(name = "title", unique = true)
     private String title;
 
     @Column(name = "deadline")
-    private String deadline;
+    private LocalDateTime deadline;
 
     @Column(name = "status")
     private String status;
 
     // Assuming a Contact class exists and is an entity with its own @Entity annotation
-    // @ManyToOne
-    // @Column(name = "person_in_charge")
-    // private contact personInCharge;
+    @ManyToMany
+    @Column(name = "person_in_charge", nullable = true)
+    private List<contact> personInCharge;
 
     @Column(name = "registration_date")
-    private String registrationDate;
+    private Date registrationDate;
 
     @Column(name = "description")
     private String description;
 
     // Additional constructors can be added as needed
-    public task(String title, String deadline, String status, String registrationDate, String description) {
+    public task(String title, LocalDateTime deadline, String status, Date registrationDate, String description) {
         this.title = title;
         this.deadline = deadline;
         this.status = status;
-        // this.personInCharge = personInCharge;
         this.registrationDate = registrationDate;
         this.description = description;
     }

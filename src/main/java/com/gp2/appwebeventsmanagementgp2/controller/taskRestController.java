@@ -1,52 +1,55 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
-import com.gp2.appwebeventsmanagementgp2.models.task;
-import com.gp2.appwebeventsmanagementgp2.repositories.taskRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.gp2.appwebeventsmanagementgp2.dto.TaskDto;
+import com.gp2.appwebeventsmanagementgp2.models.task;
+import com.gp2.appwebeventsmanagementgp2.services.TaskService;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+
+
+@RequestMapping("/task")
 @RestController
-@RequestMapping("/api/task")
 public class taskRestController {
-
-    private final taskRepository taskRepository;
-
+    
     @Autowired
-    public taskRestController(taskRepository taskRepository) {
-        this.taskRepository = taskRepository;
+    TaskService taskservice;
+
+    @PostMapping("/createtask")
+    public void createtask(@RequestBody TaskDto tsk) {
+        taskservice.addTask(tsk);
+        
+        return ;
     }
 
-    @GetMapping("/")
-    public List<task> getAllTasks() {
-        return taskRepository.findAll();
+    @GetMapping("/findall")
+    public List<task> findall() {
+        return taskservice.findAll();
     }
 
-    @PostMapping("/save")
-    public task saveTask(@RequestBody task task) {
-        return taskRepository.save(task);
+    @GetMapping("/{title}")
+    public task getByName(@PathVariable String title,Model model) {
+        model.addAttribute("title", taskservice.findByTitleTask(title));
+        return taskservice.findByTitleTask(title);
     }
-
-    @PostMapping("/create")
-    public task createtask(@RequestBody task task) {
-        return taskRepository.save(task);
+    
+    @GetMapping("/task{Id}")
+    public task getById(@PathVariable Long Id,Model model) {
+        model.addAttribute("Id", taskservice.findByIdTask(Id));
+        return taskservice.findByIdTask(Id);
     }
-
-    @GetMapping("/edit/{id}")
-    public task getTask(@PathVariable Long id) {
-        return taskRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid task ID"));
+    @PostMapping("/edit/{id}")
+    public task postMethodName(@PathVariable("id") Long id, @ModelAttribute("task") TaskDto editTask) {
+        return  taskservice.editTask(id, editTask);
     }
-
-    @PutMapping("/edit/{id}")
-    public task updatetask(@PathVariable Long id, @RequestBody task task) {
-        task.setId(id);
-        return taskRepository.save(task);
-    }
-
-    @DeleteMapping("/delete/{id}")
-    public void deletetask(@PathVariable Long id) {
-        taskRepository.deleteById(id);
-    }
+    
 }
