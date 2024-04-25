@@ -17,6 +17,8 @@ import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.UserService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 
+import jakarta.validation.Valid;
+
 
 @Controller
 public class UserController {
@@ -38,11 +40,42 @@ public class UserController {
 	}
 
 	@PostMapping("/registration")
-	public String saveUser(@ModelAttribute("user") UserDto userDto, Model model) {
-		userService.save(userDto);
-		model.addAttribute("message", "Registered Successfuly! Now Login!");
-		return "register";
-	}
+    public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, Model model) {
+        // Password length validation
+        if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
+            model.addAttribute("message", "Password cannot be empty");
+            return "register"; // Return registration form with error
+        } else if (userDto.getPassword().length() < 4 || userDto.getPassword().length() > 10) {
+            model.addAttribute("message", "Password must be between 4 and 10 characters");
+            return "register"; // Return registration form with error
+        }
+
+        try {
+            userService.save(userDto);
+            model.addAttribute("message", "Registered Successfully! Now Login!");
+        } catch (Exception e) {
+            // Handle any potential exceptions during user saving
+            model.addAttribute("message", "Registration failed! Please try again.");
+        }
+
+		if (userDto.getFullname() == null || userDto.getFullname().isEmpty()) {
+            model.addAttribute("message", "Fullname cannot be empty");
+            return "register"; // Return registration form with error
+        } else if (userDto.getFullname().length() < 2 || userDto.getFullname().length() > 100) {
+            model.addAttribute("message", "Fullname must be between 2 and 100 characters");
+            return "register"; // Return registration form with error
+        }
+
+        try {
+            userService.save(userDto);
+            model.addAttribute("message", "Registered Successfully! Now Login!");
+        } catch (Exception e) {
+            // Handle any potential exceptions during user saving
+            model.addAttribute("message", "Registration failed! Please try again.");
+        }
+
+        return "register";
+    }
 
 	@GetMapping("/login")
 	public String login() {
@@ -62,7 +95,6 @@ public class UserController {
 		model.addAttribute("user", userDetails);
 		model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
-		model.addAttribute("users",List.of("Carmela","Frederic","Yvan"));
 		return "index";
 	}
 
