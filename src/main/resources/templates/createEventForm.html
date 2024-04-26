@@ -24,7 +24,7 @@
                 </div>
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
-                    <select class="formdet" id="country" name="eventVenue" required >
+                    <select class="formt" id="country" name="eventVenue" required >
                         <option class="formdet"  th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
 
@@ -43,15 +43,23 @@
                     <input type="text" id="type" name="type" ><br><br>
                 </div>
 
-                <div class="formdt"> <label for="paidEvent">Paid Event:</label>
-                    <input class="yespaid" type="checkbox" id="paidEvent" name="paidEvent" value="Yes">
-                    <input class="nopaid" type="checkbox" id="paidEvent" name="paidEvent" value="No">
+                <div class="formdt">
+
+                    Paid event:
+                    <label for="paidEvent">
+                        <input type="radio" id="paidEvent" name="paidEvent" value="yes" tyle="display: flex; justify-content: center;"> Yes
+                      </label>
+
+
+                      <label for="paidEvent">
+                        <input type="radio" id="paidEvent" name="paidEvent" value="no" tyle="display: flex; justify-content: center;"> No
+                      </label>
 
 
 
                     <br><br>
                 </div>
-
+<br><br>
                 <div class="formbuto">
                     <button type="submit" class="fbtn">Submit</button>
                     <button id="closeFormBtn" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
