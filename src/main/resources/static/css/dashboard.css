@@ -375,6 +375,7 @@
         display: grid;
         grid-template-columns: 1fr 4fr;
         width: 100%;
+        align-items: center;
     }
 
     .formdet input,textarea{
@@ -476,3 +477,20 @@ textarea {
   justify-content: space-between;
   align-items: center;
 }
+.addvenue{
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000000;
+  background-color: #baeff8;
+  cursor: pointer;
+  font-weight: bold;
+}
+.button-select-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+

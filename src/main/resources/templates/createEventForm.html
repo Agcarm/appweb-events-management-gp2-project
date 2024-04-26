@@ -24,9 +24,12 @@
                 </div>
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
+                    <div class="button-select-container">
                     <select class="formt" id="country" name="eventVenue" required >
-                        <option class="formdet"  th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
+                        <option selected>Select or Create Venue</option>
+                        <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
+                      <a  class="addvenue" href="#">Add Venue</a> </div>
 
                     <br><br>
                 </div>
