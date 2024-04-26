@@ -13,7 +13,7 @@
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
             <form id="myForm" class="createEventForm" th:action="@{/events}" method="post" onsubmit="return confirm('Are you sure?');">
                 <div class="formdet"><label for="eventName">Event Name:</label>
-                    <input type="text" id="eventName" name="eventName" required><br><br>
+                    <input type="text" id="name" name="name" required><br><br>
                 </div>
                 <div class="formdet"><label for="startDate">Start Date:</label>
                     <input type="datetime-local" id="startDate" name="startDate" required><br><br>
@@ -24,10 +24,11 @@
                 </div>
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
-                    <select id="country" name="country" required>
-                        <option value="" th:each="venue : ${venueList}">{{venue.getName}}</option>
+                    <select class="formdet" id="country" name="eventVenue" required >
+                        <option class="formdet"  th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
-                    <input type="text" id="eventVenue" name="eventVenue"><br><br>
+
+                    <br><br>
                 </div>
 
                 <div class="formdet"> <label for="description">Description:</label>
@@ -42,8 +43,13 @@
                     <input type="text" id="type" name="type" ><br><br>
                 </div>
 
-                <div class="formdet"> <label for="paidEvent">	Paid Event:</label>
-                    <input type="checkbox" id="paidEvent" name="paidEvent"><br><br>
+                <div class="formdt"> <label for="paidEvent">Paid Event:</label>
+                    <input class="yespaid" type="checkbox" id="paidEvent" name="paidEvent" value="Yes">
+                    <input class="nopaid" type="checkbox" id="paidEvent" name="paidEvent" value="No">
+
+
+
+                    <br><br>
                 </div>
 
                 <div class="formbuto">

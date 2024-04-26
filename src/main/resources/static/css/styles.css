@@ -170,3 +170,24 @@ body {
     height: 100%;
     object-fit: cover;
   }
+
+  .yespaid{
+    margin-right: 10px;
+  }
+
+  input[type="checkbox"]::after {
+    content: "Yes"; 
+    display: inline-block; 
+    margin-right: 5px; 
+    color: #666; 
+  }
+  .nopaid{
+    margin-right: 10px;
+  }
+
+  input[type="checkbox"]::after {
+    content: "No"; 
+    display: inline-block; 
+    margin-right: 5px; 
+    color: #666; 
+  }
