@@ -176,18 +176,18 @@ body {
   }
 
   input[type="checkbox"]::after {
-    content: "Yes"; 
-    display: inline-block; 
-    margin-right: 5px; 
-    color: #666; 
+    content: "Yes";
+    display: inline-block;
+    margin-right: 5px;
+    color: #666;
   }
   .nopaid{
     margin-right: 10px;
   }
 
   input[type="checkbox"]::after {
-    content: "No"; 
-    display: inline-block; 
-    margin-right: 5px; 
-    color: #666; 
+    content: "No";
+    display: inline-block;
+    margin-right: 5px;
+    color: #666;
   }
