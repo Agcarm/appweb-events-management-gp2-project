@@ -14,7 +14,7 @@ import lombok.AllArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "task1")
+@Table(name = "task")
 public class task {
 
     @Id
