@@ -25,10 +25,8 @@ public class taskRestController {
     TaskService taskservice;
 
     @PostMapping("/createtask")
-    public void createtask(@RequestBody TaskDto tsk) {
-        taskservice.addTask(tsk);
-
-        return;
+    public task createtask(@RequestBody TaskDto tsk) {
+        return taskservice.addTask(tsk);
     }
 
     @GetMapping("/findall")
@@ -36,7 +34,7 @@ public class taskRestController {
         return taskservice.findAll();
     }
 
-    @GetMapping("/{field}")
+    @GetMapping("/sort/{field}")
     public List<task> findallSort(@PathVariable String field) {
         return taskservice.findAllSort(field);
     }

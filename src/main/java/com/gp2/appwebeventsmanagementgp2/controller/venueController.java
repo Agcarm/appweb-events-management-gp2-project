@@ -33,7 +33,7 @@ public class venueController {
 
     @GetMapping("/new")
     public String add(Model model) {
-        model.addAttribute("venue", new venue());
+        // model.addAttribute("venue", new venue());
         return "new";
     }
 

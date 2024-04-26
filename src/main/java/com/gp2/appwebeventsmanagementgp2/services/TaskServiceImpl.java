@@ -48,12 +48,11 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public task editTask(Long Id, TaskDto taskDto) {
         task task = findByIdTask(Id);
-
+        task.setContacts(taskDto.getPersonInCharge());
         task.setTitle(taskDto.getTitle());
         task.setDescription(taskDto.getDescription());
         task.setDeadline(taskDto.getDeadline());
         task.setStatus(taskDto.getStatus());
-        task.setRegistrationDate(taskDto.getRegistrationDate());
 
         return taskRepo.save(task);
     }
