@@ -4,6 +4,8 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.apache.tomcat.util.buf.StringCache;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -66,9 +68,8 @@ public class event {
 
     private Boolean paidEvent;
 
-    @Lob
     @Column(name="image")
-    private byte[] image;
+    private String imageUrl;
 
     public event(String name, venue eventVenue, String description, Integer estimatedAttendees) {
         this.name = name;
