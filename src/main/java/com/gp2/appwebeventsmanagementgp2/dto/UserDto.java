@@ -1,10 +1,18 @@
 package com.gp2.appwebeventsmanagementgp2.dto;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 public class UserDto {
 
+	@NotBlank(message = "Fullname cannot be null")
 	private String email;
+	@NotBlank(message = "Fullname cannot be null")
+	@Size(min = 4, max = 10, message="Password must be between 4 and 5 characters")
 	private String password;
 	private String role;
+	@NotBlank(message = "Fullname cannot be null")
+	@Size(min = 2, max = 100, message = "Password must be between 2 and 100 characters")
 	private String fullname;
 
 	public UserDto(String email, String password, String role, String fullname) {

@@ -42,27 +42,30 @@
                 <div class="message" th:if="${message != null}">
                     [[${message}]]
                  </div>
+
+
+
                 Welcome. Please fill the form to get access to the app
             </div>
             <div class=" input namediv">
                 <div>
                     <label for="fullname">Full Name</label>
                 </div>
-                <input th:field="*{fullname}" type="text" name="fullname" id="fullname" >
+                <input th:field="*{fullname}" type="text" name="fullname" id="fullname" required="required" >
             </div>
             <div class="input emaildiv">
                 <div>
                     <label for="email">Email</label>
                 </div>
-                <input th:field="*{email}" type="email" name="email" id="email" >
+                <input th:field="*{email}" type="email" name="email" id="email" required="required">
             </div>
             <div class="input passworddiv">
                 <div>
                     <label for="password">Password</label>
                 </div>
-                <input th:field="*{password}" type="password" name="password" id="password" >
+                <input th:field="*{password}" type="password" name="password" id="password" required="required">
             </div>
-           
+
             <div class="btn">
                 <input type="submit" value="sign up">
             </div>
