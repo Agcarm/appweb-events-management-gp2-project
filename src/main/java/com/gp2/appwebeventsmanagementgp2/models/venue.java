@@ -33,26 +33,6 @@ public class venue {
     @Column(name = "latitude")
     private Double latitude;
 
-    public venue(Long id, String name, String country, String city, String address, Double latitude, Double longitude,
-            byte[] image) {
-        this.id = id;
-        this.name = name;
-        this.country = country;
-        this.city = city;
-        this.address = address;
-        this.latitude = latitude;
-        this.longitude = longitude;
-        this.image = image;
-    }
-
-    public venue() {
-        //TODO Auto-generated constructor stub
-    }
-
-    public venue(Object object, String string, Object object2, String string2, Object object3, Object object4) {
-        //TODO Auto-generated constructor stub
-    }
-
     @Column(name = "longitude")
     private Double longitude;
     
@@ -73,4 +53,7 @@ public class venue {
     }
     
     
+    public venue() {
+        //TODO Auto-generated constructor stub
+    }
 }
