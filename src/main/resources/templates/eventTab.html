@@ -3,29 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/navStyle.css}">
-    <link rel="stylesheet" th:href="@{css/eventTab.css}">
-    <link rel="stylesheet" th:href="@{css/listStyle.css}">
-    <link rel="stylesheet" th:href="@{css/styles.css}">
-    <link rel="stylesheet" th:href="@{css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/navStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/eventTab.css}">
+    <link rel="stylesheet" th:href="@{/css/listStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     <title>Events EMS</title>
 </head>
 <body>
     <div class="container">
         <div th:replace="~{navigation :: navigation}"></div>
         <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-
-            <!--    <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
--->
+            <div class="topbar" th:replace="~{topBar :: topBar}">
             </div>
             <main>
                 <div class="table-responsive table-tabs">
@@ -59,77 +48,9 @@
     </div>
     <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
     </div>
-    <script src="../js/eventTab.js"></script>
-    <script src="../js/nav.js"></script>
-    <script src="../js/lists.js"></script>
-    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-</body>
-</html>
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{css/navStyle.css}">
-    <link rel="stylesheet" th:href="@{css/eventTab.css}">
-    <link rel="stylesheet" th:href="@{css/listStyle.css}">
-    <link rel="stylesheet" th:href="@{css/styles.css}">
-    <link rel="stylesheet" th:href="@{css/dashboard.css}">
-    <title>Events EMS</title>
-</head>
-<body>
-    <div class="container">
-        <div th:replace="~{navigation :: navigation}"></div>
-        <div class="main">
-            <div class="topbar">
-                <div class="toggle">
-                    <ion-icon name="menu-outline"></ion-icon>
-                </div>
-
-            <!--    <div class="search">
-                    <label>
-                        <input type="text" placeholder="Search here">
-                        <ion-icon name="search-outline"></ion-icon>
-                    </label>
-                </div>
--->
-            </div>
-            <main>
-                <div class="table-responsive table-tabs">
-                    <div class="label">
-                        <h2>Events</h2>
-                    </div>
-                    <div class="table-lists">
-                        <button type="button" class="tab active">Event List</button>
-                        <button type="button" class="tab">Task List</button>
-                        <button type="button" class="tab">Venue List</button>
-                        <div class="line"></div>
-                        <button type="button" id="displayFormBtn" class="btn myprimarybtn">create event</button>
-
-                    </div>
-
-                    <table th:replace="~{Lists :: eventList}"></table>
-                    <table th:replace="~{Lists :: taskList}"></table>
-                    <table th:replace="~{Lists :: venueList}"></table>
-                </div>
-            </main>
-        </div>
-        <aside class="info">
-            <div class="user">
-                <img th:src="@{/images/OIG4 (3).jpg}" alt="">
-            </div>
-            <div class="eventImage"><img th:src="@{/images/OIG4 (3).jpg}" alt=""  height="250px"></div>
-            <div class="eventTitle"></div>
-            <div class="eventDescription"></div>
-            <button type="button">view sheet</button>
-        </aside>
-    </div>
-    <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
-    </div>
-    <script src="../js/eventTab.js"></script>
-    <script src="../js/nav.js"></script>
-    <script src="../js/lists.js"></script>
+    <script th:src="@{/js/eventTab.js}"></script>
+    <script th:src="@{/js/nav.js}"></script>
+    <script th:src="@{/js/lists.js}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 </body>

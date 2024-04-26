@@ -66,4 +66,10 @@ public class eventRestController {
         return  eService.updateEvent(id, updatedEvent);
     }
     
+    @PostMapping("/delete/{id}")
+    public String postMethodName(@PathVariable("id") Long id) {
+        eService.deleteEvent(id);
+        return "successful";
+    }
+    
 }

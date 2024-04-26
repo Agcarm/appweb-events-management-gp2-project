@@ -22,7 +22,7 @@ public class EventDto {
     private String status;
     private String type;
     private Boolean paidEvent;
-    private byte[] image;
+    private String imageUrl;
 
 
     public String getName() {
@@ -98,7 +98,12 @@ public class EventDto {
     public void setActivities(List<activity> activities) {
         this.activities = activities;
     }
-
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
+    }
     
     public EventDto(String name, venue eventVenue, String description, Integer estimatedAttendees) {
         this.name = name;
@@ -106,10 +111,5 @@ public class EventDto {
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
     }
-    public byte[] getImage() {
-        return image;
-    }
-    public void setImage(byte[] image) {
-        this.image = image;
-    }
+
 }

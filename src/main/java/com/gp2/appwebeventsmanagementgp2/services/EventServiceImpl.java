@@ -8,10 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
-import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
-import com.gp2.appwebeventsmanagementgp2.services.EventService;
 
 @Service
 public class EventServiceImpl implements EventService {
@@ -44,10 +42,9 @@ public class EventServiceImpl implements EventService {
 		existingevent.setStartDate(updatedEvent.getStartDate());
 		existingevent.setPaidEvent(updatedEvent.getPaidEvent());
 		existingevent.setStatus(updatedEvent.getStatus());
-		// existingevent.setDateModified(updatedEvent.getDateModified());
 		existingevent.setDateModified(Date.valueOf(LocalDate.now()));
 		existingevent.setType(updatedEvent.getType());
-		existingevent.setImage(updatedEvent.getImage());
+		existingevent.setImageUrl(updatedEvent.getImageUrl());
 		return eventRepository.save(existingevent);
 	}
 
