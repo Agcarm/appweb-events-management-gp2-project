@@ -3,6 +3,9 @@ package com.gp2.appwebeventsmanagementgp2.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.dto.TaskDto;
@@ -28,6 +31,15 @@ public class TaskServiceImpl implements TaskService {
         return taskRepo.findAll();
     }
 
+    public List<task> findAllSort(String field) {
+        return taskRepo.findAll(Sort.by(Sort.Direction.ASC, field));
+    }
+
+    public Page<task> findAllPages(int offset, int pageSize) {
+        Page<task> taskspaged = taskRepo.findAll(PageRequest.of(offset, pageSize));
+        return taskspaged;
+    }
+
     @Override
     public task findByIdTask(Long Id) {
         return taskRepo.findById(Id).orElseThrow();
@@ -43,8 +55,8 @@ public class TaskServiceImpl implements TaskService {
         task.setStatus(taskDto.getStatus());
         task.setRegistrationDate(taskDto.getRegistrationDate());
 
-        
-        return taskRepo.save(task);    }
+        return taskRepo.save(task);
+    }
 
     @Override
     public void deleteTask(Long Id) {
@@ -52,8 +64,11 @@ public class TaskServiceImpl implements TaskService {
     }
 
     @Override
-    public task findByTitleTask(String title){
+    public task findByTitleTask(String title) {
         return taskRepo.findByTitle(title);
     }
+
+    
+
 
 }

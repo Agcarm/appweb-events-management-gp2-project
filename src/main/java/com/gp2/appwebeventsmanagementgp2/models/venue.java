@@ -7,13 +7,12 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Data;
-import lombok.Setter;
 
 @Entity
 @Data
-@Setter
-@Table(name = "venues")
+@Table(name = "venue")
 public class venue {
+
     @Id
     @GeneratedValue
     @Column(name = "idvenues")
@@ -40,4 +39,18 @@ public class venue {
     @Lob
     @Column(name = "image", columnDefinition = "BLOB")
     private byte[] image;
+
+    public venue(Long id, String name, String country, String city, String address, Double latitude, Double longitude,
+            byte[] image) {
+        this.id = id;
+        this.name = name;
+        this.country = country;
+        this.city = city;
+        this.address = address;
+        this.latitude = latitude;
+        this.longitude = longitude;
+        this.image = image;
+    }
+    
+    
 }
