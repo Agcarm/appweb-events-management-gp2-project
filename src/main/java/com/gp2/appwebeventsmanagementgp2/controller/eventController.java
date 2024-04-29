@@ -11,6 +11,7 @@ import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
+import com.gp2.appwebeventsmanagementgp2.services.typeService;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,6 +25,8 @@ public class eventController {
 	EventService eService;
 	@Autowired
     venueService vService;
+    @Autowired
+    typeService tService;
 
     @GetMapping("/events/new")
     public String showEventForm(Model model) {
@@ -67,6 +70,7 @@ public class eventController {
     public String getEventView(Model model) {
         model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
+        model.addAttribute("typeList", tService.listAll());
         return "eventTab";
     }
     

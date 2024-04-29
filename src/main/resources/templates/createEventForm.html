@@ -6,6 +6,16 @@
     <link rel="stylesheet" th:href="@{css/styles.css}">
     <link rel="stylesheet" th:href="@{css/dashboard.css}">
     <title>Document</title>
+    <style>
+        #textToHide {
+          opacity: 0;
+          transition: opacity 0.5s ease-in-out;
+        }
+
+        #textToHide.show {
+          opacity: 1;
+        }
+      </style>
 </head>
 <body>
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
@@ -29,10 +39,12 @@
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
-                      <a  class="addvenue" href="#">Add Venue</a> </div>
+                      <button type="button" class="addvenue" id="toggleButton">Add Venue</button> </div>
 
                     <br><br>
                 </div>
+
+                <div id="textToHide" style="height: 100px; background-color: blueviolet; width: 100px; align-self: center;"></div>
 
                 <div class="formdet"> <label for="description">Description:</label>
                     <textarea id="description" name="description" required></textarea><br><br>
@@ -42,9 +54,17 @@
                     <input type="number" id="estimatedAttendees" name="estimatedAttendees" required><br><br>
                 </div>
 
-                <div class="formdet"> <label for="type">Types:</label>
-                    <input type="text" id="type" name="type" ><br><br>
+                <div class="formdet"><label for="eventVenue">Event Type:</label>
+
+                    <select class="formt" id="country" name="eventType" required >
+                        <option selected>Select a Type of Event</option>
+                        <option   th:each="type : ${typeList}" th:text="${type.getName()}" th:value="${type.getId()}"></option>
+                      </select>
+
+
+                    <br><br>
                 </div>
+
 
                 <div class="formdt">
 
@@ -71,5 +91,6 @@
 
         </div>
     </div>
+
 </body>
 </html>

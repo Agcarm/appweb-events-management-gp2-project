@@ -46,7 +46,7 @@ public class EventServiceImpl implements EventService {
 		existingevent.setStatus(updatedEvent.getStatus());
 		// existingevent.setDateModified(updatedEvent.getDateModified());
 		existingevent.setDateModified(Date.valueOf(LocalDate.now()));
-		existingevent.setType(updatedEvent.getType());
+		existingevent.setEventType(updatedEvent.getEventType());
 		existingevent.setImage(updatedEvent.getImage());
 		return eventRepository.save(existingevent);
 	}
@@ -68,7 +68,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public event save(EventDto event) {
-		event e = new event(event.getName(), event.getEventVenue(), event.getDescription(), event.getEstimatedAttendees());
+		event e = new event(event.getName(), event.getEventVenue(), event.getEventType(), event.getDescription(), event.getEstimatedAttendees());
 		e.setDateModified(Date.valueOf(LocalDate.now()));
 		e.setStatus("not started");
 		return eventRepository.save(e);

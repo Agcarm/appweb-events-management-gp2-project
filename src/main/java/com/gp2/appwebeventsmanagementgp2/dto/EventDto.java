@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 import com.gp2.appwebeventsmanagementgp2.models.activity;
+import com.gp2.appwebeventsmanagementgp2.models.type;
 import com.gp2.appwebeventsmanagementgp2.models.venue;
 
 
@@ -20,7 +21,7 @@ public class EventDto {
     private List<activity> activities;
     private Date dateModified;
     private String status;
-    private String type;
+    private type eventType;
     private Boolean paidEvent;
     private byte[] image;
 
@@ -80,12 +81,14 @@ public class EventDto {
     public void setStatus(String status) {
         this.status = status;
     }
-    public String getType() {
-        return type;
+
+    public type getEventType() {
+        return eventType;
     }
-    public void setType(String type) {
-        this.type = type;
+    public void setEventType(type eventType) {
+        this.eventType = eventType;
     }
+
     public Boolean getPaidEvent() {
         return paidEvent;
     }
@@ -99,12 +102,14 @@ public class EventDto {
         this.activities = activities;
     }
 
-    
-    public EventDto(String name, venue eventVenue, String description, Integer estimatedAttendees) {
+
+    public EventDto(String name, venue eventVenue, type eventType, String description, Integer estimatedAttendees) {
         this.name = name;
         this.eventVenue = eventVenue;
+        this.eventType = eventType;
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
+
     }
     public byte[] getImage() {
         return image;

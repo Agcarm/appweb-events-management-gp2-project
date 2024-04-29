@@ -39,6 +39,10 @@ public class event {
     @JoinColumn(name = "idvenues",nullable = true)
     private venue eventVenue;
 
+    @ManyToOne
+    @JoinColumn(name = "idtype",nullable = true)
+    private type eventType;
+
     @Column(nullable = false)
     private String description;
 
@@ -62,8 +66,6 @@ public class event {
     @Column(nullable = true)
     private String status;
 
-    @Column(nullable = true)
-    private String type;
 
     private Boolean paidEvent;
 
@@ -71,16 +73,17 @@ public class event {
     @Column(name="image")
     private byte[] image;
 
-    public event(String name, venue eventVenue, String description, Integer estimatedAttendees) {
+    public event(String name, venue eventVenue, type eventType, String description, Integer estimatedAttendees) {
         this.name = name;
         this.eventVenue = eventVenue;
+        this.eventType = eventType;
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
     }
 
     public event(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, venue eventVenue,
             String description, Integer estimatedAttendees, Integer actualAttendees, List<activity> activities,
-            Date dateModified, String status, String type, Boolean paidEvent) {
+            Date dateModified, String status, type eventType, Boolean paidEvent) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -92,7 +95,7 @@ public class event {
         this.activities = activities;
         this.dateModified = dateModified;
         this.status = status;
-        this.type = type;
+        this.eventType = eventType;
         this.paidEvent = paidEvent;
     }
 
