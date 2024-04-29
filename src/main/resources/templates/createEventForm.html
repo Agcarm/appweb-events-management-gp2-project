@@ -39,12 +39,29 @@
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
-                      <button type="button" class="addvenue" id="toggleButton">Add Venue</button> </div>
+                      <button type="button" class="addvenue" id="addVenueBtn">Add Venue</button> </div>
 
                     <br><br>
                 </div>
 
-                <div id="textToHide" style="height: 100px; background-color: blueviolet; width: 100px; align-self: center;"></div>
+                <div  id="form-containerr" style="display: none;">
+                    <form id="venueForm" th:action="@{/save}"  method="post" style="margin: right 20px;" onsubmit="return confirm('Are you sure?');">
+                      <!--  form fields for venue -->
+                      <div class="formdet"><label for="venueName" style="font-weight: 350; font-style: italic;">Venue Name:</label>
+                      <input type="text" id="venueName" name="name"><br><br></div>
+
+                      <div class="formdet"><label for="venueQuarter" style="font-weight: 350; font-style: italic;">Venue Quarter:</label>
+                      <input type="text" id="venueName" name="address" style="font-weight: 350; font-style: italic;"><br><br></div>
+
+                      <div class="formdet"><label for="venueCity" style="font-weight: 350; font-style: italic;">Venue City:</label>
+                      <input type="text" id="venueName" name="city"><br><br></div>
+
+                      <div class="formdet"><label for="venueCounrty" style="font-weight: 350; font-style: italic;">Venue Country:</label>
+                      <input type="text" id="venueName" name="country"><br><br></div>
+                      <div class="formbuto"><button type="submit"  class="addvenue">Create</button></div>
+                    </form>
+                  </div><br><br>
+
 
                 <div class="formdet"> <label for="description">Description:</label>
                     <textarea id="description" name="description" required></textarea><br><br>
@@ -54,9 +71,9 @@
                     <input type="number" id="estimatedAttendees" name="estimatedAttendees" required><br><br>
                 </div>
 
-                <div class="formdet"><label for="eventVenue">Event Type:</label>
+                <div class="formdet"><label for="eventType">Event Type:</label>
 
-                    <select class="formt" id="country" name="eventType" required >
+                    <select class="formt" id="country"  name="eventType" style="width: fit-content;" required >
                         <option selected>Select a Type of Event</option>
                         <option   th:each="type : ${typeList}" th:text="${type.getName()}" th:value="${type.getId()}"></option>
                       </select>
@@ -91,6 +108,9 @@
 
         </div>
     </div>
+
+
+    <script src="../js/nav.js"></script>
 
 </body>
 </html>
