@@ -16,6 +16,7 @@
     <div class="container">
         <div class="navigation" th:replace="~{navigation :: navigation}">
         </div>
+         
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar" th:replace="~{topBar :: topBar}">
@@ -78,7 +79,20 @@
                                     style="scale: 1.45; margin-right: 10px; margin-top: 2px;"></a>
                             <a href="#" id="displayFormBtn" class="btn">Create an Event</a>
                             <a href="#" id="displayFormBtnTask" class="btn">Go to Task</a>
-
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                            <nav style="--bs-breadcrumb-divider:'>'" aria-label="breadcrumb">
+                                                <ol class="breadcrumb">
+                                                <li class="breadcrumb-item active" aria-current="page">home
+                    
+                                                </li>
+                                            
+                                            </ol> 
+                                            </nav>
+                                    </div>
+                                </div>
+                             </div>
 
                         </div>
                     </div>

@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
+import com.gp2.appwebeventsmanagementgp2.services.TaskService;
+import com.gp2.appwebeventsmanagementgp2.services.contactService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,6 +31,10 @@ public class eventController {
 	private EventService eService;
 	@Autowired
     private venueService vService;
+    @Autowired
+    private TaskService tService;
+    // @Autowired
+    // private contactService cService;
 
     @GetMapping("/{id}/edit")
     public String editEventForm(@PathVariable("id") Long id, Model model) {
@@ -65,6 +71,8 @@ public class eventController {
     public String getEventView(Model model) {
         model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
+        model.addAttribute("taskList", tService.findAll());
+        // model.addAttribute("contactList", cService.getAllcontacts());
         return "eventTab";
     }
     

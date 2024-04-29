@@ -1,11 +1,16 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
+import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.gp2.appwebeventsmanagementgp2.dto.TaskDto;
 import com.gp2.appwebeventsmanagementgp2.models.task;
@@ -25,9 +30,27 @@ public class taskRestController {
     TaskService taskservice;
 
     @PostMapping("/createtask")
-    public task createtask(@RequestBody TaskDto tsk) {
-        return taskservice.addTask(tsk);
+    public String createtask(TaskDto tsk) {
+        taskservice.addTask(tsk);
+        return "redirect:/admin-page" ;
     }
+
+    
+    // @PostMapping("/createtask")
+    // public ResponseEntity<?> createtask(TaskDto tsk) {
+    //     task t = taskservice.addTask(tsk);
+
+    //     // Set the location header for the newly created resource
+    //     HttpHeaders responseHeaders = new HttpHeaders();
+    //     URI newEventUri = ServletUriComponentsBuilder
+    //     .fromCurrentRequest()
+    //     .path("/{id}")
+    //     .buildAndExpand(t.getId())
+    //     .toUri();
+    //     responseHeaders.setLocation(newEventUri);
+    //     return new ResponseEntity<>(null, responseHeaders, HttpStatus.
+    //     CREATED);
+    // }
 
     @GetMapping("/findall")
     public List<task> findall() {

@@ -41,22 +41,26 @@
         <thead class="tablehead">
             <tr>
                 <th></th>
-                <th>Name</th>
+                <th>title</th>
+                <th>Deadline</th>
                 <th>Status</th>
-                <th>In charge</th>
-                <th>DeadLine</th>
+                <th>PersonInCharge</th>
+                <th>RegistrationDate</th>
+                <th>Description</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr class="table-primary" th:each="event : ${eventList}">
+            <tr class="table-primary" th:each="task : ${taskList}">
                 <td scope="row" class="check">
                     <label for="row-1"></label>
                     <input type="radio" name="row-1" id="row-1" title="selectRow">
                 </td>
-                <td th:text="${event.getName()}"></td>
-                <td th:text="${event.getEventVenue().getName()}"></td>
-                <td th:text="${event.getEstimatedAttendees()}"></td>
-                <td th:text="${event.getDescription()}"></td>
+                <td th:text="${task.getTitle()}"></td>
+                <td th:text="${task.getDeadline()}"></td>
+                <td th:text="${task.getStatus()}"></td>
+                <td th:text="${task.getContacts().getName()}"></td>
+                <td th:text="${task.getRegistrationDate()}"></td>
+                <td th:text="${task.getDescription()}"></td>
             </tr>
         </tbody>
     </table>
