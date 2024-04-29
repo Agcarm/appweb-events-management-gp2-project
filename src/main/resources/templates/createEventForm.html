@@ -11,7 +11,7 @@
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
-            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');">
+            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');" enctype="multipart/form-data">
                 <div class="formdet"><label for="eventName">Event Name:</label>
                     <input type="text" id="name" name="name" required><br><br>
                 </div>
@@ -46,16 +46,11 @@
                     <input type="text" id="type" name="type" ><br><br>
                 </div>
 
-                <div class="formdet"> <label for="type">Event Image</label>
+                <div> <label for="type">Event Image</label>
                     <input type="file" name="image" accept="image/*" class="form-control-file"><br><br>
-                </div>
-
-                <div class="formdet"> <label for="type">Event Image</label>
-                    <input type="file" name="image" accept="image/*" class="form-control-file"><br><br>
-                </div>
+                </div><br><br>
 
                 <div class="formdt">
-
                     Paid event:
                     <label for="paidEvent">
                         <input type="radio" id="paidEvent" name="paidEvent" value="yes" tyle="display: flex; justify-content: center;"> Yes
@@ -63,9 +58,6 @@
                       <label for="paidEvent">
                         <input type="radio" id="paidEvent" name="paidEvent" value="no" tyle="display: flex; justify-content: center;"> No
                       </label>
-
-
-
                     <br><br>
                 </div>
 <br><br>

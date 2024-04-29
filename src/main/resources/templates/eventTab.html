@@ -40,7 +40,7 @@
             <div class="user">
                 <img th:src="@{/images/OIG4 (3).jpg}" alt="">
             </div>
-            <div class="eventImage"><img th:src="@{/images/OIG4 (3).jpg}" alt=""  height="250px"></div>
+            <div class="eventImage" th:replace="~{Lists :: eventImage}"></div>
             <div class="eventTitle"></div>
             <div class="eventDescription"></div>
             <button type="button">view sheet</button>

@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.nio.file.*;
+import java.util.Optional;
 import java.io.IOException;
 
 @RequestMapping("/events")
@@ -38,7 +39,15 @@ public class eventController {
     }
 
     @PostMapping("/create")
-    public String createEvent(@ModelAttribute("event") event event) {
+    public String createEvent(@ModelAttribute("event") event event, @RequestParam("image") Optional<MultipartFile> file)throws IOException {
+        System.out.println(file.get().getSize()+"OKOKOK");
+        if (file.get().getSize()!=0) {
+            event.setImageUrl(file.get().getOriginalFilename());
+            StringBuilder fileNames = new StringBuilder();
+            Path fileNameAndPath = Paths.get(EnvironmentVariables.getEventImages(), file.get().getOriginalFilename());
+            fileNames.append(file.get().getOriginalFilename());
+            Files.write(fileNameAndPath, file.get().getBytes());
+        }
         eventService.saveEvent(event);
         return "redirect:/admin-page";
     }
