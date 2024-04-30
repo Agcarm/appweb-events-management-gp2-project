@@ -17,7 +17,6 @@ import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
 @Service
 public class EventServiceImpl implements EventService {
 
-	private static final String taskService = null;
 	@Autowired
 	private eventRepository eventRepository;
 
@@ -76,22 +75,22 @@ public class EventServiceImpl implements EventService {
 		return eventRepository.save(e);
 	}
 
-	public double calculateProgression(Long Id) {
-        Optional<event> event = eventRepository.findById(Id);
-        List<task> tasks = event.getTasks();
-        int totalTasks = tasks.size();
-        int accomplishedTasks = 0;
+	// public double calculateProgression(Long Id) {
+    //     Optional<event> event = eventRepository.findById(Id);
+    //     List<task> tasks = event.getTasks();
+    //     int totalTasks = tasks.size();
+    //     int accomplishedTasks = 0;
 
-        for (task task : tasks) {
-            if (taskService.isAccomplished(task.getId())) {
-                accomplishedTasks++;
-            }
-        }
+    //     for (task task : tasks) {
+    //         if (taskService.isAccomplished(task.getId())) {
+    //             accomplishedTasks++;
+    //         }
+    //     }
 
-        // Calculate the progression as a percentage
-        double progression = (double) accomplishedTasks / totalTasks * 100;
+    //     // Calculate the progression as a percentage
+    //     double progression = (double) accomplishedTasks / totalTasks * 100;
 
-        return progression;
-    }
+    //     return progression;
+    // }
 
 }
