@@ -23,6 +23,4 @@ public interface TaskService {
   public void deleteTask(Long Id);
 
   public task findByTitleTask(String title);
-
-  // public Page<task> findAllPages(int offset, int pageSize);
 }

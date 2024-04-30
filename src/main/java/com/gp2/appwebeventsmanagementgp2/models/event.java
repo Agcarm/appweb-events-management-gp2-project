@@ -38,7 +38,7 @@ public class event {
     private LocalDateTime endDate;
 
     @ManyToOne
-    @JoinColumn(name = "idvenues",nullable = true)
+    @JoinColumn(name = "idvenues", nullable = true)
     private venue eventVenue;
 
     @Column(nullable = false)
@@ -55,7 +55,7 @@ public class event {
     private List<activity> activities;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "eventId")
+    @JoinColumn(name = "taskId")
     @Column(nullable = true)
     private List<task> tasks;
 
@@ -69,7 +69,7 @@ public class event {
 
     private Boolean paidEvent;
 
-    @Column(name="image")
+    @Column(name = "image")
     private String imageUrl;
 
     public event(String name, venue eventVenue, String description, Integer estimatedAttendees) {
@@ -81,7 +81,7 @@ public class event {
 
     public event(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, venue eventVenue,
             String description, Integer estimatedAttendees, Integer actualAttendees, List<activity> activities,
-            Date dateModified, String status, String type, Boolean paidEvent) {
+            List<task> tasks,Date dateModified, String status, String type, Boolean paidEvent) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -91,11 +91,13 @@ public class event {
         this.estimatedAttendees = estimatedAttendees;
         this.actualAttendees = actualAttendees;
         this.activities = activities;
+        this.tasks = tasks;
         this.dateModified = dateModified;
         this.status = status;
         this.type = type;
         this.paidEvent = paidEvent;
     }
 
-    public event(){}
+    public event() {
+    }
 }

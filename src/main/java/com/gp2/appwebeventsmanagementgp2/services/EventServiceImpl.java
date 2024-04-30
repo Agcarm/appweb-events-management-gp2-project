@@ -3,17 +3,21 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
+import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
 
 @Service
 public class EventServiceImpl implements EventService {
 
+	private static final String taskService = null;
 	@Autowired
 	private eventRepository eventRepository;
 
@@ -34,6 +38,7 @@ public class EventServiceImpl implements EventService {
 		event existingevent = getEventById(id);
 		existingevent.setName(updatedEvent.getName());
 		existingevent.setActivities(updatedEvent.getActivities());
+		existingevent.setTasks(updatedEvent.getTasks());
 		existingevent.setActualAttendees(updatedEvent.getActualAttendees());
 		existingevent.setDescription(updatedEvent.getDescription());
 		existingevent.setEndDate(updatedEvent.getEndDate());
@@ -70,5 +75,23 @@ public class EventServiceImpl implements EventService {
 		e.setStatus("not started");
 		return eventRepository.save(e);
 	}
+
+	public double calculateProgression(Long Id) {
+        Optional<event> event = eventRepository.findById(Id);
+        List<task> tasks = event.getTasks();
+        int totalTasks = tasks.size();
+        int accomplishedTasks = 0;
+
+        for (task task : tasks) {
+            if (taskService.isAccomplished(task.getId())) {
+                accomplishedTasks++;
+            }
+        }
+
+        // Calculate the progression as a percentage
+        double progression = (double) accomplishedTasks / totalTasks * 100;
+
+        return progression;
+    }
 
 }
