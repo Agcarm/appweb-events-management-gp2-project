@@ -10,8 +10,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.dto.UserDto;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.UserService;
@@ -95,11 +97,18 @@ public class UserController {
 	@GetMapping("admin-page")
 	public String adminPage (Model model, Principal principal) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        EnvironmentVariables.setUser(userDetails);
 		model.addAttribute("user", userDetails);
 		model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
 		model.addAttribute("contactList", cService.getAllcontacts());
 		return "index";
 	}
+
+
+    @GetMapping("/managerImages/{name}")
+    public String managerImages(@PathVariable("name") String name){
+        return EnvironmentVariables.getEventImages()+"/"+name;
+    }
 
 }

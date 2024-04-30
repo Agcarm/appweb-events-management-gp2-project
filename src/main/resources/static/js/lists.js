@@ -1,12 +1,15 @@
+// const { data } = require("jquery");
+
 // Get the table and initialize the selected row
 var checkboxes = document.querySelectorAll('input[type="radio"]');
 var activeTable = document.querySelector('.tabTable.active');
 var rows = activeTable.querySelectorAll('tr');
-var selectedRow;
+var selectedRow = activeTable.querySelector('.selected');
 var rowName;
 var description = document.querySelector('.info');
 
 // Highlight the clicked row
+fnselect(selectedRow);
 checkboxes.forEach(element => {
     element.addEventListener("change", (e) => {
         rows.forEach(row => {
@@ -34,7 +37,30 @@ function fnselect(row) {
         // console.log(data);
         description.querySelector('.eventTitle').textContent = data.name;
         description.querySelector('.eventDescription').textContent = data.description;
+        description.querySelector('.eventImage').innerHTML = '<img src="/manager-images/'+data.imageUrl+'" alt="'+data.imageUrl+'"  height="250px">'
     })
     .catch((error) => console.error("FETCH ERROR:", error));
 }
 
+
+//Pagination
+var total;
+var current = 1;
+
+function displayEvents(pageNo, TotalperPage){
+    fetch("http://localhost:8080/task/paged/"+pageNo+"/"+TotalperPage)
+    .then((response)=>{
+        if (response.ok) {
+            return response.json();
+            } else {
+            throw new Error("NETWORK RESPONSE ERROR");
+        }
+    })
+    .then((data)=>{
+        console.log(data);
+    })
+}
+
+document.getElementById('previous').addEventListener("click",()=>{
+    displayEvents(0,2);
+});

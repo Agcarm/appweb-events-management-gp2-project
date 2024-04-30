@@ -375,6 +375,7 @@
         display: grid;
         grid-template-columns: 1fr 4fr;
         width: 100%;
+        align-items: center;
     }
 
     .formdet input,textarea{
@@ -449,16 +450,51 @@ textarea {
   margin-bottom: 20px;
   border: 1px solid #ccc;
   border-radius: 4px;
+
 }
 
-select {
-  background-color: #f5f5f5;
+.formt {
+  background-color: #f0f0f0;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-family: Arial, sans-serif;
+  font-size: 16px;
+  padding: 5px;
+  margin: 10px 0;
 }
+
 }
 .fbtn:hover{
   color: rgb(0, 0, 0);
   cursor: pointer;
 }
+
+.formdt{
+  font-weight: 600;
+        font-size: larger;
+        margin-right: 10px;
+        display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addvenue{
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #000000;
+  background-color: #baeff8;
+  cursor: pointer;
+  font-weight: bold;
+}
+.button-select-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+
 .container {
   width: 100%;
   padding-right: 15px;

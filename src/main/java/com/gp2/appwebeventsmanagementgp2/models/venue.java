@@ -45,13 +45,6 @@ public class venue {
     //     this.image = image;
     // }
 
-    public venue() {
-        //TODO Auto-generated constructor stub
-    }
-
-    public venue(Object object, String string, Object object2, String string2, Object object3, Object object4) {
-        //TODO Auto-generated constructor stub
-    }
 
     @Column(name = "longitude")
     private Double longitude;
@@ -73,4 +66,7 @@ public class venue {
     }
     
     
+    public venue() {
+        //TODO Auto-generated constructor stub
+    }
 }

@@ -11,7 +11,7 @@
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
-            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');">
+            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');" enctype="multipart/form-data">
                 <div class="formdet"><label for="eventName">Event Name:</label>
                     <input type="text" id="name" name="name" required><br><br>
                 </div>
@@ -24,9 +24,12 @@
                 </div>
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
-                    <select class="formdet" id="country" name="eventVenue" required >
-                        <option class="formdet"  th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
+                    <div class="button-select-container">
+                    <select class="formt" id="country" name="eventVenue" required >
+                        <option selected>Select or Create Venue</option>
+                        <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
+                      <a  class="addvenue" href="#">Add Venue</a> </div>
 
                     <br><br>
                 </div>
@@ -43,19 +46,21 @@
                     <input type="text" id="type" name="type" ><br><br>
                 </div>
 
-                <div class="formdet"> <label for="type">Event Image</label>
+                <div> <label for="type">Event Image</label>
                     <input type="file" name="image" accept="image/*" class="form-control-file"><br><br>
-                </div>
+                </div><br><br>
 
-                <div class="formdt"> <label for="paidEvent">Paid Event:</label>
-                    <input class="yespaid" type="checkbox" id="paidEvent" name="paidEvent" value="Yes">
-                    <input class="nopaid" type="checkbox" id="paidEvent" name="paidEvent" value="No">
-
-
-
+                <div class="formdt">
+                    Paid event:
+                    <label for="paidEvent">
+                        <input type="radio" id="paidEvent" name="paidEvent" value="yes" tyle="display: flex; justify-content: center;"> Yes
+                      </label>
+                      <label for="paidEvent">
+                        <input type="radio" id="paidEvent" name="paidEvent" value="no" tyle="display: flex; justify-content: center;"> No
+                      </label>
                     <br><br>
                 </div>
-
+<br><br>
                 <div class="formbuto">
                     <button type="submit" class="fbtn">Submit</button>
                     <button id="closeFormBtn" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
