@@ -40,14 +40,14 @@
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select></div>
-                      <button type="button" class="addvenue" id="addVenueBtn">Add Venue</button> </div>
+                      <!--<button type="button" class="addvenue" id="addVenueBtn">Add Venue</button>--> </div>
 
                     <br><br>
                 </div>
 
-                <div  id="form-containerr" style="display: none;">
+              <!-- <div  id="form-containerr" style="display: none;">
                     <form id="venueForm" th:action="@{/save}"  method="post" style="margin: right 20px;" onsubmit="return confirm('Are you sure?');">
-                      <!--  form fields for venue -->
+
                       <div class="formdet"><label for="venueName" style="font-weight: 350; font-style: italic;">Venue Name:</label>
                       <input type="text" id="venueName" name="name"><br><br></div>
 
@@ -61,7 +61,7 @@
                       <input type="text" id="venueName" name="country"><br><br></div>
                       <div class="formbuto"><button type="submit"  class="addvenue">Create</button></div>
                     </form>
-                  </div><br><br>
+                  </div><br><br> -->
 
 
                 <div class="formdet"> <label for="description">Description:</label>
