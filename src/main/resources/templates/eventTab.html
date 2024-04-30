@@ -33,12 +33,22 @@
                     <table th:replace="~{Lists :: eventList}"></table>
                     <table th:replace="~{Lists :: taskList}"></table>
                     <table th:replace="~{Lists :: venueList}"></table>
+
+                    <div class="pagination">
+                        <button type="button" class="page" id="previous"><</button>
+                        <span>1/10</span>
+                        <button type="button" class="page">></button>
+                    </div>
                 </div>
             </main>
         </div>
         <aside class="info">
-            <div class="user">
-                <img th:src="@{/images/OIG4 (3).jpg}" alt="">
+            <div class="Details">
+                <div class="userImg">
+                    <img th:src="@{/manager-images/login.PNG}" alt="">
+                </div>
+                <span>Welcome, </span>
+                <span class="username" th:text="${user.fullname}"></span> 
             </div>
             <div class="eventImage" th:replace="~{Lists :: eventImage}"></div>
             <div class="eventTitle"></div>

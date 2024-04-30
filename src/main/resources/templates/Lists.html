@@ -20,10 +20,10 @@
             </tr>
         </thead>
         <tbody class="table-group-divider">
-            <tr class="table-primary" th:each="event : ${eventList}">
+            <tr class="table-primary" th:each="event : ${eventList}" th:classappend="${event.id==1} ? selected">
                 <td scope="row" class="check">
                     <label for="row-1"></label>
-                    <input type="radio" name="row-1" id="row-1" title="selectRow" th:checked="${event.getId()==1}">
+                    <input type="radio" name="row-1" id="row-1" title="selectRow" th:checked= "${event.id==1} ? true">
                 </td>
                 <td th:text="${event.getName()}" ></td>
                 <td th:text="${event.getType()}"></td>

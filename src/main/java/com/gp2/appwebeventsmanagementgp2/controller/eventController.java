@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
+import com.gp2.appwebeventsmanagementgp2.services.UserService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,9 @@ public class eventController {
 	private EventService eService;
 	@Autowired
     private venueService vService;
+    @Autowired
+	private UserService userService;
+
 
     @GetMapping("/{id}/edit")
     public String editEventForm(@PathVariable("id") Long id, Model model) {
@@ -40,7 +44,6 @@ public class eventController {
 
     @PostMapping("/create")
     public String createEvent(@ModelAttribute("event") event event, @RequestParam("image") Optional<MultipartFile> file)throws IOException {
-        System.out.println(file.get().getSize()+"OKOKOK");
         if (file.get().getSize()!=0) {
             event.setImageUrl(file.get().getOriginalFilename());
             StringBuilder fileNames = new StringBuilder();
@@ -74,21 +77,22 @@ public class eventController {
     public String getEventView(Model model) {
         model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
+		model.addAttribute("user",EnvironmentVariables.getUser());
         return "eventTab";
     }
     
-    @GetMapping("/upload")
-    public String displayUploadImageForm() {
-        return "ImageUpload";
-    }
+    // @GetMapping("/upload")
+    // public String displayUploadImageForm() {
+    //     return "ImageUpload";
+    // }
     
-    @PostMapping("/upload") 
-    public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
-        StringBuilder fileNames = new StringBuilder();
-        Path fileNameAndPath = Paths.get(EnvironmentVariables.getEventImages(), file.getOriginalFilename());
-        fileNames.append(file.getOriginalFilename());
-        Files.write(fileNameAndPath, file.getBytes());
-        model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
-        return "ImageUpload";
-    }
+    // @PostMapping("/upload") 
+    // public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
+    //     StringBuilder fileNames = new StringBuilder();
+    //     Path fileNameAndPath = Paths.get(EnvironmentVariables.getEventImages(), file.getOriginalFilename());
+    //     fileNames.append(file.getOriginalFilename());
+    //     Files.write(fileNameAndPath, file.getBytes());
+    //     model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
+    //     return "ImageUpload";
+    // }
 }

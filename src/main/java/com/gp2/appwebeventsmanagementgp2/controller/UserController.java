@@ -94,6 +94,7 @@ public class UserController {
 	@GetMapping("admin-page")
 	public String adminPage (Model model, Principal principal) {
 		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+        EnvironmentVariables.setUser(userDetails);
 		model.addAttribute("user", userDetails);
 		model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
