@@ -2,6 +2,7 @@ package com.gp2.appwebeventsmanagementgp2.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,6 +13,7 @@ import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 import com.gp2.appwebeventsmanagementgp2.services.typeService;
+import org.springframework.validation.BindingResult;
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,16 +45,23 @@ public class eventController {
 
 
     @PostMapping("/events")
-    public String createEvent(@ModelAttribute("event") event event) {
+    public String createEvent(@ModelAttribute("event") event event, BindingResult result) {
+        if (result.hasErrors()) {
+            return "eventForm"; // return back to the form if there are errors
+        }
         eventService.saveEvent(event);
         return "redirect:/admin-page";
     }
 
     @PostMapping("/event/{id}/update")
-    public String updateEvent(@PathVariable("id") Long id, @ModelAttribute("event") event updatedEvent) {
+    public String updateEvent(@PathVariable("id") Long id, @ModelAttribute("event") event updatedEvent, BindingResult result) {
+        if (result.hasErrors()) {
+            return "editEvent"; // return back to the form if there are errors
+        }
         eventService.updateEvent(id, updatedEvent);
         return "redirect:/admin-page";
     }
+
 
     @GetMapping("/event/{id}/delete")
     public String deleteContact(@PathVariable("id") Long id) {
@@ -73,7 +82,7 @@ public class eventController {
         model.addAttribute("typeList", tService.listAll());
         return "eventTab";
     }
-    
-    
+
+
 
 }
