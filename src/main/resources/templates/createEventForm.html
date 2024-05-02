@@ -21,19 +21,16 @@
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
-            <form id="myForm" class="createEventForm" th:action="@{/events}" method="post" onsubmit="return validateForm();">
+            <form id="myForm" class="createEventForm" th:action="@{/events}" method="post" onsubmit="return confirm('Are you sure?');">
                 <div class="formdet"><label for="eventName">Event Name:</label>
-                    <input type="text" id="name" name="name" required>
-                    <!--<span th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></span>--><br><br>
+                    <input type="text" id="name" name="name" required><br><br>
                 </div>
                 <div class="formdet"><label for="startDate">Start Date:</label>
-                    <input type="datetime-local" id="startDate" name="startDate" required>
-                    <span th:if="${#fields.hasErrors('startDate')}" th:errors="*{startDate}"></span><br><br>
+                    <input type="datetime-local" id="startDate" name="startDate" required><br><br>
                 </div>
 
                 <div class="formdet"><label for="endDate">End Date:</label>
-                    <input type="datetime-local" id="endDate" name="endDate" required>
-                    <span th:if="${#fields.hasErrors('endDate')}" th:errors="*{endDate}"></span><br><br>
+                    <input type="datetime-local" id="endDate" name="endDate" required><br><br>
                 </div>
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
@@ -68,8 +65,7 @@
 
 
                 <div class="formdet"> <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea>
-                    <span th:if="${#fields.hasErrors('description')}" th:errors="*{description}"></span><br><br>
+                    <textarea id="description" name="description" required></textarea><br><br>
                 </div>
 
                 <div class="formdet"> <label for="estimatedAttendees">Estimated Attendees:</label>

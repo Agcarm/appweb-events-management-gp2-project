@@ -7,28 +7,15 @@ import java.util.List;
 import com.gp2.appwebeventsmanagementgp2.models.activity;
 import com.gp2.appwebeventsmanagementgp2.models.type;
 import com.gp2.appwebeventsmanagementgp2.models.venue;
-import com.gp2.appwebeventsmanagementgp2.validation.StartDateNotBeforeCurrent;
-import com.gp2.appwebeventsmanagementgp2.validation.StartEndDateCheck;
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
 
-@StartEndDateCheck
 public class EventDto {
 
-    @NotBlank
     private String name;
-    @NotBlank
-    @StartDateNotBeforeCurrent
     private LocalDateTime startDate;
-    @NotBlank
-
     private LocalDateTime endDate;
     private venue eventVenue;
-    @NotBlank
     private String description;
-    @NotBlank
-    @Min(value = 0, message = "Number of attendees cannot be negative")
     private Integer estimatedAttendees;
     private Integer actualAttendees;
     private List<activity> activities;
