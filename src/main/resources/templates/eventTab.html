@@ -30,12 +30,12 @@
 
                     </div>
 
-                    <table th:replace="~{Lists :: eventList}"></table>
-                    <table th:replace="~{Lists :: taskList}"></table>
-                    <table th:replace="~{Lists :: venueList}"></table>
+                    <table th:replace="~{Lists :: eventList}" id="dataTable"></table>
+                    <table th:replace="~{Lists :: taskList}" id="dataTable"></table>
+                    <table th:replace="~{Lists :: venueList}" id="dataTable"></table>
 
                     <div class="pagination">
-                        <button type="button" class="page" id="previous"><</button>
+                        <button type="button" class="page" id="previous"></button>
                         <span>1/10</span>
                         <button type="button" class="page">></button>
                     </div>
@@ -48,7 +48,7 @@
                     <img th:src="@{/manager-images/login.PNG}" alt="">
                 </div>
                 <span>Welcome, </span>
-                <span class="username" th:text="${user.fullname}"></span> 
+                <span class="username" th:text="${user.fullname}"></span>
             </div>
             <div class="eventImage" th:replace="~{Lists :: eventImage}"></div>
             <div class="eventTitle"></div>
@@ -63,5 +63,6 @@
     <script th:src="@{/js/lists.js}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/searchbar.js}"></script>
 </body>
 </html>

@@ -76,17 +76,17 @@ public class eventController {
     @GetMapping("/view")
     public String getEventView(Model model) {
         model.addAttribute("eventList", eService.findAll());
-		model.addAttribute("venueList", vService.listAll());
+		model.addAttribute("venueList", vService.findAll());
 		model.addAttribute("user",EnvironmentVariables.getUser());
         return "eventTab";
     }
-    
+
     // @GetMapping("/upload")
     // public String displayUploadImageForm() {
     //     return "ImageUpload";
     // }
-    
-    // @PostMapping("/upload") 
+
+    // @PostMapping("/upload")
     // public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
     //     StringBuilder fileNames = new StringBuilder();
     //     Path fileNameAndPath = Paths.get(EnvironmentVariables.getEventImages(), file.getOriginalFilename());

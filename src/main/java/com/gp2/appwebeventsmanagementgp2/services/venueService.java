@@ -8,24 +8,16 @@ import com.gp2.appwebeventsmanagementgp2.models.venue;
 import com.gp2.appwebeventsmanagementgp2.repositories.venueRepository;
 
 @Service
-public class venueService {
-    @Autowired
-    private venueRepository repo;
-    
-    public List<venue> listAll() {
-        return repo.findAll();
-    }
-    
-    public venue save(venue std) {
-        return repo.save(std);
-    }
-    
-    public venue get(long id) {
-        return repo.findById(id).get();
-    }
-    
-    public void delete(long id) {
-        repo.deleteById(id);
-    }
-    
+public interface venueService {
+    void saveVenue(venue venue);
+
+	List<venue> findAll();
+	venue getVenueById(Long id);
+
+	void updateVenue(Long id, venue updatedVenue);
+
+	void deleteVenue(Long id);
+
 }
+
+

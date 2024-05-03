@@ -6,7 +6,7 @@
     <title>EMS</title>
 </head>
 <body>
-    <table class="tabTable active" th:fragment="eventList">
+    <table class="tabTable active" th:fragment="eventList" id="dataTable">
         <thead class="tablehead">
             <tr>
                 <th></th>
@@ -36,7 +36,7 @@
             <tr th:text="${hey}"></tr>
         </tbody>
     </table>
-    <table class="tabTable" th:fragment="taskList">
+    <table class="tabTable" th:fragment="taskList" id="dataTable">
         <thead class="tablehead">
             <tr>
                 <th></th>
@@ -59,8 +59,8 @@
             </tr>
         </tbody>
     </table>
-    
-    <table class="tabTable" th:fragment="venueList">
+
+    <table class="tabTable" th:fragment="venueList" id="dataTable">
         <thead class="tablehead">
             <tr>
                 <th></th>
@@ -70,8 +70,6 @@
                 <th>Address</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -85,14 +83,16 @@
                 <td th:text="${venue.getCity()}"></td>
                 <td th:text="${venue.getAddress()}"></td>
                 <td th:text="${venue.getLongitude()}"></td>
-                <td th:text="${venue.getLatitude()}"></td>                
+                <td th:text="${venue.getLatitude()}"></td>
 
 
-                <td><a th:href="@{'/edit/' + ${venue.id}}">Edit</a></td>
-                <td><a th:href="@{'/delete/' + ${venue.id}}">Delete</a></td>
+                <td><a th:href="@{'/venues/' + ${venue.id} + '/edit'}">Edit</a></td>
+                <td><a th:href="@{'/venue/' + ${venue.id} + '/delete'}">Delete</a></td>
             </tr>
         </tbody>
     </table>
 
     <div class="eventImage" th:fragment="eventImage"></div>
-</body></html>
+</body>
+<script th:src="@{/js.lists.js}"></script>
+</html>
