@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import com.gp2.appwebeventsmanagementgp2.models.venue;
 import com.gp2.appwebeventsmanagementgp2.repositories.venueRepository;
 
-@Service
+
 public interface venueService {
-    void saveVenue(venue venue);
+    venue saveVenue(venue venue);
 
 	List<venue> findAll();
 	venue getVenueById(Long id);
