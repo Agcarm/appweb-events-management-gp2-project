@@ -6,32 +6,23 @@
     <link rel="stylesheet" th:href="@{css/styles.css}">
     <link rel="stylesheet" th:href="@{css/dashboard.css}">
     <title>Document</title>
-    <style>
-        #textToHide {
-          opacity: 0;
-          transition: opacity 0.5s ease-in-out;
-        }
 
-        #textToHide.show {
-          opacity: 1;
-        }
-      </style>
 </head>
 <body>
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
-            <form id="myForm" class="createEventForm" th:action="@{/events}" method="post" onsubmit="return confirm('Are you sure?');">
+            <form id="myForm" class="createEventForm" th:action="@{/events}" method="post" onsubmit="return validateEstimatedAttendees();">
                 <div class="formdet"><label for="eventName">Event Name:</label>
-                    <input type="text" id="name" name="name" required><br><br>
+                    <input type="text" id="name" name="name"  placeholder="Enter an event name"><br><br>
                 </div>
                 <div class="formdet"><label for="startDate">Start Date:</label>
                     <input type="datetime-local" id="startDate" name="startDate" required><br><br>
-                </div>
+                </div><div id="startDateError" class="error-message"></div><br>
 
                 <div class="formdet"><label for="endDate">End Date:</label>
                     <input type="datetime-local" id="endDate" name="endDate" required><br><br>
-                </div>
+                </div><div id="endDateError" class="error-message"></div><br>
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
                     <div class="button-select-container">
@@ -40,37 +31,23 @@
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select></div>
-                      <!--<button type="button" class="addvenue" id="addVenueBtn">Add Venue</button>--> </div>
+                      <button type="button" class="addvenue" id="addVenueBtn">Add Venue</button> </div>
 
                     <br><br>
                 </div>
 
-              <!-- <div  id="form-containerr" style="display: none;">
-                    <form id="venueForm" th:action="@{/save}"  method="post" style="margin: right 20px;" onsubmit="return confirm('Are you sure?');">
 
-                      <div class="formdet"><label for="venueName" style="font-weight: 350; font-style: italic;">Venue Name:</label>
-                      <input type="text" id="venueName" name="name"><br><br></div>
-
-                      <div class="formdet"><label for="venueQuarter" style="font-weight: 350; font-style: italic;">Venue Quarter:</label>
-                      <input type="text" id="venueName" name="address" style="font-weight: 350; font-style: italic;"><br><br></div>
-
-                      <div class="formdet"><label for="venueCity" style="font-weight: 350; font-style: italic;">Venue City:</label>
-                      <input type="text" id="venueName" name="city"><br><br></div>
-
-                      <div class="formdet"><label for="venueCounrty" style="font-weight: 350; font-style: italic;">Venue Country:</label>
-                      <input type="text" id="venueName" name="country"><br><br></div>
-                      <div class="formbuto"><button type="submit"  class="addvenue">Create</button></div>
-                    </form>
-                  </div><br><br> -->
 
 
                 <div class="formdet"> <label for="description">Description:</label>
-                    <textarea id="description" name="description" required></textarea><br><br>
+                    <textarea id="description" name="description" required min="0" placeholder="Enter a suitable description"></textarea><br><br>
                 </div>
 
                 <div class="formdet"> <label for="estimatedAttendees">Estimated Attendees:</label>
-                    <input type="number" id="estimatedAttendees" name="estimatedAttendees" required><br><br>
-                </div>
+                    <input type="number" id="estimatedAttendees" name="estimatedAttendees" required pattern="\d+" placeholder="Enter a positive value">
+                    <br><br>
+                </div><div id="attendeesError" class="error-message"></div><br>
+
 
                 <div class="formdet"><label for="eventType">Event Type:</label>
 
@@ -109,7 +86,59 @@
 
         </div>
     </div>
+<script>
+  function validateEstimatedAttendees() {
+  const estimatedAttendeesInput = document.getElementById('estimatedAttendees');
+  const attendeesError = document.getElementById('attendeesError');
+  const startDateInput = document.getElementById('startDate');
+  const startDateError = document.getElementById('startDateError');
+  const endDateInput = document.getElementById('endDate');
+  const endDateError = document.getElementById('endDateError');
 
+  // Check estimated attendees
+  if (estimatedAttendeesInput.value < 0) {
+    attendeesError.textContent = 'Estimated attendees cannot be negative.';
+    attendeesError.classList.add('show');
+    return false; // Indicate validation failure
+  }
+
+  // Check start date
+  const currentDate = new Date();
+  const selectedStartDate = new Date(startDateInput.value);
+
+  if (selectedStartDate < currentDate) {
+    startDateError.textContent = 'Start date cannot be before the current date.';
+    startDateError.classList.add('show');
+    return false; // Indicate validation failure
+  }
+
+  const selectedEndDate = new Date(endDateInput.value);
+
+  if (selectedEndDate < selectedStartDate) {
+    endDateError.textContent = 'End date cannot be before the start date.'; // Use startDateError here for consistency
+    endDateError.classList.add('show');
+    return false; // Indicate validation failure
+  }
+
+  // All checks passed, allow form submission
+  else{
+  attendeesError.textContent = '';
+  attendeesError.classList.remove('show');
+  estimatedAttendeesInput.nextElementSibling.remove();
+  startDateError.textContent = '';
+  startDateError.classList.remove('show');
+  startDateInput.nextElementSibling.remove();
+  endDateError.textContent = '';
+  endDateError.classList.remove('show');
+  endDateInput.nextElementSibling.remove();
+  return true;
+  confirm('Are you sure you wish to submit?');}
+}
+
+
+
+
+  </script>
 
     <script src="../js/nav.js"></script>
 

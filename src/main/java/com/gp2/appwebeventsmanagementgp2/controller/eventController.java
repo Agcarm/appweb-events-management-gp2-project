@@ -12,6 +12,8 @@ import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 import com.gp2.appwebeventsmanagementgp2.services.typeService;
+import org.springframework.ui.Model; // Assuming you're using Spring MVC
+
 
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -43,10 +45,11 @@ public class eventController {
 
 
     @PostMapping("/events")
-    public String createEvent(@ModelAttribute("event") event event) {
-        eventService.saveEvent(event);
-        return "redirect:/admin-page";
-    }
+public String createEvent(@ModelAttribute("event") event event, Model model) {
+   eventService.saveEvent(event);
+    return "redirect:/admin-page";
+}
+
 
     @PostMapping("/event/{id}/update")
     public String updateEvent(@PathVariable("id") Long id, @ModelAttribute("event") event updatedEvent) {
@@ -73,7 +76,7 @@ public class eventController {
         model.addAttribute("typeList", tService.listAll());
         return "eventTab";
     }
-    
-    
+
+
 
 }
