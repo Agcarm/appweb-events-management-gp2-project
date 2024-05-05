@@ -8,6 +8,7 @@
     <link rel="stylesheet" th:href="@{/css/listStyle.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{/css/CEF.css}">
     <title>Events EMS</title>
 </head>
 <body>
@@ -36,8 +37,8 @@
 
                     <div class="pagination">
                         <button type="button" class="page" id="previous"><</button>
-                        <span>1/10</span>
-                        <button type="button" class="page">></button>
+                        <span class="pageNumber"></span>
+                        <button type="button" class="page" id="next">></button>
                     </div>
                 </div>
             </main>

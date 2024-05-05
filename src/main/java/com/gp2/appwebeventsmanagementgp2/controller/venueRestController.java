@@ -1,6 +1,7 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -44,5 +45,10 @@ public class venueRestController {
     @DeleteMapping("/delete/{id}")
     public void deletevenue(@PathVariable(name = "id") int id) {
         service.delete(id);
+    }
+
+    @GetMapping("/paged/{offset}/{pageSize}")
+    public Page<venue> findallPages(@PathVariable int offset, @PathVariable int pageSize) {
+        return service.findAllPages(offset, pageSize);
     }
 }

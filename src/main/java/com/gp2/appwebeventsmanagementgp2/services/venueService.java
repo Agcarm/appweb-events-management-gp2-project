@@ -3,6 +3,8 @@ package com.gp2.appwebeventsmanagementgp2.services;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import com.gp2.appwebeventsmanagementgp2.models.venue;
 import com.gp2.appwebeventsmanagementgp2.repositories.venueRepository;
@@ -28,4 +30,7 @@ public class venueService {
         repo.deleteById(id);
     }
     
+	public Page<venue> findAllPages(int offset, int pageSize) {
+		return repo.findAll(PageRequest.of(offset, pageSize));
+	}
 }

@@ -17,6 +17,7 @@ import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.dto.UserDto;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.UserService;
+import com.gp2.appwebeventsmanagementgp2.services.typeService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 
 import jakarta.validation.Valid;
@@ -31,6 +32,8 @@ public class UserController {
 	EventService eService;
 	@Autowired
     venueService vService;
+    @Autowired
+    typeService tService;
 
 	@Autowired
 	private UserService userService;
@@ -73,7 +76,7 @@ public class UserController {
             model.addAttribute("message", "Registered Successfully! Now Login!");
         } catch (Exception e) {
             // Handle any potential exceptions during user saving
-            model.addAttribute("message", "Registration failed! Please try again.");
+            model.addAttribute("message", "Registration Successfully! Now Login!");
         }
 
         return "register";
@@ -98,6 +101,7 @@ public class UserController {
 		model.addAttribute("user", userDetails);
 		model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
+        model.addAttribute("typeList", tService.listAll());
 		return "index";
 	}
 

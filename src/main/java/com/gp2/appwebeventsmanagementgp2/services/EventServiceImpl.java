@@ -1,12 +1,19 @@
 package com.gp2.appwebeventsmanagementgp2.services;
 import java.sql.Date;
 import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.stream.StreamSupport;
+import java.util.stream.Collectors;
+
+
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
@@ -43,7 +50,7 @@ public class EventServiceImpl implements EventService {
 		existingevent.setPaidEvent(updatedEvent.getPaidEvent());
 		existingevent.setStatus(updatedEvent.getStatus());
 		existingevent.setDateModified(Date.valueOf(LocalDate.now()));
-		existingevent.setType(updatedEvent.getType());
+		existingevent.setEventType(updatedEvent.getEventType());
 		existingevent.setImageUrl(updatedEvent.getImageUrl());
 		return eventRepository.save(existingevent);
 	}
@@ -65,10 +72,21 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public event save(EventDto event) {
-		event e = new event(event.getName(), event.getEventVenue(), event.getDescription(), event.getEstimatedAttendees());
+		event e = new event(event.getName(), event.getEventVenue(), event.getEventType(), event.getDescription(), event.getEstimatedAttendees());
 		e.setDateModified(Date.valueOf(LocalDate.now()));
 		e.setStatus("not started");
 		return eventRepository.save(e);
+	}
+
+	@Override
+	public Page<event> findAllPages(int offset, int pageSize) {
+		return eventRepository.findAll(PageRequest.of(offset, pageSize));
+	}
+
+	@Override
+	public Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end) {
+		Iterable<event> MyEvents = eventRepository.findAllByStartDateBetween(start, end);
+		return StreamSupport.stream(MyEvents.spliterator(), false).map(event::toDayPilotEvent).collect(Collectors.toList());
 	}
 
 }

@@ -1,5 +1,3 @@
-// const { data } = require("jquery");
-
 // Get the table and initialize the selected row
 var checkboxes = document.querySelectorAll('input[type="radio"]');
 var activeTable = document.querySelector('.tabTable.active');
@@ -43,12 +41,38 @@ function fnselect(row) {
 }
 
 
-//Pagination
+/*PAGINATION */
+/*For tasks */
 var total;
 var current = 1;
 
-function displayEvents(pageNo, TotalperPage){
-    fetch("http://localhost:8080/task/paged/"+pageNo+"/"+TotalperPage)
+var totalPagesEvent;
+var currentPageEvent = 1;
+
+var totalPagesVenue;
+var currentPageVenue = 1;
+
+displayPages(0,1);
+
+document.getElementById('previous').addEventListener("click",()=>{
+    displayPages(0,1);
+    printPageNumber();
+});
+document.getElementById('next').addEventListener("click",()=>{
+    displayPages(currentPageEvent,1);
+    printPageNumber();
+});
+
+function printPageNumber() {
+    const page = document.querySelector(".pageNumber");
+    page.innerHTML = current + "/" + total;
+}
+
+function displayPages(pageNo, TotalperPage) {
+    const activeTable = document.querySelector(".tabTable.active");
+    const id = activeTable.getAttribute('id');
+    activeTable.querySelector('tbody').innerHTML = '';
+    fetch("http://localhost:8080/"+id+"/paged/"+pageNo+"/"+TotalperPage)
     .then((response)=>{
         if (response.ok) {
             return response.json();
@@ -57,10 +81,66 @@ function displayEvents(pageNo, TotalperPage){
         }
     })
     .then((data)=>{
-        console.log(data);
+        total = data.totalPages
+        printPageNumber();
+        switch (id) {
+            case "eventRest":
+                data.content.forEach(element => {
+                    console.log(activeTable.querySelector('tbody'));
+                    activeTable.querySelector('tbody').innerHTML += `
+                        <tr class="table-primary">
+                            <td scope="row" class="check">
+                                <label for="row-1"></label>
+                                <input type="radio" name="row-1" id="row-1" title="selectRow">
+                            </td>
+                            <td>`+element.name+`</td>
+                            <td>`+element.eventVenue.name+`</td>
+                            <td>`+element.status+`</td>
+                            <td>`+element.startDate+`</td>
+                            <td>`+element.name+`</td>
+                            <td>`+element.dateModified+`</td>
+                        </tr>
+                    `
+                });
+                break;
+
+            case "task":
+                data.content.forEach(element => {
+                    console.log(activeTable.querySelector('tbody'));
+                    activeTable.querySelector('tbody').innerHTML += `
+                        <tr class="table-primary">
+                            <td scope="row" class="check">
+                                <label for="row-1"></label>
+                                <input type="radio" name="row-1" id="row-1" title="selectRow">
+                            </td>
+                            <td>`+element.title+`</td>
+                            <td>`+element.status+`</td>
+                            <td>`+element.status+`</td>
+                            <td>`+element.deadline+`</td>
+                        </tr>
+                    `
+                });
+                break;
+            
+            case "api/venues":
+                data.content.forEach(element => {
+                    console.log(activeTable.querySelector('tbody'));
+                    activeTable.querySelector('tbody').innerHTML += `
+                        <tr class="table-primary">
+                            <td scope="row" class="check">
+                                <label for="row-1"></label>
+                                <input type="radio" name="row-1" id="row-1" title="selectRow">
+                            </td>
+                            <td>`+element.name+`</td>
+                            <td>`+element.country+`</td>
+                            <td>`+element.city+`</td>
+                            <td>`+element.address+`</td>
+                            <td>`+element.longitude+`</td>
+                            <td>`+element.latitude+`</td>
+                        </tr>
+                    `
+                });
+                break;
+        }
     })
 }
-
-document.getElementById('previous').addEventListener("click",()=>{
-    displayEvents(0,2);
-});

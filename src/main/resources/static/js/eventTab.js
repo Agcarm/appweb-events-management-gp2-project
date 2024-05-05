@@ -13,6 +13,7 @@ tabLists.forEach((tab, index) => {
 
     tables.forEach(content=>{content.classList.remove('active')})
     tables[index].classList.add('active') 
+    displayPages(0,1); //from list.js
     })
 });
 

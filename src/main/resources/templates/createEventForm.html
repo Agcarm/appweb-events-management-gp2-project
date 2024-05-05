@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{css/styles.css}">
     <link rel="stylesheet" th:href="@{css/dashboard.css}">
+    <link rel="stylesheet" th:href="@{css/CEF.css}">
     <title>Document</title>
 </head>
 <body>
@@ -13,7 +14,7 @@
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
             <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');" enctype="multipart/form-data">
                 <div class="formdet"><label for="eventName">Event Name:</label>
-                    <input type="text" id="name" name="name" required><br><br>
+                    <input type="text" id="eventName" name="name" required><br><br>
                 </div>
                 <div class="formdet"><label for="startDate">Start Date:</label>
                     <input type="datetime-local" id="startDate" name="startDate" required><br><br>
@@ -25,11 +26,13 @@
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
                     <div class="button-select-container">
-                    <select class="formt" id="country" name="eventVenue" required >
+                        <div class="custom">
+                    <select class="formt" id="country" name="eventVenue" required title="eventVenue" >
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
-                      </select>
+                      </select></div>
                       <a  class="addvenue" href="#">Add Venue</a> </div>
+                      <!--<button type="button" class="addvenue" id="addVenueBtn">Add Venue</button>--> </div>
 
                     <br><br>
                 </div>
@@ -42,12 +45,19 @@
                     <input type="number" id="estimatedAttendees" name="estimatedAttendees" required><br><br>
                 </div>
 
-                <div class="formdet"> <label for="type">Types:</label>
-                    <input type="text" id="type" name="type" ><br><br>
+                <div class="formdet"><label for="eventType">Event Type:</label>
+
+                   <div class="custom" style="min-width: 250px;" > <select  id="coun"  name="eventType" required title="eventTitle" >
+                        <option selected>Select a Type of Event</option>
+                        <option   th:each="type : ${typeList}" th:text="${type.getName()}" th:value="${type.getId()}"></option>
+                      </select></div>
+
+
+                    <br><br>
                 </div>
 
-                <div> <label for="type">Event Image</label>
-                    <input type="file" name="image" accept="image/*" class="form-control-file"><br><br>
+                <div> <label for="image">Event Image</label>
+                    <input type="file" name="image" accept="image/*" id="image" class="form-control-file"><br><br>
                 </div><br><br>
 
                 <div class="formdt">
@@ -69,5 +79,9 @@
 
         </div>
     </div>
+
+
+    <script src="../js/nav.js"></script>
+
 </body>
 </html>

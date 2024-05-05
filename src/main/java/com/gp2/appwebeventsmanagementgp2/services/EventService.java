@@ -2,6 +2,10 @@ package com.gp2.appwebeventsmanagementgp2.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import java.time.LocalDateTime;
+
+import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 
@@ -19,4 +23,8 @@ public interface EventService {
 	void deleteEvent(Long id);
 
     event findByName(String name);
+
+	Page<event> findAllPages(int offset, int pageSize);
+
+	Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end);
 }
