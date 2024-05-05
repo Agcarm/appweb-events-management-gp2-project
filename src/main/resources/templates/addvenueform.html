@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{css/styles.css}">
+    <link rel="stylesheet" th:href="@{css/dashboard.css}">
+</head>
+<body>
+    <div  id="form-containerr" >
+        <form id="venueForm" th:action="@{/save}"  method="post" style="margin: right 20px;" onsubmit="return confirm('Are you sure?');">
+
+          <div class="formdet"><label for="venueName" style="font-weight: 350; font-style: italic;">Venue Name:</label>
+          <input type="text" id="venueName" name="name"><br><br></div>
+
+          <div class="formdet"><label for="venueQuarter" style="font-weight: 350; font-style: italic;">Venue Quarter:</label>
+          <input type="text" id="venueName" name="address" style="font-weight: 350; font-style: italic;"><br><br></div>
+
+          <div class="formdet"><label for="venueCity" style="font-weight: 350; font-style: italic;">Venue City:</label>
+          <input type="text" id="venueName" name="city"><br><br></div>
+
+          <div class="formdet"><label for="venueCounrty" style="font-weight: 350; font-style: italic;">Venue Country:</label>
+          <input type="text" id="venueName" name="country"><br><br></div>
+          <div class="formbuto">
+            <button type="submit" class="fbtn">Submit</button>
+            <button id="closeFormBtn" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
+        </div>
+        </form>
+      </div><br><br>
+</body>
+</html>

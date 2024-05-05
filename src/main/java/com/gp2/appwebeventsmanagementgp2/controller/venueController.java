@@ -60,12 +60,17 @@ public class venueController {
     @RequestMapping("/delete/{id}")
     public String deletevenue(@PathVariable(name = "id") int id) {
         service.delete(id);
-        return "redirect:/events"; 
+        return "redirect:/events";
     }
 
     @GetMapping("/events")
     public String showEventTab() {
         return "eventTab";
 }
+
+//new
+@GetMapping("/addvenueform.html") // clicking on the link of add venue in the form you go to add venue page.
+    public String handleLostPage() {
+        return "addvenueform";
+    }
 }
-    

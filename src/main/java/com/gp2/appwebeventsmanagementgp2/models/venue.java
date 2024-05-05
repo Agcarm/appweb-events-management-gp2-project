@@ -3,6 +3,7 @@ package com.gp2.appwebeventsmanagementgp2.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
@@ -15,7 +16,7 @@ import lombok.Setter;
 @Table(name = "venues")
 public class venue {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idvenues")
     private Long id;
 
@@ -56,7 +57,7 @@ public class venue {
 
     @Column(name = "longitude")
     private Double longitude;
-    
+
     @Lob
     @Column(name = "image", columnDefinition = "BLOB")
     private byte[] image;

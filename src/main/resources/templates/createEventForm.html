@@ -31,7 +31,10 @@
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select></div>
-                      <button type="button" class="addvenue" id="addVenueBtn">Add Venue</button> </div>
+
+                      <a class="addvenue" id="addVenueBtn" href="addvenueform.html">Add Venue</a> </div>
+
+
 
                     <br><br>
                 </div>
