@@ -23,6 +23,8 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private eventRepository eventRepository;
+	@Autowired
+	private TaskService taskService;
 
 	@Override
 	public void saveEvent(event event) {
@@ -62,6 +64,9 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public void deleteEvent(Long id) {
+		getEventById(id).getTasks().forEach(task -> {
+			taskService.deleteTask(task.getId());
+		});
 		eventRepository.deleteById(id);
 	}
 

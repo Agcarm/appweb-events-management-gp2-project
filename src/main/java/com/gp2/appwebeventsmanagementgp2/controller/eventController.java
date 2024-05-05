@@ -66,7 +66,7 @@ public class eventController {
     }
 
     @GetMapping("/{id}/delete")
-    public String deleteContact(@PathVariable("id") Long id) {
+    public String deleteEvent(@PathVariable("id") Long id) {
         eventService.deleteEvent(id);
         return "redirect:/admin-page"; // Redirect to the contact list page
     }
@@ -97,14 +97,4 @@ public class eventController {
     public String ScheduleTab() {
         return "schedule";
     }
-
-    // @PostMapping("/upload") 
-    // public String uploadImage(Model model, @RequestParam("image") MultipartFile file) throws IOException {
-    //     StringBuilder fileNames = new StringBuilder();
-    //     Path fileNameAndPath = Paths.get(EnvironmentVariables.getEventImages(), file.getOriginalFilename());
-    //     fileNames.append(file.getOriginalFilename());
-    //     Files.write(fileNameAndPath, file.getBytes());
-    //     model.addAttribute("msg", "Uploaded images: " + fileNames.toString());
-    //     return "ImageUpload";
-    // }
 }
