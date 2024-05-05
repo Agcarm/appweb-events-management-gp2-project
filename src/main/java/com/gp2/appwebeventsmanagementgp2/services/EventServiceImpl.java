@@ -86,6 +86,17 @@ public class EventServiceImpl implements EventService {
     //             accomplishedTasks++;
     //         }
     //     }
+	public double calculateProgression(Long Id) {
+        Optional<event> event = eventRepository.findById(Id);
+        List<task> tasks = event.get().getTasks();
+        int totalTasks = tasks.size();
+        int accomplishedTasks = 0;
+
+        // for (task task : tasks) {
+        //     if (taskService.isAccomplished(task.getId())) {
+        //         accomplishedTasks++;
+        //     }
+        // }
 
     //     // Calculate the progression as a percentage
     //     double progression = (double) accomplishedTasks / totalTasks * 100;
