@@ -13,7 +13,7 @@
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
             <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');" enctype="multipart/form-data">
                 <div class="formdet"><label for="eventName">Event Name:</label>
-                    <input type="text" id="name" name="name" required><br><br>
+                    <input type="text" id="name" name="name" title="name" required><br><br>
                 </div>
                 <div class="formdet"><label for="startDate">Start Date:</label>
                     <input type="datetime-local" id="startDate" name="startDate" required><br><br>
@@ -25,7 +25,7 @@
 
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
                     <div class="button-select-container">
-                    <select class="formt" id="country" name="eventVenue" required >
+                    <select class="formt" id="country" name="eventVenue" title="eventVenue" required >
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div> <label for="type">Event Image</label>
-                    <input type="file" name="image" accept="image/*" class="form-control-file"><br><br>
+                    <input type="file" name="image" accept="image/*" title="image" class="form-control-file"><br><br>
                 </div><br><br>
 
                 <div class="formdt">

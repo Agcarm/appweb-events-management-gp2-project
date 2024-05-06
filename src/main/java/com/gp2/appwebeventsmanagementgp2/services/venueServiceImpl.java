@@ -16,8 +16,8 @@ public class venueServiceImpl implements venueService{
 	private venueRepository venueRepository;
 
 	@Override
-	public void saveVenue(venue venue) {
-		venueRepository.save(venue);
+	public venue saveVenue(venue venue) {
+		return venueRepository.save(venue);
 	}
 
 	@Override
@@ -43,7 +43,6 @@ public class venueServiceImpl implements venueService{
 
 
 		venueRepository.save(existingvenue);
-
 	}
 
 	@Override
