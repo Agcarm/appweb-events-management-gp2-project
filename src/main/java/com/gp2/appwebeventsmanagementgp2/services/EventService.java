@@ -19,4 +19,6 @@ public interface EventService {
 	void deleteEvent(Long id);
 
     event findByName(String name);
+
+	double calculateProgression(Long Id);
 }

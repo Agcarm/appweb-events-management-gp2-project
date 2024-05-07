@@ -92,5 +92,15 @@ public class TaskDto {
     public TaskDto() {
     }
 
+
+    public TaskDto(String title, LocalDateTime deadline, String status, contact personInCharge, Date registrationDate,
+            String description) {
+        this.title = title;
+        this.deadline = deadline;
+        this.status = status;
+        this.personInCharge = personInCharge;
+        this.registrationDate = registrationDate;
+        this.description = description;
+    }
     
 }

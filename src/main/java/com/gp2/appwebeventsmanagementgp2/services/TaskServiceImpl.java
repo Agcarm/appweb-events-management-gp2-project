@@ -21,8 +21,9 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public task addTask(TaskDto taskDto) {
 
-        task tsk = new task(taskDto.getTitle(), taskDto.getDeadline(), taskDto.getStatus(),
-                taskDto.getRegistrationDate(), taskDto.getDescription());
+        // task tsk = new task(taskDto.getTitle(), taskDto.getDeadline(), taskDto.getStatus(),
+        //         taskDto.getRegistrationDate(), taskDto.getDescription());
+        task tsk = new task(taskDto.getTitle(), taskDto.getDeadline(), taskDto.getStatus(), taskDto.getPersonInCharge(),taskDto.getRegistrationDate(), taskDto.getDescription());
         return taskRepo.save(tsk);
     }
 

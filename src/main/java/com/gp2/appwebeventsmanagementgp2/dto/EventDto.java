@@ -101,10 +101,10 @@ public class EventDto {
         return tasks;
     }
     public void setActivities(List<activity> activities) {
-        this.activities = activities;
+        this.activities.addAll(activities);
     }
     public void setTasks(List<task> tasks) {
-        this.tasks = tasks;
+        this.tasks.addAll(tasks);
     }
     public String getImageUrl() {
         return imageUrl;

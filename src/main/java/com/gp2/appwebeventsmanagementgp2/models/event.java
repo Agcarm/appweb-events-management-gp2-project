@@ -10,6 +10,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -50,8 +51,7 @@ public class event {
     @Column(nullable = true)
     private List<activity> activities;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "Id")
+    @ManyToMany(fetch = FetchType.EAGER)
     @Column(nullable = true)
     private List<task> tasks;
 
@@ -77,7 +77,7 @@ public class event {
 
     public event(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, venue eventVenue,
             String description, Integer estimatedAttendees, Integer actualAttendees, List<activity> activities,
-            List<task> tasks,Date dateModified, String status, String type, Boolean paidEvent) {
+            List<task> tasks, Date dateModified, String status, String type, Boolean paidEvent) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
@@ -86,8 +86,8 @@ public class event {
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
         this.actualAttendees = actualAttendees;
-        this.activities = activities;
-        this.tasks = tasks;
+        this.activities.addAll(activities);
+        this.tasks.addAll(tasks);
         this.dateModified = dateModified;
         this.status = status;
         this.type = type;
@@ -96,4 +96,9 @@ public class event {
 
     public event() {
     }
+
+    public void setTasks(List<task> tasks) {
+        this.tasks.addAll(tasks);
+    }
+
 }

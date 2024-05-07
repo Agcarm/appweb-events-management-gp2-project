@@ -35,14 +35,6 @@ public class task {
     @Column(name = "status", nullable = true)
     private String status;
 
-    // Assuming a Contact class exists and is an entity with its own @Entity
-    // annotation
-    // @ManyToMany
-    // @JoinTable(name = "person_in_charge", joinColumns = @JoinColumn(name =
-    // "task_id"), inverseJoinColumns = @JoinColumn(name =
-    // "person_in_charge_contact_id"))
-    // private List<contact> personInCharge;
-
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "person_in_charge_id", nullable = true)
     private contact contacts;
@@ -63,6 +55,16 @@ public class task {
     }
 
     public task() {
+    }
+
+    public task(String title, LocalDateTime deadline, String status, contact contacts, Date registrationDate,
+            String description) {
+        this.title = title;
+        this.deadline = deadline;
+        this.status = status;
+        this.contacts = contacts;
+        this.registrationDate = registrationDate;
+        this.description = description;
     }
 
 }

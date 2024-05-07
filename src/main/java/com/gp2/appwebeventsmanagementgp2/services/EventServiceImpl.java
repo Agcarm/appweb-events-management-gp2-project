@@ -1,8 +1,11 @@
 package com.gp2.appwebeventsmanagementgp2.services;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +22,9 @@ public class EventServiceImpl implements EventService {
 
 	@Autowired
 	private eventRepository eventRepository;
+
+	@Autowired
+	private com.gp2.appwebeventsmanagementgp2.repositories.taskRepository taskRepository;
 
 	@Override
 	public void saveEvent(event event) {
@@ -62,46 +68,37 @@ public class EventServiceImpl implements EventService {
 		eventRepository.deleteById(id);
 	}
 
-    @Override
-    public event findByName(String name) {
-        return eventRepository.findByName(name);
-    }
+	@Override
+	public event findByName(String name) {
+		return eventRepository.findByName(name);
+	}
 
 	@Override
 	public event save(EventDto event) {
-		event e = new event(event.getName(), event.getEventVenue(), event.getDescription(), event.getEstimatedAttendees());
+		event e = new event(event.getName(), event.getEventVenue(), event.getDescription(),
+				event.getEstimatedAttendees());
 		e.setDateModified(Date.valueOf(LocalDate.now()));
 		e.setStatus("not started");
 		return eventRepository.save(e);
 	}
 
-	// public double calculateProgression(Long Id) {
-    //     Optional<event> event = eventRepository.findById(Id);
-    //     List<task> tasks = event.getTasks();
-    //     int totalTasks = tasks.size();
-    //     int accomplishedTasks = 0;
-
-    //     for (task task : tasks) {
-    //         if (taskService.isAccomplished(task.getId())) {
-    //             accomplishedTasks++;
-    //         }
-    //     }
 	public double calculateProgression(Long Id) {
-        Optional<event> event = eventRepository.findById(Id);
-        List<task> tasks = event.get().getTasks();
-        int totalTasks = tasks.size();
-        int accomplishedTasks = 0;
+		event e = eventRepository.findById(Id).get();
+		List<task> tasks = e.getTasks();
+		System.out.println(tasks);
+		int totalTasks = tasks.size();
+		int accomplishedTasks = 0;
+		
+		for (task evenTask : tasks) {
+			if (evenTask.getStatus().equals("Completed")) {
+				accomplishedTasks++;
+			}
+		}
 
-        // for (task task : tasks) {
-        //     if (taskService.isAccomplished(task.getId())) {
-        //         accomplishedTasks++;
-        //     }
-        // }
+		// Calculate the progression as a percentage
+		double progression = (double) accomplishedTasks / totalTasks * 100;
 
-    //     // Calculate the progression as a percentage
-    //     double progression = (double) accomplishedTasks / totalTasks * 100;
-
-    //     return progression;
-    // }
+		return progression;
+	}
 
 }

@@ -35,7 +35,7 @@
     <div id="overlayTask" class="overlayTask" th:fragment="task">
         <div class="container">
             <h1>Task Form</h1>
-            <form id="myForm" action="#" th:action="@{/task/createtask}" method="post">
+            <form id="myForm" th:action="@{/task/createtask}" method="post">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required>
 
@@ -49,10 +49,16 @@
                     <option value="Completed">Completed</option>
                 </select>
 
+                <label for="event">Event:</label>
+                <!-- <input type="text" id="personInCharge" name="personInCharge"> -->
+                <select class="formdet" id="event" name="event" required >
+                    <option class="formdet"  th:each="event : ${eventList}" th:text="${event.name}" th:value="${event.id}"></option>
+                  </select>
+
                 <label for="personInCharge">Person in Charge:</label>
                 <!-- <input type="text" id="personInCharge" name="personInCharge"> -->
                 <select class="formdet" id="personInCharge" name="personInCharge" required >
-                    <option class="formdet"  th:each="contact : ${contactList}" th:text="${contact.name}" th:value="${contact.getContactId()}"></option>
+                    <option class="formdet"  th:each="contact : ${contactList}" th:text="${contact.name}" th:value="${contact.contactId}"></option>
                   </select>
 
                 <label for="registrationDate">Registration Date:</label>
@@ -70,7 +76,7 @@
 
         </div>
     </div>
-    <script>
+    <!-- <script>
         const form = document.getElementById('myForm');
 
         form.addEventListener('submit', (event) => {
@@ -104,7 +110,7 @@
                 });
         });
 
-    </script>
+    </script> -->
 </body>
 
 </html>

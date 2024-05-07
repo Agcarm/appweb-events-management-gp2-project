@@ -172,3 +172,14 @@ nav[aria-label="breadcrumb"] {
 .breadcrumb-item.active {
     color: #6c757d;
 }
+.progress-bar {
+    width: 100%;
+    background-color: #f3f3f3;
+    border-radius: 25px;
+}
+.progress-bar-fill {
+    height: 30px;
+    background-color: #4c63af;
+    border-radius: 25px;
+    transition: width 1s;
+}

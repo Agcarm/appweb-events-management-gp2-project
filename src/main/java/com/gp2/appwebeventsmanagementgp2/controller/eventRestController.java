@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -28,6 +29,7 @@ public class eventRestController {
     @Autowired
     EventService eService;
 
+    @Transactional
     @GetMapping("/all")
     public ResponseEntity<List<event>> GetAllEvents() {
         return new ResponseEntity<>(eService.findAll(), HttpStatus.OK);
@@ -49,12 +51,14 @@ public class eventRestController {
         CREATED);
     }
 
+    @Transactional
     @GetMapping("/{name}")
     public event GetEventByName(@PathVariable String name, Model model){
         model.addAttribute("event",eService.findByName(name));
         return eService.findByName(name);
     }
 
+    @Transactional
     @GetMapping("/event{id}")
     public event GetEvent(@PathVariable Long id, Model model){
         model.addAttribute("event", eService.getEventById(id));
@@ -72,4 +76,10 @@ public class eventRestController {
         return "successful";
     }
     
+    
+    @GetMapping("/{id}/progression")
+    public double calculateProgression(@PathVariable("id") Long id) {
+     double prog = eService.calculateProgression(id);
+        return prog; // Redirect to the contact list page
+    }
 }
