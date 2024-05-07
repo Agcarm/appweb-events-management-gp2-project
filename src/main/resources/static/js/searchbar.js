@@ -2,7 +2,7 @@ function searchTable() {
     let input, filter, table, tr, td, i, txtValue;
     input = document.getElementById("searchInput");
     filter = input.value.toUpperCase();
-    table = document.getElementById("dataTable");
+    table = document.querySelector('.tabTable');
     tr = table.getElementsByTagName("tr");
 
     for (i = 0; i < tr.length; i++) {
