@@ -4,15 +4,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Venue Information</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" th:href="@{css/dashboard.css}">
-    <link rel="stylesheet" th:href="@{css/navStyle.css}">
-    <link rel="stylesheet" th:href="@{css/styles.css}">
     <link rel="stylesheet" th:href="@{css/venue.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
-
 <body>
-<div class="container mt-5">
+   <div class="container mt-5">
     <h2>Venue Information</h2>
     <hr>
     <form th:action="@{/venues}" method="post">

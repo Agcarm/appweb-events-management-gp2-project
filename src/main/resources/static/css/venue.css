@@ -10,3 +10,8 @@
 #but:hover{
     background-color: #847b7b;
 }
+
+body{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
