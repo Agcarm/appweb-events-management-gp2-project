@@ -1,26 +1,23 @@
-const calendar = new DayPilot.Month("calendar", {
-    startDate: "2024-05-22",
-    // onBeforeEventRender: args => {
-    //     const color = args.data.color;
-    //     args.data.backColor = color;
-    //     args.data.borderColor = "darker";
-    //     args.data.fontColor = "#ffffff";
-    //     args.data.areas = [
-    //       {
-    //         top: 6,
-    //         right: 6,
-    //         width: 18,
-    //         height: 18,
-    //         symbol: "../icons/daypilot.svg#minichevron-down-2",
-    //         action: "ContextMenu",
-    //         backColor: "#ffffff",
-    //         fontColor: "#666666",
-    //         style: "border: 1px solid #ccc; cursor:pointer; border-radius: 15px;"
-    //       }
-    //     ];
-    //   }
-  });
+/*Mini calendar */
+const nav = new DayPilot.Navigator("miniCalendar");
+nav.selectMode = "month";
+    nav.onTimeRangeSelected = function(args) {
+        calendar.startDate = args.start;
+        // load events
+        calendar.update();
+    };
+    // ...
+    nav.init();
 
+/*Main Calendar */
+const calendar = new DayPilot.Month("calendar", {
+    startDate: DayPilot.Date.today(),
+  });
+calendar.onBeforeEventRender = (args) => {
+    console.log(args.data.color)
+    args.data.backColor = args.data.color;
+    // ...
+};
 calendar.contextMenu = new DayPilot.Menu({
     items: [
       {text:"Show event ID", onClick: args => {alert("Event value: " + args.source.id());} },
@@ -32,3 +29,10 @@ calendar.contextMenu = new DayPilot.Menu({
 calendar.init();
 calendar.events.load("/eventRest/loadCalendar");
 
+/*Scheduler */
+var scheduler = new DayPilot.Scheduler("calendar");
+scheduler.onBeforeCellRender =  function (args){
+  args.cell.cssClass = "customCells";
+};
+
+scheduler.init()

@@ -3,12 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/schedule.css}">
     <title>Document</title>
 </head>
 <body>
-    <!-- monthly calendar control placeholder -->
-    <div id="calendar"></div>
-
+    <div class="scheduleCalendar">
+        <div id="miniCalendar"></div>
+        <div class="calendar">
+            <!-- monthly calendar control placeholder -->
+            <div class="calendarButton">
+                <button type="button">Year</button>
+                <button type="button" class="active">Month</button>
+                <button type="button">Week</button>
+                <button type="button">Day</button>
+            </div>
+            <div id="calendar"></div>
+        </div> 
+    </div>
     <!-- DayPilot library -->
     <script th:src="@{/js/daypilot/daypilot-all.min.js}"></script>
     <script th:src="@{/js/schedule.js}"></script>

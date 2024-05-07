@@ -36,9 +36,13 @@
                     <table th:replace="~{Lists :: venueList}"></table>
 
                     <div class="pagination">
-                        <button type="button" class="page" id="previous"><</button>
-                        <span class="pageNumber"></span>
-                        <button type="button" class="page" id="next">></button>
+                        <div type="button" class="page" id="previous"><ion-icon name="chevron-back-outline"></ion-icon></div>
+                        <span class="pageNumber">
+                            <input type="text" title="currentPageNumber" name="currentPN" id="currentPN">
+                            /
+                            <span class="totalPN"></span>
+                        </span>
+                        <div type="button" class="page" id="next"><ion-icon name="chevron-forward-outline"></ion-icon></div>
                     </div>
                 </div>
             </main>
@@ -46,15 +50,32 @@
         <aside class="info">
             <div class="Details">
                 <div class="userImg">
-                    <img th:src="@{/manager-images/login.PNG}" alt="">
+                    <img th:src="@{/manager-images/profile.jpg}" alt="">
                 </div>
-                <span>Welcome, </span>
-                <span class="username" th:text="${user.fullname}"></span> 
+                <div>
+                    <span class="username">Welcome, </span>
+                    <span class="username" th:text="${user.fullname}"></span>
+                </div> 
             </div>
-            <div class="eventImage" th:replace="~{Lists :: eventImage}"></div>
-            <div class="eventTitle"></div>
-            <div class="eventDescription"></div>
-            <button type="button">view sheet</button>
+            <div class="eventDetails">
+                <div class="eventTitle"></div>
+                <div class="eventImage" th:replace="~{Lists :: eventImage}"></div>
+                <div class="eventStartDate">
+                    <span class="DateTitle">Date: </span>
+                    <span class="startDate"></span>
+                </div>
+                <div class="eventEndDate">
+                    <span class="DateTitle">End Date: </span>
+                    <span class="endDate"></span>
+                </div>
+                <div class="eventVenue">
+                    <span class="venueTitle">Venue: </span>
+                    <span class="venue"></span>
+                </div>
+                <p class="descriptionTitle">Description</p>
+                <div class="eventDescription"></div>
+            </div>
+            <button type="button" class="btn myprimarybtn">view sheet</button>
         </aside>
     </div>
     <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">

@@ -7,6 +7,7 @@ public class DayPilotEventDto {
     private LocalDateTime start;
     private LocalDateTime end;
     private String text;
+    private String color;
 
 
     public Long getId() {
@@ -32,5 +33,11 @@ public class DayPilotEventDto {
     }
     public void setText(String text) {
         this.text = text;
+    }
+    public String getColor() {
+        return color;
+    }
+    public void setColor(String color) {
+        this.color = color;
     }
 }

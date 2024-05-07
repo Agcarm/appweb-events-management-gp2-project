@@ -107,6 +107,7 @@ public class event {
         dpe.setStart(this.startDate);
         dpe.setEnd(this.endDate);
         dpe.setText(this.name);
+        dpe.setColor(this.eventType.getColour());
         // ... set other properties
         return dpe;
     }
