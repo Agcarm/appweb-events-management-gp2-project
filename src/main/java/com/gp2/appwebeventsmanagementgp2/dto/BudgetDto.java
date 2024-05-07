@@ -10,7 +10,6 @@ public class BudgetDto {
     private String title;
     private double estimatedAmount;
     private double actualAmount;
-    private List<expense> expenses;
 
     public Long getId() {
         return id;
@@ -44,27 +43,19 @@ public class BudgetDto {
         this.actualAmount = actualAmount;
     }
 
-    public List<expense> getExpenses() {
-        return expenses;
-    }
+   
 
-    public void setExpenses(List<expense> expenses) {
-        this.expenses = expenses;
-    }
-
-    public BudgetDto(Long id, String title, double estimatedAmount, double actualAmount, List<expense> expenses) {
+    public BudgetDto(Long id, String title, double estimatedAmount, double actualAmount) {
         this.id = id;
         this.title = title;
         this.estimatedAmount = estimatedAmount;
         this.actualAmount = actualAmount;
-        this.expenses = expenses;
     }
 
-    public BudgetDto(String title, double estimatedAmount, double actualAmount, List<expense> expenses) {
+    public BudgetDto(String title, double estimatedAmount, double actualAmount) {
         this.title = title;
         this.estimatedAmount = estimatedAmount;
         this.actualAmount = actualAmount;
-        this.expenses = expenses;
     }
 
     public BudgetDto() {

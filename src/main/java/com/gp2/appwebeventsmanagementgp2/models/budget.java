@@ -23,26 +23,20 @@ public class budget {
     @Column(name = "actualAmount")
     private double actualAmount;
 
-    @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "expenseId")
-    @Column(nullable = true)
-    private List<expense> expenses;
-
     
    
-    public budget(Long id, String title, double estimatedAmount, double actualAmount, List<expense> expenses) {
+    public budget(Long id, String title, double estimatedAmount, double actualAmount) {
         this.id = id;
         this.title = title;
         this.estimatedAmount = estimatedAmount;
         this.actualAmount = actualAmount;
-        this.expenses = expenses;
     }
 
-    public budget(String title, double estimatedAmount, double actualAmount, List<expense> expenses) {
+    public budget(String title, double estimatedAmount, double actualAmount) {
         this.title = title;
         this.estimatedAmount = estimatedAmount;
         this.actualAmount = actualAmount;
-        this.expenses = expenses;
+      
     }
 
 

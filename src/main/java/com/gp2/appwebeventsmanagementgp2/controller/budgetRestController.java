@@ -1,17 +1,11 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-
 import com.gp2.appwebeventsmanagementgp2.dto.BudgetDto;
 import com.gp2.appwebeventsmanagementgp2.models.budget;
 import com.gp2.appwebeventsmanagementgp2.services.BudgetService;
@@ -28,6 +22,12 @@ public class budgetRestController {
 
     @Autowired
     BudgetService budgetservice;
+
+     @GetMapping("")
+    public String showBudget() {
+        return "redirect:/Budget"; // Thymeleaf template name
+    }
+
 
     @PostMapping("/createbudget")
     public BudgetDto createbudget(@RequestBody BudgetDto bud) {

@@ -30,7 +30,7 @@ public class expenseRestController {
     ExpenseService expenseservice;
 
     @PostMapping("/createexpense")
-    public ExpenseDto createexpense(@RequestBody ExpenseDto bud) {
+    public ExpenseDto createExpense(@RequestBody ExpenseDto bud) {
         expenseservice.addExpense(bud);
         return bud;
     }

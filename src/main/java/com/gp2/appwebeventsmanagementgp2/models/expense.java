@@ -33,13 +33,13 @@ public class expense {
     @Column(name = "date")
     private LocalDateTime date;
 
-    // @ManyToOne
-    // @JoinColumn(name = "budgetId", nullable = false)
-    // private budget budgets;
+    @ManyToOne
+    @JoinColumn(name = "budgetId")
+    private budget budget;
 
 
     public expense(Long id, String title, double estimatedUnitPrice, double actualUnitPrice, double estimatedQty,
-            double actualQty, LocalDateTime date) {
+            double actualQty, LocalDateTime date ,budget budget) {
         this.id = id;
         this.title = title;
         this.estimatedUnitPrice = estimatedUnitPrice;
@@ -47,18 +47,18 @@ public class expense {
         this.estimatedQty = estimatedQty;
         this.actualQty = actualQty;
         this.date = date;
-        // this.budgets = budgets;
+        this.budget = budget;
     }
 
     public expense(String title, double estimatedUnitPrice, double actualUnitPrice, double estimatedQty,
-            double actualQty, LocalDateTime date) {
+            double actualQty, LocalDateTime date,budget budget) {
         this.title = title;
         this.estimatedUnitPrice = estimatedUnitPrice;
         this.actualUnitPrice = actualUnitPrice;
         this.estimatedQty = estimatedQty;
         this.actualQty = actualQty;
         this.date = date;
-        // this.budgets = budgets;
+        this.budget = budget;
     }
 
     public expense() {

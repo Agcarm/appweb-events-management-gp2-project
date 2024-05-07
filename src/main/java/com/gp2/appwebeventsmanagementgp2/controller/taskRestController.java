@@ -58,6 +58,12 @@ public class taskRestController {
         return taskservice.findAll();
     }
 
+    @GetMapping("/{Id}/delete")
+    public String deleteTask(Long Id) {
+        taskservice.deleteTask(Id);
+        return "Task deleted successfully";
+    }
+
     @GetMapping("/sort/{field}")
     public List<task> findallSort(@PathVariable String field) {
         return taskservice.findAllSort(field);
