@@ -179,7 +179,7 @@ nav[aria-label="breadcrumb"] {
 }
 .progress-bar-fill {
     height: 30px;
-    background-color: #4c63af;
+    background-color: var(--blue);
     border-radius: 25px;
     transition: width 1s;
 }
