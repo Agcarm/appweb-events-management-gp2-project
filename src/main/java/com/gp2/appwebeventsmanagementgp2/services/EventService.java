@@ -27,4 +27,6 @@ public interface EventService {
 	Page<event> findAllPages(int offset, int pageSize);
 
 	Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end);
+
+	double calculateProgression(Long Id);
 }

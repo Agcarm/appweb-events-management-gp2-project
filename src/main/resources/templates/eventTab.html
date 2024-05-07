@@ -22,6 +22,24 @@
                     <div class="label">
                         <h2>Events</h2>
                     </div>
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-md-8">
+                                    <nav style="--bs-breadcrumb-divider:'>'" aria-label="breadcrumb">
+                                    
+                                        <li class="breadcrumb-item">
+                                            <a th:href= "@{/admin-page}">Home</a>
+                                        </li>
+                                        <li class="breadcrumb-item active" aria-current="page">Event
+            
+                                        </li>
+                                    
+                            
+                                    </nav>
+                            </div>
+                        </div>
+                        
+                     </div>
                     <div class="table-lists">
                         <button type="button" class="tab active">Event List</button>
                         <button type="button" class="tab">Task List</button>
@@ -76,6 +94,9 @@
                 <div class="eventDescription"></div>
             </div>
             <button type="button" class="btn myprimarybtn">view sheet</button>
+            <div class="progress-bar">
+                <div class="progress-bar-fill" ></div>
+            </div>
         </aside>
     </div>
     <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">

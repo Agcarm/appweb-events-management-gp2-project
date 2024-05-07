@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,30 +10,37 @@
 
 </head>
 <style>
-              /* Reset some default styling */
-body, div, h1, form, label, input, select, textarea, button {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+    /* Reset some default styling */
+    body,
+    div,
+    h1,
+    form,
+    label,
+    input,
+    select,
+    textarea,
+    button {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
 
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f9f9f9;
-}
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f9f9f9;
+    }
 </style>
+
 <body>
-    <div id="overlayTask" class="overlayTask"  th:fragment="task">
+    <div id="overlayTask" class="overlayTask" th:fragment="task">
         <div class="container">
             <h1>Task Form</h1>
-            <form action="#" th:action="@{/task/createtask}" th:object="${taskDto}" method="post" onsubmit="return confirm('Are you sure you wish to submit?');">
+            <form id="myForm" th:action="@{/task/createtask}" method="post">
                 <label for="title">Title:</label>
                 <input type="text" id="title" name="title" required>
 
-
                 <label for="deadline">Deadline:</label>
-                <input type="date" id="deadline" name="deadline" required>
-
+                <input type="datetime-local" id="deadline" name="deadline" required>
 
                 <label for="status">Status:</label>
                 <select id="status" name="status">
@@ -41,25 +49,68 @@ body {
                     <option value="Completed">Completed</option>
                 </select>
 
+                <label for="event">Event:</label>
+                <!-- <input type="text" id="personInCharge" name="personInCharge"> -->
+                <select class="formdet" id="event" name="event" required >
+                    <option class="formdet"  th:each="event : ${eventList}" th:text="${event.name}" th:value="${event.id}"></option>
+                  </select>
 
                 <label for="personInCharge">Person in Charge:</label>
-                <input type="text" id="personInCharge" name="personInCharge">
-
+                <!-- <input type="text" id="personInCharge" name="personInCharge"> -->
+                <select class="formdet" id="personInCharge" name="personInCharge" required >
+                    <option class="formdet"  th:each="contact : ${contactList}" th:text="${contact.name}" th:value="${contact.contactId}"></option>
+                  </select>
 
                 <label for="registrationDate">Registration Date:</label>
                 <input type="date" id="registrationDate" name="registrationDate">
 
-
                 <label for="description">Description:</label>
                 <textarea id="description" name="description" rows="4"></textarea>
 
-            <div class="formbuto">
-                <button type="submit" class="fbtn">Submit</button>
-                <button id="closeFormBtnTask" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
-            </div>
-
+                <div class="formbuto">
+                    <button type="submit" class="fbtn">Submit</button>
+                    <button id="closeFormBtnTask" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
+                </div>
             </form>
+
+
         </div>
     </div>
+    <!-- <script>
+        const form = document.getElementById('myForm');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); // Prevent default form submission
+
+            // Prepare data object from form fields
+            const data = {
+                title: document.getElementById('title').value,
+                deadline: document.getElementById('deadline').value,
+                status: document.getElementById('status').value,
+                personInCharge: document.getElementById('personInCharge').value,
+                registrationDate: document.getElementById('registrationDate').value,
+                description: document.getElementById('description').value,
+            };
+
+            // Convert data object to JSON string
+            const jsonData = JSON.stringify(data);
+
+            // Send data as JSON with Fetch API
+            fetch('task/createtask', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(data), // data can be `string` or {object}!
+            })
+                .then(response => response.json())
+                .then(data => console.log(data))
+                .catch((error) => {
+                    console.error('Error:', error);
+                });
+        });
+
+    </script> -->
 </body>
+
 </html>

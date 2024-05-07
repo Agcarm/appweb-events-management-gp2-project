@@ -17,6 +17,7 @@ import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.dto.UserDto;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.UserService;
+import com.gp2.appwebeventsmanagementgp2.services.contactService;
 import com.gp2.appwebeventsmanagementgp2.services.typeService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 
@@ -38,6 +39,8 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 
+    @Autowired
+    private contactService cService;
 
 	@GetMapping("/registration")
 	public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
@@ -102,6 +105,7 @@ public class UserController {
 		model.addAttribute("eventList", eService.findAll());
 		model.addAttribute("venueList", vService.listAll());
         model.addAttribute("typeList", tService.listAll());
+		model.addAttribute("contactList", cService.getAllcontacts());
 		return "index";
 	}
 

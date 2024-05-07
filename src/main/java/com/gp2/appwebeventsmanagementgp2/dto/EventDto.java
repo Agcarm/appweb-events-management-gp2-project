@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.gp2.appwebeventsmanagementgp2.models.activity;
 import com.gp2.appwebeventsmanagementgp2.models.type;
+import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.models.venue;
 
 
@@ -19,6 +20,7 @@ public class EventDto {
     private Integer estimatedAttendees;
     private Integer actualAttendees;
     private List<activity> activities;
+    private List<task> tasks;
     private Date dateModified;
     private String status;
     private type eventType;
@@ -98,8 +100,14 @@ public class EventDto {
     public List<activity> getActivities() {
         return activities;
     }
+    public List<task> getTasks() {
+        return tasks;
+    }
     public void setActivities(List<activity> activities) {
-        this.activities = activities;
+        this.activities.addAll(activities);
+    }
+    public void setTasks(List<task> tasks) {
+        this.tasks.addAll(tasks);
     }
     public String getImageUrl() {
         return imageUrl;

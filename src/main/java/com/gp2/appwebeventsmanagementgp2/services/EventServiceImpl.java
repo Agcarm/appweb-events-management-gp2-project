@@ -1,14 +1,19 @@
 package com.gp2.appwebeventsmanagementgp2.services;
+
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.StreamSupport;
 import java.util.stream.Collectors;
 
 
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.config.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -16,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
+import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
 
 @Service
@@ -43,6 +49,7 @@ public class EventServiceImpl implements EventService {
 		event existingevent = getEventById(id);
 		existingevent.setName(updatedEvent.getName());
 		existingevent.setActivities(updatedEvent.getActivities());
+		existingevent.setTasks(updatedEvent.getTasks());
 		existingevent.setActualAttendees(updatedEvent.getActualAttendees());
 		existingevent.setDescription(updatedEvent.getDescription());
 		existingevent.setEndDate(updatedEvent.getEndDate());
@@ -70,14 +77,15 @@ public class EventServiceImpl implements EventService {
 		eventRepository.deleteById(id);
 	}
 
-    @Override
-    public event findByName(String name) {
-        return eventRepository.findByName(name);
-    }
+	@Override
+	public event findByName(String name) {
+		return eventRepository.findByName(name);
+	}
 
 	@Override
 	public event save(EventDto event) {
-		event e = new event(event.getName(), event.getEventVenue(), event.getEventType(), event.getDescription(), event.getEstimatedAttendees());
+		event e = new event(event.getName(), event.getEventVenue(), event.getEventType(), event.getDescription(),
+				event.getEstimatedAttendees());
 		e.setDateModified(Date.valueOf(LocalDate.now()));
 		e.setStatus("not started");
 		return eventRepository.save(e);
@@ -92,6 +100,25 @@ public class EventServiceImpl implements EventService {
 	public Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end) {
 		Iterable<event> MyEvents = eventRepository.findAllByStartDateBetween(start, end);
 		return StreamSupport.stream(MyEvents.spliterator(), false).map(event::toDayPilotEvent).collect(Collectors.toList());
+	}
+
+	public double calculateProgression(Long Id) {
+		event e = eventRepository.findById(Id).get();
+		List<task> tasks = e.getTasks();
+		System.out.println(tasks);
+		int totalTasks = tasks.size();
+		int accomplishedTasks = 0;
+		
+		for (task evenTask : tasks) {
+			if (evenTask.getStatus().equals("Completed")) {
+				accomplishedTasks++;
+			}
+		}
+
+		// Calculate the progression as a percentage
+		double progression = (double) accomplishedTasks / totalTasks * 100;
+
+		return progression;
 	}
 
 }

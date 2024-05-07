@@ -33,6 +33,19 @@ public class venue {
     @Column(name = "latitude")
     private Double latitude;
 
+    // public venue(Long id, String name, String country, String city, String address, Double latitude, Double longitude,
+    //         byte[] image) {
+    //     this.id = id;
+    //     this.name = name;
+    //     this.country = country;
+    //     this.city = city;
+    //     this.address = address;
+    //     this.latitude = latitude;
+    //     this.longitude = longitude;
+    //     this.image = image;
+    // }
+
+
     @Column(name = "longitude")
     private Double longitude;
     

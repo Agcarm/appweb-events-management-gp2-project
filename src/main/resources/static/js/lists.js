@@ -21,7 +21,7 @@ document.getElementById('previous').addEventListener("click",()=>{
                 displayPages(currentPageEvent,elmtperpage);
             }
             break;
-        case "task":
+        case "taskRest":
             if (currentPageTask > 0) {
                 currentPageTask -= 1;
                 printPageNumber(currentPageTask,totalPagesTask);
@@ -49,7 +49,7 @@ document.getElementById('next').addEventListener("click",()=>{
                 displayPages(currentPageEvent,elmtperpage);
             }
             break;
-        case "task":
+        case "taskRest":
             if (currentPageTask+1 < totalPagesTask) {
                 currentPageTask += 1;
                 printPageNumber(currentPageTask,totalPagesTask);
@@ -111,7 +111,7 @@ function displayPages(pageNo, TotalperPage) {
                 });
                 break;
 
-            case "task":
+            case "taskRest":
                 totalPagesTask = data.totalPages
                 printPageNumber(currentPageTask,totalPagesTask);
                 data.content.forEach(element => {
@@ -209,9 +209,29 @@ function fnselect(row) {
         description.querySelector('.eventTitle').textContent = data.name;
         description.querySelector('.eventDescription').textContent = data.description;
         description.querySelector('.eventImage').innerHTML = '<img src="/manager-images/'+data.imageUrl+'" alt="'+data.imageUrl+'"  height="250px">';
+        progression(data.id);
         description.querySelector('.startDate').innerHTML = data.startDate;
         description.querySelector('.endDate').innerHTML = data.endDate;
         description.querySelector('.venue').innerHTML = data.eventVenue.name;
     })
     .catch((error) => console.error("FETCH ERROR:", error));
+}
+
+function progression(params) {
+    fetch("http://localhost:8080/eventRest/"+ params +"/progression")
+    .then((response) => {
+        if (response.ok) {
+        return response.json();
+        } else {
+        throw new Error("NETWORK RESPONSE ERROR");
+        }
+    })
+
+    .then(data => {
+        console.log(data);
+        description.querySelector('.progress-bar-fill').style.width=data+ "%";
+        
+
+    })
+
 }
