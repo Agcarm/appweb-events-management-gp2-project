@@ -6,27 +6,84 @@
     <title>Document</title>
     <link rel="stylesheet" th:href="@{css/styles.css}">
     <link rel="stylesheet" th:href="@{css/dashboard.css}">
+    <style>
+
+      body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;}
+
+      form {
+    position: relative;
+    width: 50%; /* Adjust as needed */
+    margin: 0 auto; /* Horizontally center the form */
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23); /* Add shadow */
+    transform: translateY(-50px); /* Move the form up */
+    background-color: #fff; /* Add a background color */
+    border-radius: 15px;
+}
+/*style for the map*/
+  /*
+            * Always set the map height explicitly to define the size of the div element
+            * that contains the map.
+            */
+            #map {
+             height: 50%;
+             width: 50%;
+             margin-left: 10px;
+           }
+
+           /*
+            * Optional: Makes the sample page fill the window.
+            */
+
+    </style>
 </head>
 <body>
+     <!-- Search input -->
+<input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+
+<!-- Google map -->
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE"></script>
+
+<script src="../js/mapscript.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE&callback=initMap" async defer></script>
+
+
     <div  id="form-containerr" >
         <form id="venueForm" th:action="@{/save}"  method="post" style="margin: right 20px;" onsubmit="return confirm('Are you sure?');">
 
-          <div class="formdet"><label for="venueName" style="font-weight: 350; font-style: italic;">Venue Name:</label>
-          <input type="text" id="venueName" name="name"><br><br></div>
+          <div class="formdet"><label for="venueName" >Venue Name:</label>
+          <input type="text" id="venueName" name="name" required><br><br></div>
 
-          <div class="formdet"><label for="venueQuarter" style="font-weight: 350; font-style: italic;">Venue Quarter:</label>
-          <input type="text" id="venueName" name="address" style="font-weight: 350; font-style: italic;"><br><br></div>
+          <div class="formdet"><label for="FullAddress" >Venue Address:</label>
+          <input type="text" id="venueFullAddress" name="address" ><br><br></div>
 
-          <div class="formdet"><label for="venueCity" style="font-weight: 350; font-style: italic;">Venue City:</label>
-          <input type="text" id="venueName" name="city"><br><br></div>
+          <div class="formdet"><label for="venueCity" >Venue City:</label>
+          <input type="text" id="venueCity" name="city" required><br><br></div>
 
-          <div class="formdet"><label for="venueCounrty" style="font-weight: 350; font-style: italic;">Venue Country:</label>
-          <input type="text" id="venueName" name="country"><br><br></div>
+          <div class="formdet"><label for="venueCounrty" >Venue Country:</label>
+          <input type="text" id="venueCounrty" name="country" required><br><br></div>
+
+          <div class="formdet"><label for="venuelatitude" >Venue Latitude:</label>
+            <input type="number" id="venuelatitude" name="latitude" placeholder="select from map or skip"><br><br></div>
+
+            <div class="formdet"><label for="venuelongitude" >Venue Longitude:</label>
+              <input type="number" id="venuelongitude" name="longitude" placeholder="select from map or skip"><br><br></div>
+
           <div class="formbuto">
             <button type="submit" class="fbtn">Submit</button>
             <button id="closeFormBtn" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
         </div>
+
         </form>
+
       </div><br><br>
 </body>
 </html>
