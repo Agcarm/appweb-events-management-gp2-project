@@ -12,6 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact ;
 import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
+import com.gp2.appwebeventsmanagementgp2.services.BudgetService;
+import com.gp2.appwebeventsmanagementgp2.services.ExpenseService;
+import com.gp2.appwebeventsmanagementgp2.services.TaskService;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
 
 @Controller
@@ -22,6 +25,14 @@ public class contactController {
     private final contactRepository contactRepository;
 
     public contactService contactService ;
+    
+    @Autowired
+    private BudgetService bService;
+
+    @Autowired
+    private ExpenseService eService;
+
+
 
     @Autowired
     public contactController(contactRepository contactRepository,contactService contactService) {
@@ -32,6 +43,10 @@ public class contactController {
     @GetMapping("/contact")
     public String showContactForm(Model model) {
         model.addAttribute("contact", new contact(null, null, null));
+        model.addAttribute("budgetList", bService.findAll());
+        model.addAttribute("expenseList", eService.findAll());
+        model.addAttribute("contactList", contactService.getAllcontacts());
+
         return "Contact"; // Thymeleaf template name
     }
 
@@ -66,5 +81,11 @@ public class contactController {
     public String deleteContact(@PathVariable("id") Long contactId) {
         contactService.deleteContact(contactId);
         return "redirect:/Contact"; // Redirect to the contact list page
+    }
+
+    @GetMapping("/{Id}/delete")
+    public String deleteTask(Long Id) {
+        bService.deleteBudget(Id);
+        return "Task deleted successfully";
     }
 }
