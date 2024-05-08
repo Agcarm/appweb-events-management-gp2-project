@@ -308,3 +308,10 @@ nav[aria-label="breadcrumb"] {
     border-radius: 25px;
     transition: width 1s;
 }
+
+#currentPN{
+    border: none;
+    background-color: transparent;
+    width: 20px;
+    font-size: 16px;
+}
