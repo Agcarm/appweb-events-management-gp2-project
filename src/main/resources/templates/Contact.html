@@ -17,7 +17,7 @@
 			<div class="navigation" th:replace="~{navigation :: navigation}">
 		</div>
 			<!-- ========================= Main ==================== -->
-			
+
 			<div class="main">
 				<div class="topbar">
 					<div class="toggle">
@@ -33,22 +33,22 @@
 							<div class="row">
 								<div class="col-md-8">
 										<nav style="--bs-breadcrumb-divider:'>'" aria-label="breadcrumb">
-										
+
 											<li class="breadcrumb-item">
 												<a th:href= "@{/admin-page}">Home</a>
 											</li>
 											<li class="breadcrumb-item active" aria-current="page">contact
-				
+
 											</li>
-										
-								
+
+
 										</nav>
 								</div>
 							</div>
-							
+
 						 </div>
 					</div>
-					
+
 					<div class="user">
 						<img src="assets/imgs/customer01.jpg" alt="">
 					</div>
@@ -85,8 +85,6 @@
 								<td th:text="${contact.phoneNumber}"></td>
 								<td th:text="${contact.country}"></td>
 
-								<td><a th:href="@{'/contacts/' + ${contact.contactId} + '/edit'}">Edit</a></td>
-                				<td><a th:href="@{'/contacts/' + ${contact.contactId}+'/delete'}">Delete</a></td>
 								<td><a th:href="@{'/contacts/' + ${contact.contactId} + '/edit'}">Edit</a></td>
                 				<td><a th:href="@{'/contacts/' + ${contact.contactId}+'/delete'}">Delete</a></td>
 							</tr>
