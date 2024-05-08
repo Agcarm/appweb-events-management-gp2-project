@@ -25,6 +25,7 @@ public class contactController {
     @GetMapping("/contact")
     public String showContactForm(Model model) {
         model.addAttribute("contact", new contact(null, null, null));
+        model.addAttribute("contactList",contactService.getAllcontacts());
         return "Contact"; // Thymeleaf template name
     }
 
@@ -45,19 +46,20 @@ public class contactController {
     @PostMapping("/contacts/{id}/update")
     public String updateContact(@PathVariable("id") Long contactId, @ModelAttribute("contact") contact updatedContact) {
         contactService.updateContact(contactId, updatedContact);
-        return "redirect:/Contact";
+        return "redirect:/admin-page";
     }
 
 
     @PostMapping("/save-project")
-    public String saveContact(@ModelAttribute contact contact) {
+    public String saveContact(@ModelAttribute contact contact, Model model) {
    	 contactService.saveContact(contact);
-    	 return "/Contact";
+        model.addAttribute("contactList",contactService.getAllcontacts());
+    	 return "Contact";
         }
 
     @GetMapping("/contacts/{id}/delete")
     public String deleteContact(@PathVariable("id") Long contactId) {
         contactService.deleteContact(contactId);
-        return "redirect:/Contact"; // Redirect to the contact list page
+        return "redirect:/admin-page"; // Redirect to the contact list page
     }
 }

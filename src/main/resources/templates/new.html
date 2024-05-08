@@ -2,7 +2,9 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Create New Product</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootswatch/4.5.2/cosmo/bootstrap.min.css" />
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -63,8 +65,8 @@
                             </tr>
 
                             </tr>
-                            <label class="form-label">Upload Image</label>
-                            <td><input type="file" th:field="*{image}" class="form-control" accept="image/*" /></td>
+                            <label for="image" class="form-label">Upload Image</label>
+                            <td><input type="file" th:field="*{image}" id="image" class="form-control" accept="image/*" /></td>
                         </tr>
                     </div>
                             <br>

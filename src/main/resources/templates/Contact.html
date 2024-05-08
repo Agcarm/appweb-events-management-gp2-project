@@ -79,14 +79,14 @@
                         </thead>
 
                         <tbody>
-							<tr th:each="contact : ${contacts}">
-								<td th:text="@{contacts.getName()}"></td>
-								<td th:text="@{contacts.getEmail()}"></td>
-								<td th:text="@{contacts.getPhoneNumber()}"></td>
-								<td th:text="@{contacts.getCountry()}"></td>
+							<tr th:each="contact : ${contactList}">
+								<td th:text="${contact.name}"></td>
+								<td th:text="${contact.email}"></td>
+								<td th:text="${contact.phoneNumber}"></td>
+								<td th:text="${contact.country}"></td>
 
-								<td><a th:href="@{'/contacts/' + ${contacts.contactId} + '/edit'}">Edit</a></td>
-                				<td><a th:href="@{'/contacts/' + ${contacts.contactId}+'/delete'}">Delete</a></td>
+								<td><a th:href="@{'/contacts/' + ${contact.contactId} + '/edit'}">Edit</a></td>
+                				<td><a th:href="@{'/contacts/' + ${contact.contactId}+'/delete'}">Delete</a></td>
 							</tr>
                         </tbody>
                     </table>
