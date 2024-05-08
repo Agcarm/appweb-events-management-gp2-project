@@ -23,7 +23,7 @@ public class ExpenseServiceImpl implements ExpenseService {
 
         expense exp = new expense(expenseDto.getTitle(), expenseDto.getEstimatedUnitPrice(),
                 expenseDto.getActualUnitPrice(), expenseDto.getEstimatedQty(), expenseDto.getActualQty(),
-                expenseDto.getDate());
+                expenseDto.getDate(),expenseDto.getBudget());
         return expenseRepo.save(exp);
     }
 
@@ -55,7 +55,7 @@ public class ExpenseServiceImpl implements ExpenseService {
         expense.setEstimatedQty(expenseDto.getEstimatedQty());
         expense.setActualQty(expenseDto.getActualQty());
         expense.setDate(expenseDto.getDate());
-        // expense.setBudgets(expenseDto.getBudgets());
+        expense.setBudget(expenseDto.getBudget());
 
         return expenseRepo.save(expense);
     }

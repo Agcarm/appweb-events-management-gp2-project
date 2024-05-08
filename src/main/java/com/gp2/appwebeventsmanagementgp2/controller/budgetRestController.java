@@ -1,19 +1,16 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
-import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.gp2.appwebeventsmanagementgp2.dto.BudgetDto;
 import com.gp2.appwebeventsmanagementgp2.models.budget;
 import com.gp2.appwebeventsmanagementgp2.services.BudgetService;
+import com.gp2.appwebeventsmanagementgp2.services.ExpenseService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,27 +25,36 @@ public class budgetRestController {
     @Autowired
     BudgetService budgetservice;
 
-    @PostMapping("/createbudget")
-    public BudgetDto createbudget(@RequestBody BudgetDto bud) {
-        budgetservice.addBudget(bud);
-        return bud ;
+     @Autowired
+    private ExpenseService eService;
+
+    @GetMapping("/budget")
+    public String showBudget(Model model) {
+        model.addAttribute("budgetList", budgetservice.findAll());
+        model.addAttribute("expenseList", eService.findAll());
+        return "Budget"; // Thymeleaf template name
     }
 
-    
+    @PostMapping("/createbudget")
+    public String createbudget(BudgetDto bud) {
+        budgetservice.addBudget(bud);
+        return "redirect:/admin-page";
+    }
+
     // @PostMapping("/createbudget")
     // public ResponseEntity<?> createbudget(budgetDto tsk) {
-    //     budget t = budgetservice.addbudget(tsk);
+    // budget t = budgetservice.addbudget(tsk);
 
-    //     // Set the location header for the newly created resource
-    //     HttpHeaders responseHeaders = new HttpHeaders();
-    //     URI newEventUri = ServletUriComponentsBuilder
-    //     .fromCurrentRequest()
-    //     .path("/{id}")
-    //     .buildAndExpand(t.getId())
-    //     .toUri();
-    //     responseHeaders.setLocation(newEventUri);
-    //     return new ResponseEntity<>(null, responseHeaders, HttpStatus.
-    //     CREATED);
+    // // Set the location header for the newly created resource
+    // HttpHeaders responseHeaders = new HttpHeaders();
+    // URI newEventUri = ServletUriComponentsBuilder
+    // .fromCurrentRequest()
+    // .path("/{id}")
+    // .buildAndExpand(t.getId())
+    // .toUri();
+    // responseHeaders.setLocation(newEventUri);
+    // return new ResponseEntity<>(null, responseHeaders, HttpStatus.
+    // CREATED);
     // }
 
     @GetMapping("/findall")
@@ -81,6 +87,12 @@ public class budgetRestController {
     @PostMapping("/edit/{id}")
     public budget postMethodName(@PathVariable("id") Long id, @ModelAttribute("budget") BudgetDto editbudget) {
         return budgetservice.editBudget(id, editbudget);
+    }
+
+    @GetMapping("/{Id}/delete")
+    public String deleteTask(Long Id) {
+        budgetservice.deleteBudget(Id);
+        return "Task deleted successfully";
     }
 
 }

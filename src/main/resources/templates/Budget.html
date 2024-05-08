@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="ISO-8859-1">
+	<title>Insert title here</title>
+	<link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/navStyle.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/styles.css}">
+	<link rel="stylesheet" type="text/css" th:href="@{/css/contact.css}">
+</head>
+
+<body>
+	<!-- =============== Navigation ================ -->
+	<div class="container">
+		<div class="navigation" th:replace="~{navigation :: navigation}">
+		</div>
+
+		<!-- ========================= Main ==================== -->
+
+		<div class="main">
+			<div class="topbar">
+				<div class="toggle">
+					<ion-icon name="menu-outline"></ion-icon>
+				</div>
+
+				<div class="search">
+					<label>
+						<input type="text" placeholder="Search here">
+						<ion-icon name="search-outline"></ion-icon>
+					</label>
+					<div class="container">
+						<div class="row">
+							<div class="col-md-8">
+								<nav style="--bs-breadcrumb-divider:'>'" aria-label="breadcrumb">
+
+									<li class="breadcrumb-item">
+										<a th:href="@{/admin-page}">Home</a>
+									</li>
+									<li class="breadcrumb-item active" aria-current="page">Budget
+
+									</li>
+
+
+								</nav>
+							</div>
+						</div>
+
+					</div>
+				</div>
+
+				<div class="user">
+					<img src="assets/imgs/customer01.jpg" alt="">
+				</div>
+			</div>
+			<div class="container">
+			</div>
+			<div class="details">
+				<div class="recentOrders" style="display: block;">
+					<div class="cardHeader">
+						<h2>Budget List</h2>
+						<div class="carHeaderleft">
+							<a href="#"><img src="./assets/imgs/icons8_downloading_updates_24px.png" alt=""
+									style="scale: 1.45; margin-right: 10px; margin-top: 2px;"></a>
+							<a href="#" id="displayFormBtn" class="btn">Add a new Budget</a>
+
+
+						</div>
+					</div>
+
+					<table>
+						<thead>
+							<tr>
+								<td></td>
+								<td>Title</td>
+								<td>estimatedAmount</td>
+								<td>actualAmount</td>
+								<td></td>
+							</tr>
+						</thead>
+
+
+						<tbody class="table-group-divider">
+							<tr class="table-primary" th:each="budget : ${budgetList}">
+								<td scope="row" class="check">
+									<label for="row-1"></label>
+									<input type="radio" name="row-1" id="row-1" title="selectRow">
+								</td>
+								<td th:text="${budget.getTitle()}"></td>
+								<td th:text="${budget.getEstimatedAmount()}"></td>
+								<td th:text="${budget.getActualAmount()}"></td>
+
+								<td><a th:href="@{'/budget/edit/' + ${budget.id}}">Edit</a></td>
+								<td><a th:href="@{'/budget/' + ${budget.id}+'/delete'}">Delete</a></td>
+
+					</table>
+				</div>
+
+				<div class="details">
+					<div class="recentOrders" style="display: block;">
+						<div class="cardHeader">
+							<h2>Expense List</h2>
+							<div class="carHeaderleft">
+								<a href="#"><img src="./assets/imgs/icons8_downloading_updates_24px.png" alt=""
+										style="scale: 1.45; margin-right: 10px; margin-top: 2px;"></a>
+								<a href="#" id="displayFormBtnTask" class="btn">Add a new Expense</a>
+
+
+							</div>
+						</div>
+
+						<table>
+							<thead>
+								<tr>
+									<td></td>
+									<td>Title</td>
+									<td>estimatedUnitPrice</td>
+									<td>actualUnitPrice</td>
+									<td>estimatedQty</td>
+									<td>actualQty</td>
+									<td>date</td>
+									<td>budget</td>
+								</tr>
+							</thead>
+
+							<tbody class="table-group-divider">
+								<tr class="table-primary" th:each="expense : ${expenseList}">
+									<td scope="row" class="check"
+										<label for="row-1"></label>
+										<input type="radio" name="row-1" id="row-1" title="selectRow">
+									</td>
+									<td th:text="${expense.getTitle()}"></td>
+									<td th:text="${expense.getEstimatedUnitPrice()}"></td>
+									<td th:text="${expense.getActualUnitPrice()}"></td>
+									<td th:text="${expense.getEstimatedQty()}"></td>
+									<td th:text="${expense.getActualQty()}"></td>
+									<td th:text="${expense.getDate()}"></td>
+									<td th:text="${expense.getBudget().getTitle}"></td>
+
+
+									<td><a th:href="@{'/expense/edit/' + ${expense.id} }">Edit</a></td>
+									<td><a th:href="@{'/expense/' + ${expense.id}+'/delete'}">Delete</a></td>
+
+						</table>
+					</div>
+
+					<div id="overlay" class="overlay" style="flex-direction: column;" th:fragment="BudgetForm">
+						<form class="form-container" id="BudgetForm" action="/budj/createbudget" method="post"
+							style="padding: 25px;border-radius: 20px;">
+							<h2>
+								<center>Fill the Budget Form</center>
+							</h2>
+							<div class="form-group">
+								<label for="title">Title:</label>
+								<input type="text" id="name" name="title" placeholder="Title of budget" required>
+							</div>
+							<div class="form-group">
+								<label for="estimatedAmount">estimatedAmount:</label>
+								<input type="number" id="estimatedAmount" name="estimatedAmount"
+									placeholder="The estimatedAmount Here !!!" required>
+							</div>
+
+							<div class="form-group">
+								<label for="actualAmount">estimatedAmount:</label>
+								<input type="number" id="actualAmount" name="actualAmount"
+									placeholder="The actualAmount Here !!!" required>
+							</div>
+
+
+							<div class="formbuto">
+								<button type="submit" class="fbtn"
+									onsubmit="return confirm('Are you sure you wish to Create?');">Submit</button>
+								<button id="closeFormBtn" class="fbtn"
+									style="background-color: rgb(200, 1, 1);">Close</button>
+							</div>
+
+						</form>
+					</div>
+
+
+					<div id="overlayTask" class="overlayTask" style="flex-direction: column;" th:fragment="task">
+						<form class="form-container" id="Task" action="/exp/createexpense" method="post"
+							style="padding: 25px;border-radius: 20px;">
+							<h2>
+								<center>Fill the Expense Form</center>
+							</h2>
+							<div class="form-group">
+								<label for="title">Title:</label>
+								<input type="text" id="name" name="title" placeholder="Title of budget" required>
+							</div>
+							<div class="form-group">
+								<label for="estimatedUnitPrice">estimatedUnitPrice:</label>
+								<input type="number" id="estimatedUnitPrice" name="estimatedUnitPrice"
+									placeholder="The estimatedUnitPrice Here !!!" required>
+							</div>
+
+							<div class="form-group">
+								<label for="actualUnitPrice">estimated Amount:</label>
+								<input type="number" id="actualUnitPrice" name="actualUnitPrice"
+									placeholder="The actual Unit Price Here !!!" required>
+							</div>
+
+							<div class="form-group">
+								<label for="estimatedQty">estimated Qty:</label>
+								<input type="number" id="estimatedQty" name="estimatedQty"
+									placeholder="The estimated Qty Here !!!" required>
+							</div>
+							<div class="form-group">
+								<label for="actualQty">actual Qty:</label>
+								<input type="number" id="actual Qty" name="actualQty"
+									placeholder="The actual Qty Here !!!" required>
+							</div>
+							<div class="form-group">
+								<label for="">Date:</label>
+								<input type="datetime-local" id="date" name="Date"
+									placeholder="The actual Qty Here !!!" required>
+							</div>
+							<div class="form-group">
+								<label for="actualQty">Budget</label>
+								<select class="formdet" id="budget" name="budget" required >
+									<option class="formdet"  th:each="budget : ${budgetList}" th:text="${budget.title}" th:value="${budget.id}"></option>
+								  </select>
+							</div>
+
+
+
+							<div class="formbuto">
+								<button type="submit" class="fbtn"
+									onsubmit="return confirm('Are you sure you wish to Create?');">Submit</button>
+								<button id="closeFormBtnTask" class="fbtn"
+									style="background-color: rgb(200, 1, 1);">Close</button>
+							</div>
+
+						</form>
+					</div>
+				</div>
+				<!-- 
+			<div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
+			</div> -->
+				<!-- <div id="overlayTask" class="overlayTask"  th:replace="~{task :: task}"></div> -->
+
+</body>
+<script src="../js/nav.js"></script>
+<!-- ====== ionicons ======= -->
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+
+
+</html>

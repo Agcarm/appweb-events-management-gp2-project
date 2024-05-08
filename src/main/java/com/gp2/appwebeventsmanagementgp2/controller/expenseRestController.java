@@ -30,9 +30,9 @@ public class expenseRestController {
     ExpenseService expenseservice;
 
     @PostMapping("/createexpense")
-    public ExpenseDto createexpense(@RequestBody ExpenseDto bud) {
-        expenseservice.addExpense(bud);
-        return bud;
+    public ExpenseDto createExpense(ExpenseDto exp) {
+        expenseservice.addExpense(exp);
+        return exp;
     }
 
     
@@ -82,6 +82,12 @@ public class expenseRestController {
     @PostMapping("/edit/{id}")
     public expense postMethodName(@PathVariable("id") Long id, @ModelAttribute("expense") ExpenseDto editexpense) {
         return expenseservice.editExpense(id, editexpense);
+    }
+
+    @GetMapping("/{Id}/delete")
+    public String deleteTask(Long Id) {
+        expenseservice.deleteExpense(Id);
+        return "Task deleted successfully";
     }
 
 }
