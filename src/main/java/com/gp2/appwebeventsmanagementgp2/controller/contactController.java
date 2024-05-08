@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact ;
-import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
 
 @Controller
