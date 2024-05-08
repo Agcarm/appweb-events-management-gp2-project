@@ -13,7 +13,6 @@ import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.TaskService;
 import com.gp2.appwebeventsmanagementgp2.services.UserService;
-import com.gp2.appwebeventsmanagementgp2.services.TaskService;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 import com.gp2.appwebeventsmanagementgp2.services.typeService;

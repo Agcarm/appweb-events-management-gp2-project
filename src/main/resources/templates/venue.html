@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Venue Information</title>
+    <link rel="stylesheet" th:href="@{css/venue.css}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+   <div class="container mt-5">
+    <h2>Venue Information</h2>
+    <hr>
+    <form th:action="@{/venues}" method="post">
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="country">Country:</label>
+            <input type="text" class="form-control" id="country" name="country" >
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" class="form-control" id="city" name="city" >
+        </div>
+        <div class="form-group">
+            <label for="address">Address:</label>
+            <input type="text" class="form-control" id="address" name="address" >
+        </div>
+        <div class="form-group">
+            <label for="latitude">Latitude:</label>
+            <input type="number" class="form-control" id="latitude" name="latitude" step="any" >
+        </div>
+        <div class="form-group">
+            <label for="longitude">Longitude:</label>
+            <input type="number" class="form-control" id="longitude" name="longitude" step="any" >
+        </div>
+        <div class="butns">
+            <button type="submit" class="btn btn-primary" id="but">Submit</button>
+            <a th:href="@{/admin-page}" class="btn btn-primary" id="but" style="background-color: crimson; border: 0;">Cancel and go Home</a>
+        </div>
+    </form>
+</div>
+</body>
+</html>

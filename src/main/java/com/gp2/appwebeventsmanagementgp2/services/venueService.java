@@ -2,35 +2,21 @@ package com.gp2.appwebeventsmanagementgp2.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.stereotype.Service;
 import com.gp2.appwebeventsmanagementgp2.models.venue;
-import com.gp2.appwebeventsmanagementgp2.repositories.venueRepository;
 
-@Service
-public class venueService {
-    @Autowired
-    private venueRepository repo;
+
+public interface venueService {
+    venue saveVenue(venue venue);
+
+	List<venue> findAll();
     
-    public List<venue> listAll() {
-        return repo.findAll();
-    }
-    
-    public venue save(venue std) {
-        return repo.save(std);
-    }
-    
-    public venue get(long id) {
-        return repo.findById(id).get();
-    }
-    
-    public void delete(long id) {
-        repo.deleteById(id);
-    }
-    
-	public Page<venue> findAllPages(int offset, int pageSize) {
-		return repo.findAll(PageRequest.of(offset, pageSize));
-	}
+	venue getVenueById(Long id);
+
+	void updateVenue(Long id, venue updatedVenue);
+
+	void deleteVenue(Long id);
+
+    Page<venue> findAllPages(int offset, int pageSize);
+
 }

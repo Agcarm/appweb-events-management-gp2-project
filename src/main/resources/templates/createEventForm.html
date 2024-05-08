@@ -13,9 +13,9 @@
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
-            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" enctype="multipart/form-data">
-                <div class="formdet"><label for="eventName">Event Name:</label>
-                    <input type="text" id="name" name="name"  placeholder="Enter an event name"><br><br>
+            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');" enctype="multipart/form-data">
+                <div class="formdet"><label for="name">Event Name:</label>
+                    <input type="text" id="name" name="name" placeholder="Enter an event name"><br><br>
                 </div>
                 <div class="formdet"><label for="startDate">Start Date:</label>
                     <input type="datetime-local" id="startDate" name="startDate" required><br><br>
@@ -29,13 +29,16 @@
                     <label for="eventVenue">Event Venue:</label>
                     <div class="button-select-container">
                         <div class="custom">
-                            <select class="formt" id="count" name="eventVenue" title="eventName" required >
+                            <select class="formt" id="count" name="eventVenue" title="eventVenue" required >
                                 <option selected>Select or Create Venue</option>
                                 <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                             </select>
                         </div>
-                       <button type="button" class="addvenue" id="addVenueBtn">Add Venue</button> 
-                    </div>
+
+                      <a  class="addvenue" th:href="@{/venue/new}">Add Venue</a> </div>
+                      <div class="createVenueform">
+
+                      </div>
 
                     <br><br>
                 </div>

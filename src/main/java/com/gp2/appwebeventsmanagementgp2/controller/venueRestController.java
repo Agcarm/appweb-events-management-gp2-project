@@ -17,34 +17,23 @@ public class venueRestController {
 
     @GetMapping("/")
     public List<venue> viewHomePage() {
-        List<venue> listvenue = service.listAll();
-        System.out.print("Get / ");
+        List<venue> listvenue = service.findAll();
         return listvenue;
     }
 
     @PostMapping("/new")
     public venue add(@RequestBody venue newVenue) {
-        return service.save(newVenue);
-    }
-
-    @PostMapping("/save")
-    public venue savevenue(@RequestBody venue std) {
-        return service.save(std);
-    }
-
-    @PostMapping("/create")
-    public String CreateVenue(@RequestBody String entity) {
-        return entity;
+        return service.saveVenue(newVenue);
     }
 
     @GetMapping("/edit/{id}")
-    public venue showEditvenuePage(@PathVariable(name = "id") int id) {
-        return service.get(id);
+    public venue showEditvenuePage(@PathVariable(name = "id") long id) {
+        return service.getVenueById(id);
     }
 
     @DeleteMapping("/delete/{id}")
-    public void deletevenue(@PathVariable(name = "id") int id) {
-        service.delete(id);
+    public void deletevenue(@PathVariable(name = "id") long id) {
+        service.deleteVenue(id);
     }
 
     @GetMapping("/paged/{offset}/{pageSize}")

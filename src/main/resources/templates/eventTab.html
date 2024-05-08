@@ -49,9 +49,9 @@
 
                     </div>
 
-                    <table th:replace="~{Lists :: eventList}"></table>
-                    <table th:replace="~{Lists :: taskList}"></table>
-                    <table th:replace="~{Lists :: venueList}"></table>
+                    <table th:replace="~{Lists :: eventList}" id="dataTable"></table>
+                    <table th:replace="~{Lists :: taskList}" id="dataTable"></table>
+                    <table th:replace="~{Lists :: venueList}" id="dataTable"></table>
 
                     <div class="pagination">
                         <div type="button" class="page" id="previous"><ion-icon name="chevron-back-outline"></ion-icon></div>
@@ -90,13 +90,13 @@
                     <span class="venueTitle">Venue: </span>
                     <span class="venue"></span>
                 </div>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" ></div>
+                </div>
                 <p class="descriptionTitle">Description</p>
                 <div class="eventDescription"></div>
             </div>
             <button type="button" class="btn myprimarybtn">view sheet</button>
-            <div class="progress-bar">
-                <div class="progress-bar-fill" ></div>
-            </div>
         </aside>
     </div>
     <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
@@ -106,5 +106,6 @@
     <script th:src="@{/js/lists.js}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script th:src="@{/js/searchbar.js}"></script>
 </body>
 </html>

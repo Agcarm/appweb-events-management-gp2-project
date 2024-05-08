@@ -24,7 +24,7 @@
             </tr>
         </tbody>
     </table>
-    <table class="tabTable" id="task" th:fragment="taskList">
+    <table class="tabTable" id="taskRest" th:fragment="taskList">
         <thead class="tablehead">
             <tr>
                 <th></th>
@@ -52,8 +52,6 @@
                 <th>Address</th>
                 <th>Latitude</th>
                 <th>Longitude</th>
-                <th>Edit</th>
-                <th>Delete</th>
             </tr>
         </thead>
         <tbody class="table-group-divider">
@@ -63,4 +61,6 @@
     </table>
 
     <div class="eventImage" th:fragment="eventImage"></div>
-</body></html>
+</body>
+<script th:src="@{/js.lists.js}"></script>
+</html>

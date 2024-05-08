@@ -5,7 +5,7 @@
 
     <div class="search">
         <label>
-            <input type="text" placeholder="Search here">
+            <input id="searchInput" onkeyup="searchTable()" type="text" placeholder="Search here">
             <ion-icon name="search-outline"></ion-icon>
         </label>
     </div>
@@ -16,3 +16,4 @@
         </div>
     </div>
 </div>
+<script th:src="@{/js/searchbar.js}"></script>
