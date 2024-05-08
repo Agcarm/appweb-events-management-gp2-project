@@ -15,10 +15,9 @@
 
 <body>
     <!-- =============== Navigation ================ -->
+    <div class="navigation" th:replace="~{navigation :: navigation}">
+    </div>
     <div class="container">
-        <div class="navigation" th:replace="~{navigation :: navigation}">
-        </div>
-         
         <!-- ========================= Main ==================== -->
         <div class="main">
             <div class="topbar" th:replace="~{topBar :: topBar}">
