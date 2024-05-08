@@ -27,7 +27,7 @@
                 <div class="formdet"><label for="eventVenue">Event Venue:</label>
                     <div class="button-select-container">
                         <div class="custom">
-                    <select class="formt" id="country" name="eventVenue" required >
+                    <select class="formt" id="count" title="eventVenue" name="eventVenue" required >
                         <option selected>Select or Create Venue</option>
                         <option   th:each="venue : ${venueList}" th:text="${venue.getName()}" th:value="${venue.getId()}"></option>
                       </select></div>
@@ -54,7 +54,7 @@
 
                 <div class="formdet"><label for="eventType">Event Type:</label>
 
-                   <div class="custom" style="min-width: 250px;" > <select  id="country"  name="eventType" required >
+                   <div class="custom" style="min-width: 250px;" > <select  id="country" title="eventType" name="eventType" required >
                         <option selected>Select a Type of Event</option>
                         <option   th:each="type : ${typeList}" th:text="${type.getName()}" th:value="${type.getId()}"></option>
                       </select></div>
