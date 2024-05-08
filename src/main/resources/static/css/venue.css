@@ -15,3 +15,25 @@ body{
     display: grid;
     grid-template-columns: 1fr 1fr;
 }
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;}
+
+      form {
+    position: relative;
+    width: 50%; /* Adjust as needed */
+    margin: 0 auto; /* Horizontally center the form */
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23); /* Add shadow */
+    transform: translateY(-50px); /* Move the form up */
+    background-color: #fff; /* Add a background color */
+    border-radius: 15px;
+      }
+      #map {
+        height: 50%;
+        width: 50%;
+        margin-left: 10px;
+      }
