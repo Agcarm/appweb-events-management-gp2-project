@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -7,9 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Venue Information</title>
     <link rel="stylesheet" th:href="@{css/venue.css}">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" th:href="@{css/styles.css}">
+    <link rel="stylesheet" th:href="@{css/dashboard.css}">
 </head>
 <body>
+    <div class="mapdet">
+        <input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE"></script>
+        <script src="../js/mapscript.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE&callback=initMap" async defer></script>
+        <div id="map"></div>
+    </div>
    <div class="container mt-5">
     <h2>Venue Information</h2>
     <hr>
@@ -44,5 +52,97 @@
         </div>
     </form>
 </div>
+</body>
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
+    <style>
+
+      body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;}
+
+      form {
+    position: relative;
+    width: 50%; /* Adjust as needed */
+    margin: 0 auto; /* Horizontally center the form */
+    padding: 20px;
+    box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.19), 0px 6px 6px rgba(0, 0, 0, 0.23); /* Add shadow */
+    transform: translateY(-50px); /* Move the form up */
+    background-color: #fff; /* Add a background color */
+    border-radius: 15px;
+}
+/*style for the map*/
+  /*
+            * Always set the map height explicitly to define the size of the div element
+            * that contains the map.
+            */
+            #map {
+             height: 50%;
+             width: 50%;
+             margin-left: 10px;
+           }
+
+           /*
+            * Optional: Makes the sample page fill the window.
+            */
+
+    </style>
+</head>
+<body>
+     <!-- Search input -->
+<input id="searchInput" class="controls" type="text" placeholder="Enter a location">
+
+<!-- Google map -->
+<div id="map"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE"></script>
+
+<script src="../js/mapscript.js"></script>
+
+    <script src="https://maps.googleapis.com/maps/api/js?libraries=places&key=AIzaSyDKBOEOJ79eyU4iNQhhAAwQZJCWcCOfPbE&callback=initMap" async defer></script>
+
+
+    <div  id="form-containerr" >
+        <form id="venueForm" th:action="@{/venues}"  method="post" style="margin: right 20px;" onsubmit="return confirm('Are you sure?');">
+
+          <div class="formdet"><label for="venueName" >Venue Name:</label>
+          <input type="text" id="venueName" name="name" required><br><br></div>
+
+          <div class="formdet"><label for="FullAddress" >Venue Address:</label>
+          <input type="text" id="venueFullAddress" name="address" ><br><br></div>
+
+          <div class="formdet"><label for="venueCity" >Venue City:</label>
+          <input type="text" id="venueCity" name="city" required><br><br></div>
+
+          <div class="formdet"><label for="venueCounrty" >Venue Country:</label>
+          <input type="text" id="venueCounrty" name="country" required><br><br></div>
+
+          <div class="formdet"><label for="venuelatitude" >Venue Latitude:</label>
+            <input type="text" id="venuelatitude" name="latitude" placeholder="select from map or skip"><br><br></div>
+
+            <div class="formdet"><label for="venuelongitude" >Venue Longitude:</label>
+              <input type="text" id="venuelongitude" name="longitude" placeholder="select from map or skip"><br><br></div>
+
+          <div class="formbuto">
+            <button type="submit" class="fbtn">Submit</button>
+            <a th:href="@{/admin-page}" class="btn btn-primary" id="but" style="background-color: crimson; border: 0;">Cancel and go Home</a>
+        </div>
+
+        </form>
+
+      </div><br><br>
 </body>
 </html>
