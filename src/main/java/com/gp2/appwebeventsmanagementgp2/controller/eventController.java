@@ -45,7 +45,7 @@ public class eventController {
     }
 
     @PostMapping("/create")
-    public String createEvent(@ModelAttribute("event") event event, @RequestParam("image") Optional<MultipartFile> file)throws IOException {
+    public String createEvent(@ModelAttribute("event") event event, @RequestParam("image") Optional<MultipartFile> file, Model model)throws IOException {
         if (file.get().getSize()!=0) {
             event.setImageUrl(file.get().getOriginalFilename());
             StringBuilder fileNames = new StringBuilder();
@@ -53,8 +53,9 @@ public class eventController {
             fileNames.append(file.get().getOriginalFilename());
             Files.write(fileNameAndPath, file.get().getBytes());
         }
+		model.addAttribute("user",EnvironmentVariables.getUser());
         eventService.saveEvent(event);
-        return "#";
+        return "eventTab";
     }
 
     @PostMapping("/{id}/update")
