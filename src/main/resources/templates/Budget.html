@@ -2,7 +2,8 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-	<meta charset="ISO-8859-1">
+	<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Insert title here</title>
 	<link rel="stylesheet" type="text/css" th:href="@{/css/dashboard.css}">
 	<link rel="stylesheet" type="text/css" th:href="@{/css/navStyle.css}">
@@ -12,9 +13,9 @@
 
 <body>
 	<!-- =============== Navigation ================ -->
+	<div class="navigation" th:replace="~{navigation :: navigation}">
+	</div>
 	<div class="container">
-		<div class="navigation" th:replace="~{navigation :: navigation}">
-		</div>
 
 		<!-- ========================= Main ==================== -->
 
@@ -217,7 +218,7 @@
 							</div>
 							<div class="form-group">
 								<label for="actualQty">Budget</label>
-								<select class="formdet" id="budget" name="budget" required >
+								<select class="formdet" id="budget" title="budget" name="budget" required >
 									<option class="formdet"  th:each="budget : ${budgetList}" th:text="${budget.title}" th:value="${budget.id}"></option>
 								  </select>
 							</div>

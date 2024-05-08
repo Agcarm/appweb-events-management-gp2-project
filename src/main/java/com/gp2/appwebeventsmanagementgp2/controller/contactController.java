@@ -63,6 +63,6 @@ public class contactController {
     @GetMapping("/contacts/{id}/delete")
     public String deleteContact(@PathVariable("id") Long contactId) {
         contactService.deleteContact(contactId);
-        return "redirect:/Contact"; // Redirect to the contact list page
+        return "Contact"; // Redirect to the contact list page
     }
 }
