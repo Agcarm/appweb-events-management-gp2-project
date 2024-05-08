@@ -13,7 +13,7 @@
     <div id="overlay" class="overlay"  th:fragment="createEventForm">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
-            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return confirm('Are you sure?');" enctype="multipart/form-data">
+            <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return validateEstimatedAttendees();" enctype="multipart/form-data">
                 <div class="formdet"><label for="name">Event Name:</label>
                     <input type="text" id="name" name="name" placeholder="Enter an event name"><br><br>
                 </div>
