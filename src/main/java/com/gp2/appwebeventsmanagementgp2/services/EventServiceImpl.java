@@ -66,7 +66,7 @@ public class EventServiceImpl implements EventService {
 
 	@Override
 	public event getEventById(Long id) {
-		return eventRepository.findById(id).orElseThrow();
+		return eventRepository.findById(id).get();
 	}
 
 	@Override
@@ -116,8 +116,11 @@ public class EventServiceImpl implements EventService {
 		}
 
 		// Calculate the progression as a percentage
+		if(totalTasks==0){
+			return 0;
+		}
+		
 		double progression = (double) accomplishedTasks / totalTasks * 100;
-
 		return progression;
 	}
 

@@ -17,7 +17,6 @@ public class contact {
     private String name;
     public contact() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	private String email;
     private String country;

@@ -554,9 +554,9 @@ position: relative;
 }
 
 select {
-appearance: none;
 /*  safari  */
 -webkit-appearance: none;
+appearance: none;
 /*  other styles for aesthetics */
 width: 100%;
 font-size: 1.15rem;

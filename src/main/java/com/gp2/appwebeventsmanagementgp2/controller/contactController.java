@@ -19,15 +19,8 @@ import com.gp2.appwebeventsmanagementgp2.services.contactService;
 
 public class contactController {
 
-    private final contactRepository contactRepository;
-
-    public contactService contactService ;
-
     @Autowired
-    public contactController(contactRepository contactRepository,contactService contactService) {
-        this.contactRepository = contactRepository;
-        this.contactService = contactService ;
-    }
+    private contactService contactService;
 
     @GetMapping("/contact")
     public String showContactForm(Model model) {

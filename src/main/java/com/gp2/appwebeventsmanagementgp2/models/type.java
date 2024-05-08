@@ -4,7 +4,6 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.Lob;
 import jakarta.persistence.Table;
 import lombok.Data;
 import lombok.Setter;
@@ -33,11 +32,9 @@ public class type {
     }
 
     public type() {
-        //TODO Auto-generated constructor stub
     }
 
     public type(Object object, String string, Object object2) {
-        //TODO Auto-generated constructor stub
     }
 }
 

@@ -18,30 +18,30 @@ tabLists.forEach((tab, index) => {
         tab.classList.add('active');
     
         var line = document.querySelector('.line');
-    line.style.width = e.target.offsetWidth + "px";
-    line.style.left = e.target.offsetLeft + "px";
+        line.style.width = e.target.offsetWidth + "px";
+        line.style.left = e.target.offsetLeft + "px";
 
-    tables.forEach(content=>{content.classList.remove('active')})
-    tables[index].classList.add('active') 
-    
-    //from list.js
-    const activeTableId = document.querySelector(".tabTable.active").getAttribute('id');
-    switch (activeTableId) {
-        case "eventRest":
-            selectedRow = null;
-            displayPages(window.currentPageEvent,elmtperpage); 
-            break;
-        case "task":
-            selectedRow = null;
-            displayPages(window.currentPageTask,elmtperpage); 
-            break; 
-        case "api/venues":
-            selectedRow = null;
-            displayPages(window.currentPageVenue,elmtperpage); 
-            break;       
-        default:
-            break;
-    }
+        tables.forEach(content=>{content.classList.remove('active')})
+        tables[index].classList.add('active') 
+        
+        //from list.js
+        const activeTableId = document.querySelector(".tabTable.active").getAttribute('id');
+        switch (activeTableId) {
+            case "eventRest":
+                selectedRow = null;
+                displayPages(window.currentPageEvent,elmtperpage); 
+                break;
+            case "taskRest":
+                selectedRow = null;
+                displayPages(window.currentPageTask,elmtperpage); 
+                break; 
+            case "api/venues":
+                selectedRow = null;
+                displayPages(window.currentPageVenue,elmtperpage); 
+                break;       
+            default:
+                break;
+        }
     })
 });
 

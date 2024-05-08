@@ -92,8 +92,27 @@ function displayPages(pageNo, TotalperPage) {
             case "eventRest":
                 totalPagesEvent = data.totalPages
                 printPageNumber(currentPageEvent,totalPagesEvent);
-                data.content.forEach(element => {
-                    activeTable.querySelector('tbody').innerHTML += `
+                data.content.forEach((element, index) => {
+                    if (index===0) {
+                        activeTable.querySelector('tbody').innerHTML += `
+                        <tr class="table-primary selected">
+                            <td scope="row" class="check">
+                                <label for="row-1"></label>
+                                <input type="radio" name="row-1" title="selectRow" checked>
+                            </td>
+                            <td>`+element.name+`</td>
+                            <td>`+element.eventType.name+`</td>
+                            <td>`+element.eventVenue.name+`</td>
+                            <td>`+element.status+`</td>
+                            <td>`+element.startDate+`</td>
+                            <td>`+element.estimatedAttendees+`</td>
+                            <td>`+element.dateModified+`</td>
+                        </tr>
+                        `
+                        selectedRow = activeTable.querySelector('tbody tr');
+                        fnselect(selectedRow);
+                    } else {
+                        activeTable.querySelector('tbody').innerHTML += `
                         <tr class="table-primary">
                             <td scope="row" class="check">
                                 <label for="row-1"></label>
@@ -107,7 +126,8 @@ function displayPages(pageNo, TotalperPage) {
                             <td>`+element.estimatedAttendees+`</td>
                             <td>`+element.dateModified+`</td>
                         </tr>
-                    `
+                        `
+                    }
                 });
                 break;
 
@@ -122,9 +142,10 @@ function displayPages(pageNo, TotalperPage) {
                                 <input type="radio" name="row-1" title="selectRow">
                             </td>
                             <td>`+element.title+`</td>
-                            <td>`+element.status+`</td>
-                            <td>`+element.status+`</td>
                             <td>`+element.deadline+`</td>
+                            <td>`+element.status+`</td>
+                            <td>`+element.contacts.name+`</td>
+                            <td>`+element.registrationDate+`</td>
                         </tr>
                     `
                 });
@@ -161,13 +182,18 @@ function displayPages(pageNo, TotalperPage) {
 /*ROW SELECTION OPERATIONS*/
 var selectedRow;
 var checkboxes;
+var rows;
 const description = document.querySelector('.info');
 
 // Function to select a row
 function SelectCheckbox() {
+    rows = document.querySelectorAll('.tabTable.active tbody tr');
     checkboxes = document.querySelectorAll('.tabTable tbody input[type="radio"]');
     checkboxes.forEach(element => {
         element.addEventListener("click", (e) => {
+            rows.forEach(row => {
+                row.classList.remove('selected');
+            })
             checkboxes.forEach(checkbox => {
                 checkbox.checked = false;
             });
@@ -195,7 +221,6 @@ function remakeSelected() {
 function fnselect(row) {
     let cells = row.querySelectorAll('td');
     rowName = cells[1].textContent;
-    console.log(cells[1].textContent);
     fetch("http://localhost:8080/eventRest/"+rowName)
     .then((response) => {
         if (response.ok) {
@@ -205,7 +230,6 @@ function fnselect(row) {
         }
     })
     .then(data => {
-        console.log(data);
         description.querySelector('.eventTitle').textContent = data.name;
         description.querySelector('.eventDescription').textContent = data.description;
         description.querySelector('.eventImage').innerHTML = '<img src="/manager-images/'+data.imageUrl+'" alt="'+data.imageUrl+'"  height="250px">';
@@ -228,10 +252,7 @@ function progression(params) {
     })
 
     .then(data => {
-        console.log(data);
-        description.querySelector('.progress-bar-fill').style.width=data+ "%";
-        
-
+        description.querySelector('.progress-bar-fill').style.width=data+ "%";        
     })
 
 }

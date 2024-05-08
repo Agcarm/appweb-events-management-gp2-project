@@ -103,7 +103,7 @@ public class UserController {
         EnvironmentVariables.setUser(userDetails);
 		model.addAttribute("user", userDetails);
 		model.addAttribute("eventList", eService.findAll());
-		model.addAttribute("venueList", vService.listAll());
+		model.addAttribute("venueList", vService.findAll());
         model.addAttribute("typeList", tService.listAll());
 		model.addAttribute("contactList", cService.getAllcontacts());
 		return "index";

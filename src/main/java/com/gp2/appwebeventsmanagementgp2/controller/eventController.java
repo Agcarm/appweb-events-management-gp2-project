@@ -12,8 +12,6 @@ import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.models.event;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.TaskService;
-import com.gp2.appwebeventsmanagementgp2.services.UserService;
-import com.gp2.appwebeventsmanagementgp2.services.contactService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
 import com.gp2.appwebeventsmanagementgp2.services.typeService;
 
@@ -56,7 +54,7 @@ public class eventController {
             Files.write(fileNameAndPath, file.get().getBytes());
         }
         eventService.saveEvent(event);
-        return "redirect:/admin-page";
+        return "#";
     }
 
     @PostMapping("/{id}/update")
@@ -80,7 +78,7 @@ public class eventController {
     @GetMapping("/view")
     public String getEventView(Model model) {
         model.addAttribute("eventList", eventService.findAll());
-		model.addAttribute("venueList", vService.listAll());
+		model.addAttribute("venueList", vService.findAll());
 		model.addAttribute("taskList", taskService.findAll());
 		model.addAttribute("user",EnvironmentVariables.getUser());
         model.addAttribute("typeList", tService.listAll());

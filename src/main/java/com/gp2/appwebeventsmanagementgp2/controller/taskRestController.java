@@ -29,13 +29,6 @@ public class taskRestController {
 
     @Autowired
     TaskService taskservice;
-
-    // @PostMapping("/createtask")
-    // public String createtask(TaskDto tsk) {
-    //     taskservice.addTask(tsk);
-    //     return "redirect:/admin-page" ;
-    // }
-
     
     @PostMapping("/createtask")
     public ResponseEntity<?> createtask(TaskDto tsk) {
