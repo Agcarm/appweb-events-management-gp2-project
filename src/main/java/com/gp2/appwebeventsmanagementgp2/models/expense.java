@@ -26,7 +26,7 @@ public class expense {
 
     @Column(name = "estimatedQty")
     private double estimatedQty;
-    
+
     @Column(name = "actualQty")
     private double actualQty;
 
@@ -64,5 +64,5 @@ public class expense {
     public expense() {
     }
 
-    
+
 }

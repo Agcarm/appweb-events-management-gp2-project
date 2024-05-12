@@ -5,37 +5,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Contact Management</title>
-<link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
 </head>
 <body>
-
+	<div class="container">
+		<div class="navigation" th:replace="~{navigation :: navigation}">
+	</div>
 	<div class="container mt-5">
 		<h2>Contact Management</h2>
 		<hr>
-		<h4>List of Contacts</h4>
-		<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Phone Number</th>
-					<th>Action</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:each="contact : ${contacts}">
-					<td th:text="${contact.name}" />
-					<td th:text="${contact.email}" />
-					<td th:text="${contact.phoneNumber}" />
-					<td>
-                    <a
-						th:href="@{'/contacts/' + ${contact.contactId} + '/edit'}"
-						class="btn btn-primary btn-sm">Edit</a></td>
-
-				</tr>
-        </tbody>
-    </table>
     <div th:if="${contact != null}">
         <h4>Edit Contact</h4>
         <form
@@ -58,9 +37,9 @@
             </div>
             <button type="submit" class="btn btn-success">Update</button>
         </form>
-        <form th:action="@{'/contacts/' + ${contact.contactId} + '/delete'}" method="post" style="display: inline;">
-             <a th:href="@{/contacts/{id}/delete(id=${contact.contactId})}" class="btn btn-danger btn-sm">Delete</a>
-         </form>
+		<form th:action="@{'/contacts/' + ${contact.contactId} + '/delete'}" method="post" style="display: inline;">
+			<a th:href="@{/contacts/{id}/delete(id=${contact.contactId})}" class="btn btn-danger btn-sm">Delete</a>
+		</form>
     </div>
 </div>
 

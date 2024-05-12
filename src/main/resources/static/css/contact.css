@@ -60,45 +60,45 @@
       margin-right: auto;
       margin-left: auto;
   }
-  
+
   .row {
       display: flex;
       flex-wrap: wrap;
       margin-right: -15px;
       margin-left: -15px;
   }
-  
+
   .col-md-8 {
       position: relative;
       width: 100%;
       padding-right: 15px;
       padding-left: 15px;
   }
-  
+
   nav[aria-label="breadcrumb"] {
       padding: 1em;
       background-color: #f8f9fa;
       border-radius: 5px;
   }
-  
+
   .breadcrumb-item {
       display: inline-block;
   }
-  
+
   .breadcrumb-item::after {
       content: ">";
       padding: 0 0.5em;
   }
-  
+
   .breadcrumb-item:last-child::after {
       content: "";
   }
-  
+
   .breadcrumb-item a {
       text-decoration: none;
       color: #007bff;
   }
-  
+
   .breadcrumb-item.active {
       color: #6c757d;
   }
@@ -116,4 +116,4 @@
     align-items: center;
     overflow-y:auto;
 }
-  
+

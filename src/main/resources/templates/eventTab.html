@@ -9,6 +9,7 @@
     <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/dashboard.css}">
     <link rel="stylesheet" th:href="@{/css/CEF.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
     <title>Events EMS</title>
 </head>
 <body>
@@ -31,13 +32,13 @@
                                                 <a th:href= "@{/admin-page}">Home</a>
                                             </li>
                                             <li class="breadcrumb-item active" aria-current="page">Event
-                
+
                                             </li>
                                         </ul>
                                     </nav>
                             </div>
                         </div>
-                        
+
                      </div>
                     <div class="table-lists">
                         <button type="button" class="tab active">Event List</button>
@@ -72,7 +73,7 @@
                 <div>
                     <span class="username">Welcome, </span>
                     <span class="username" th:text="${user.fullname}"></span>
-                </div> 
+                </div>
             </div>
             <div class="eventDetails">
                 <div class="eventTitle"></div>
@@ -95,16 +96,92 @@
                 <p class="descriptionTitle">Description</p>
                 <div class="eventDescription"></div>
             </div>
-            <button type="button" class="btn myprimarybtn">view sheet</button>
+            <button id="displayFormBtn3" class="btn myprimarybtn">view sheet</button>
         </aside>
     </div>
     <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
     </div>
+
+    <div id="overlayViewSheet" class="overlayViewSheet" style="display: flex; flex-direction: column;">
+        <div class="ViewSheet157" id="myTable" style="background-color: aliceblue; padding:55px;">
+            <h2><center>EVENTS GENERAL DETAILS</center></h2><br>
+            <ul>
+                <li><strong>Event Name:</strong> [Event Name]</li>
+                <li><strong>Date:</strong> [Start Date] - [End Date]</li>
+                <li><strong>Location:</strong> [Location Name]</li>
+                <li><strong>Estimated Attendees:</strong> [Estimated Number]</li>
+            </ul>
+            <br>
+            <h2>Tasks</h2>
+            <br>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Task Name</th>
+                        <th>Contact Concerned</th>
+                        <th>Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>[Task 1 Name]</td>
+                        <td>[Contact Name]</td>
+                        <td>[Task 1 Description]</td>
+                    </tr>
+                    <tr>
+                        <td>[Task 2 Name]</td>
+                        <td>[Contact Name]</td>
+                        <td>[Task 2 Description]</td>
+                    </tr>
+                    <tr>
+                        <td>[Task 3 Name]</td>
+                        <td>[Contact Name]</td>
+                        <td>[Task 3 Description]</td>
+                    </tr>
+                    <!-- Add more rows as needed -->
+                </tbody>
+            </table>
+<br>
+            <h2>Budget</h2>
+            <br>
+            <p><strong>Total Estimated Budget:</strong> [Total Amount]</p>
+            <br>
+            <h3>Allocated Expenses:</h3>
+            <ol>
+                <li>[Expense Category 1]: [Amount]</li>
+                <li>[Expense Category 2]: [Amount]</li>
+                <li>[Expense Category 3]: [Amount]</li>
+                <li>[Expense Category 4]: [Amount]</li>
+                <!-- Add more expenses as needed -->
+            </ol>
+        </div>
+        <div class="formbuto">
+            <button id="downloadBtn" class="fbtn"> Download PDF</button>
+            <button id="closeFormBtn3" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>
+        </div>
+    </div>
+
     <script th:src="@{/js/eventTab.js}"></script>
     <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/lists.js}"></script>
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script th:src="@{/js/searchbar.js}"></script>
+    <script>
+        var opt = {
+            margin: 1 ,
+            filename: 'Technical Sheet PDF' ,
+            image: {type: 'jpeg',quality:0.98} ,
+            html2canvas :{scale : 2},
+            jsPDF :{unit:'in',format:'letter',orientation:'portrait'}
+
+        }
+        window.onload=function(){
+            document.getElementById("downloadBtn").addEventListener("click",()=>{
+                const invoice = this.document.getElementById("myTable");
+                html2pdf().from(myTable).set(opt).save();
+            })
+        }
+        </script>
 </body>
 </html>

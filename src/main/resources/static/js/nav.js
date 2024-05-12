@@ -99,7 +99,7 @@ const displayFormBtnTask = document.getElementById('displayFormBtnTask');
      this.classList.toggle("select-arrow-active");
    });
  }
- 
+
  function closeAllSelect(elmnt) {
    /* A function that will close all select boxes in the document,
    except the current select box: */
@@ -121,10 +121,10 @@ const displayFormBtnTask = document.getElementById('displayFormBtnTask');
      }
    }
  }
- 
- 
+
+
  //Js for validation in eventform
- 
+
  function validateEstimatedAttendees() {
    const estimatedAttendeesInput = document.getElementById('estimatedAttendees');
    const attendeesError = document.getElementById('attendeesError');
@@ -132,32 +132,32 @@ const displayFormBtnTask = document.getElementById('displayFormBtnTask');
    const startDateError = document.getElementById('startDateError');
    const endDateInput = document.getElementById('endDate');
    const endDateError = document.getElementById('endDateError');
- 
+
    // Check estimated attendees
    if (estimatedAttendeesInput.value < 0) {
      attendeesError.textContent = 'Estimated attendees cannot be negative.';
      attendeesError.classList.add('show');
      return false; // Indicate validation failure
    }
- 
+
    // Check start date
    const currentDate = new Date();
    const selectedStartDate = new Date(startDateInput.value);
- 
+
    if (selectedStartDate < currentDate) {
      startDateError.textContent = 'Start date cannot be before the current date.';
      startDateError.classList.add('show');
      return false; // Indicate validation failure
    }
- 
+
    const selectedEndDate = new Date(endDateInput.value);
- 
+
    if (selectedEndDate < selectedStartDate) {
      endDateError.textContent = 'End date cannot be before the start date.'; // Use startDateError here for consistency
      endDateError.classList.add('show');
      return false; // Indicate validation failure
    }
- 
+
    // All checks passed, allow form submission
    else{
    attendeesError.textContent = '';
@@ -173,5 +173,4 @@ const displayFormBtnTask = document.getElementById('displayFormBtnTask');
    return true;
  }
  }
- 
- 
+
