@@ -9,30 +9,26 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact ;
-import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
-import com.gp2.appwebeventsmanagementgp2.services.BudgetService;
-import com.gp2.appwebeventsmanagementgp2.services.ExpenseService;
-import com.gp2.appwebeventsmanagementgp2.services.TaskService;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
 
 @Controller
-//@RequestMapping("api/contacts")
-
+@RequestMapping("/contacts")
 public class contactController {
 
     @Autowired
     private contactService contactService;
 
-    @GetMapping("/contact")
+    @GetMapping({"/", ""})
     public String showContactForm(Model model) {
         model.addAttribute("contact", new contact(null, null, null));
         model.addAttribute("contactList",contactService.getAllcontacts());
-        return "Contact"; // Thymeleaf template name
+        return "Contact";
     }
 
-    @GetMapping("/contacts/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String editContactForm(@PathVariable("id") Long contactId, Model model) {
         contact contact = contactService.getContactById(contactId);
         model.addAttribute("contact", contact);
@@ -46,7 +42,7 @@ public class contactController {
         return "contactDet1"; // Thymeleaf template name
     }
 
-    @PostMapping("/contacts/{id}/update")
+    @PostMapping("/{id}/update")
     public String updateContact(@PathVariable("id") Long contactId, @ModelAttribute("contact") contact updatedContact) {
         contactService.updateContact(contactId, updatedContact);
         return "redirect:/admin-page";
@@ -60,7 +56,7 @@ public class contactController {
     	 return "Contact";
         }
 
-    @GetMapping("/contacts/{id}/delete")
+    @GetMapping("/{id}/delete")
     public String deleteContact(@PathVariable("id") Long contactId) {
         contactService.deleteContact(contactId);
         return "Contact"; // Redirect to the contact list page
