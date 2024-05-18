@@ -30,7 +30,7 @@ public class contactServiceImpl implements contactService {
 
 	@Override
 	public contact getContactById(Long contact_id) {
-		return contactRepository.findById(contact_id).orElseThrow();
+		return contactRepository.findById(contact_id).orElse(null);
 	}
 
 	@Override

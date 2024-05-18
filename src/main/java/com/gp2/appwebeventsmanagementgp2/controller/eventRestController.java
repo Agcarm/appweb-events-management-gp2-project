@@ -72,7 +72,7 @@ public class eventRestController {
     }
 
     @PostMapping("/edit/{id}")
-    public event postMethodName(@PathVariable("id") Long id, @ModelAttribute("event") event updatedEvent) {
+    public event postMethodName(@PathVariable("id") Long id, @RequestBody event updatedEvent) {
         return  eService.updateEvent(id, updatedEvent);
     }
     

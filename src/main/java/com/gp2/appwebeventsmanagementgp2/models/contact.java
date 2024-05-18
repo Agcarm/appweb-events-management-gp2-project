@@ -1,64 +1,53 @@
 package com.gp2.appwebeventsmanagementgp2.models;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "contacts")
 public class contact {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contactId;
 
+	@NotBlank
+	@Column(unique = true, nullable = false)
     private String name;
-    public contact() {
-		super();
-	}
+
+	@Email
+	@Column(unique = true)
 	private String email;
+
+	@Column
     private String country;
+
+	@Column
     public int phoneNumber ;
-	public int getPhoneNumber() {
-		return phoneNumber;
-	}
-	public void setPhoneNumber(int phoneNumber) {
-		this.phoneNumber = phoneNumber;
-	}
-	public String getCountry() {
-		return country;
-	}
-	public void setCountry(String country) {
-		this.country = country;
-	}
-	public contact(Long contactId, String name, String email) {
-		super();
+
+	public contact(Long contactId, @NotBlank String name, @Email String email) {
 		this.contactId = contactId;
 		this.name = name;
-		this.email = email;
-	}
-	public Long getContactId() {
-		return contactId;
-	}
-	public void setContactId(Long contactId) {
-		this.contactId = contactId;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public void setEmail(String email) {
 		this.email = email;
 	}
 
+	public contact(@NotBlank String name, @Email String email, String country, int phoneNumber) {
+		this.name = name;
+		this.email = email;
+		this.country = country;
+		this.phoneNumber = phoneNumber;
+	}
 
 
 }

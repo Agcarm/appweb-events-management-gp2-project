@@ -4,6 +4,7 @@ import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 
 import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 
@@ -18,10 +19,15 @@ import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.FutureOrPresent;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@NoArgsConstructor
 @Table(name = "event")
 public class event {
     @Id
@@ -29,12 +35,15 @@ public class event {
     @Column(name = "eventId")
     private Long id;
 
+    @NotBlank
     @Column(name = "eventName", unique = true)
     private String name;
 
+    @FutureOrPresent
     @Column(name = "startDate")
     private LocalDateTime startDate;
 
+    @FutureOrPresent
     @Column(name = "endDate")
     private LocalDateTime endDate;
 
@@ -46,12 +55,15 @@ public class event {
     @JoinColumn(name = "idtype",nullable = true)
     private type eventType;
 
+    @Size(min = 3, max = 500 , message = "Description must be minimum 3 characters, and maximum 500 characters long")
     @Column(nullable = false)
     private String description;
 
+    @Value("${some.key:0}")
     @Column(nullable = false)
     private Integer estimatedAttendees;
 
+    @Value("${some.key:0}")
     private Integer actualAttendees;
 
     @OneToMany(fetch = FetchType.EAGER)
@@ -74,7 +86,11 @@ public class event {
     @Column(name = "image")
     private String imageUrl;
 
-    public event(String name, venue eventVenue, type eventType, String description, Integer estimatedAttendees) {
+
+
+    public event(@NotBlank String name, venue eventVenue, type eventType,
+            @Size(min = 3, max = 500, message = "Description must be minimum 3 characters, and maximum 500 characters long") String description,
+            Integer estimatedAttendees) {
         this.name = name;
         this.eventVenue = eventVenue;
         this.eventType = eventType;
@@ -99,9 +115,6 @@ public class event {
         this.status = status;
         this.eventType = eventType;
         this.paidEvent = paidEvent;
-    }
-
-    public event() {
     }
 
     public void setTasks(List<task> tasks) {
