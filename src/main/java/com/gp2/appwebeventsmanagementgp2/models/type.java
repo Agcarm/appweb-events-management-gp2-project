@@ -3,6 +3,7 @@ package com.gp2.appwebeventsmanagementgp2.models;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -14,7 +15,7 @@ import lombok.Setter;
 @Table(name = "type")
 public class type {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "idtype")
     private Long id;
 

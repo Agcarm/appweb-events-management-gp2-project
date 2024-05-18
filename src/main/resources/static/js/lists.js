@@ -135,6 +135,9 @@ function displayPages(pageNo, TotalperPage) {
                 totalPagesTask = data.totalPages
                 printPageNumber(currentPageTask,totalPagesTask);
                 data.content.forEach(element => {
+                    if (element.contacts === null) {
+                        element.contacts = {name: "none"}
+                    }
                     activeTable.querySelector('tbody').innerHTML += `
                         <tr class="table-primary">
                             <td scope="row" class="check">
@@ -146,6 +149,7 @@ function displayPages(pageNo, TotalperPage) {
                             <td>`+element.status+`</td>
                             <td>`+element.contacts.name+`</td>
                             <td>`+element.registrationDate+`</td>
+                            <td>`+element.description+`</td>
                         </tr>
                     `
                 });

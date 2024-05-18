@@ -1,7 +1,5 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,8 +20,7 @@ public class contactController {
     private contactService contactService;
 
     @GetMapping({"/", ""})
-    public String showContactForm(Model model) {
-        model.addAttribute("contact", new contact(null, null, null));
+    public String showContactS(Model model) {
         model.addAttribute("contactList",contactService.getAllcontacts());
         return "Contact";
     }
@@ -32,33 +29,29 @@ public class contactController {
     public String editContactForm(@PathVariable("id") Long contactId, Model model) {
         contact contact = contactService.getContactById(contactId);
         model.addAttribute("contact", contact);
-        return "editCon"; // Assuming you have a view named contact-edit for editing contacts
-    }
-
-    @GetMapping("/contactDet1")
-    public String showContacts(Model model) {
-    	List<contact> contacts = contactService.getAllcontacts();
-        model.addAttribute("contact", contacts);
-        return "contactDet1"; // Thymeleaf template name
+        return "editCon";
     }
 
     @PostMapping("/{id}/update")
-    public String updateContact(@PathVariable("id") Long contactId, @ModelAttribute("contact") contact updatedContact) {
+    public String updateContact(@PathVariable("id") Long contactId, @ModelAttribute("contact") contact updatedContact, Model model) {
         contactService.updateContact(contactId, updatedContact);
-        return "redirect:/admin-page";
+        model.addAttribute("contactList",contactService.getAllcontacts());
+        return "Contact";
     }
 
 
     @PostMapping("/save-project")
     public String saveContact(@ModelAttribute contact contact, Model model) {
-   	 contactService.saveContact(contact);
+   	    contactService.saveContact(contact);
         model.addAttribute("contactList",contactService.getAllcontacts());
-    	 return "Contact";
-        }
+    	return "Contact";
+    }
 
     @GetMapping("/{id}/delete")
-    public String deleteContact(@PathVariable("id") Long contactId) {
+    public String deleteContact(@PathVariable("id") Long contactId, Model model) {
+        System.out.println(contactId);
         contactService.deleteContact(contactId);
+        model.addAttribute("contactList",contactService.getAllcontacts());
         return "Contact"; // Redirect to the contact list page
     }
 }

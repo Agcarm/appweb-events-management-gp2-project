@@ -2,16 +2,14 @@ package com.gp2.appwebeventsmanagementgp2.models;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import java.util.Set;
+
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -21,7 +19,7 @@ import lombok.Data;
 public class task {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Long id;
 
@@ -36,7 +34,8 @@ public class task {
     private String status;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "person_in_charge_id", nullable = true)
+    @JoinColumn(name = "person_in_charge_id", nullable = true, referencedColumnName = "contactId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private contact contacts;
 
     @Column(name = "registration_date", nullable = false)

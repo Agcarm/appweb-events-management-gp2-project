@@ -2,6 +2,7 @@ package com.gp2.appwebeventsmanagementgp2.models;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -11,7 +12,7 @@ import lombok.Data;
 @Table(name = "contacts")
 public class contact {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long contactId;
 
     private String name;

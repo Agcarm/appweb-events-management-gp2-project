@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.view.RedirectView;
+import jakarta.servlet.http.HttpServletRequest;
 
 import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.models.event;
@@ -37,6 +39,16 @@ public class eventController {
     // @Autowired
     // private contactService cService;
 
+    @GetMapping({"/", "", "/view"})
+    public String getEventView(Model model) {
+        model.addAttribute("eventList", eventService.findAll());
+		model.addAttribute("venueList", vService.findAll());
+		model.addAttribute("taskList", taskService.findAll());
+		model.addAttribute("user",EnvironmentVariables.getUser());
+        model.addAttribute("typeList", tService.listAll());
+        return "eventTab";
+    }
+
     @GetMapping("/{id}/edit")
     public String editEventForm(@PathVariable("id") Long id, Model model) {
         event event = eventService.getEventById(id);
@@ -45,7 +57,7 @@ public class eventController {
     }
 
     @PostMapping("/create")
-    public String createEvent(@ModelAttribute("event") event event, @RequestParam("image") Optional<MultipartFile> file, Model model)throws IOException {
+    public RedirectView createEvent(@ModelAttribute("event") event event, @RequestParam("image") Optional<MultipartFile> file, Model model, HttpServletRequest request)throws IOException {
         if (file.get().getSize()!=0) {
             event.setImageUrl(file.get().getOriginalFilename());
             StringBuilder fileNames = new StringBuilder();
@@ -55,7 +67,8 @@ public class eventController {
         }
 		model.addAttribute("user",EnvironmentVariables.getUser());
         eventService.saveEvent(event);
-        return "eventTab";
+        String referer = request.getHeader("Referer");
+        return new RedirectView(referer != null ? referer : "/contacts");
     }
 
     @PostMapping("/{id}/update")
@@ -74,16 +87,6 @@ public class eventController {
     public event GetEventByName(@PathVariable String name, Model model){
         model.addAttribute("event",eventService.findByName(name));
         return eventService.findByName(name);
-    }
-
-    @GetMapping("/view")
-    public String getEventView(Model model) {
-        model.addAttribute("eventList", eventService.findAll());
-		model.addAttribute("venueList", vService.findAll());
-		model.addAttribute("taskList", taskService.findAll());
-		model.addAttribute("user",EnvironmentVariables.getUser());
-        model.addAttribute("typeList", tService.listAll());
-        return "eventTab";
     }
     
     @GetMapping("/CEF")

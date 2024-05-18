@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.dto.TaskDto;
+import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.taskRepository;
 
@@ -43,7 +44,7 @@ public class TaskServiceImpl implements TaskService {
 
     @Override
     public task findByIdTask(Long Id) {
-        return taskRepo.findById(Id).orElseThrow();
+        return taskRepo.findById(Id).orElseThrow(() -> new RuntimeException("Task not found"));
     }
 
     @Override
@@ -66,6 +67,19 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public task findByTitleTask(String title) {
         return taskRepo.findByTitle(title);
+    }
+
+    
+    @Override
+    public List<task> findByContactTask(contact contacts) {
+        return taskRepo.findByContacts(contacts);
+    }
+
+    @Override
+    public task clearContact(Long taskId) {
+        task t = taskRepo.findById(taskId).orElseThrow(() -> new RuntimeException("task not found"));;
+        t.setContacts(null);
+        return taskRepo.save(t);
     }
 
 }

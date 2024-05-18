@@ -2,19 +2,21 @@ package com.gp2.appwebeventsmanagementgp2.services;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact;
+import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
 
 @Service
 public class contactServiceImpl implements contactService {
 
+	@Autowired
 	private contactRepository contactRepository ;
-
-	public contactServiceImpl(contactRepository contactRepository) {
-		this.contactRepository = contactRepository;
-	}
+	@Autowired
+	private TaskService tservice;
 
 	@Override
 	public List<contact> getAllcontacts() {
@@ -28,7 +30,6 @@ public class contactServiceImpl implements contactService {
 
 	@Override
 	public contact getContactById(Long contact_id) {
-		// TODO Auto-generated method stub
 		return contactRepository.findById(contact_id).orElseThrow();
 	}
 
@@ -43,9 +44,14 @@ public class contactServiceImpl implements contactService {
 	}
 
 	@Override
+	@Transactional
 	public void deleteContact(Long contact_id) {
+		contact c = getContactById(contact_id);
+		List<task> tasks = tservice.findByContactTask(c);
+		tasks.forEach(tsk ->
+			tservice.clearContact(tsk.getId())
+		);
 		contactRepository.deleteById(contact_id);
-
 	}
 
 }

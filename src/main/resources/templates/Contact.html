@@ -63,8 +63,6 @@
                             <a href="#"><img src="./assets/imgs/icons8_downloading_updates_24px.png" alt=""
                                     style="scale: 1.45; margin-right: 10px; margin-top: 2px;"></a>
                             <a href="#" id="displayFormBtn" class="btn">Add a new contact</a>
-
-
                         </div>
                     </div>
 
@@ -86,16 +84,14 @@
 								<td th:text="${contact.country}"></td>
 
 								<td><a th:href="@{'/contacts/' + ${contact.contactId} + '/edit'}">Edit</a></td>
-                				<td><a th:href="@{'/contacts/' + ${contact.contactId}+'/delete'}">Delete</a></td>
-								<td><a th:href="@{'/contacts/' + ${contact.contactId} + '/edit'}">Edit</a></td>
-                				<td><a th:href="@{'/contacts/' + ${contact.contactId}+'/delete'}">Delete</a></td>
+                				<td><a th:href="@{'/contacts/' + ${contact.contactId} + '/delete'}">Delete</a></td>
 							</tr>
                         </tbody>
                     </table>
                 </div>
 
 				<div id="overlay" class="overlay" style="flex-direction: column;">
-					<form class="form-container" id="contactForm" action="/save-project" method="post" style="padding: 25px;border-radius: 20px;">
+					<form class="form-container" id="contactForm" th:action= "@{/contacts/save-project}" method="post" style="padding: 25px;border-radius: 20px;">
 						<h2><center>Fill the Contact Form</center></h2>
 					  <div class="form-group">
 						<label for="name">Name:</label>
@@ -132,7 +128,7 @@
 		</div>
 
 </body>
-<script src="../js/nav.js"></script>
+<script src="/js/nav.js"></script>
     <!-- ====== ionicons ======= -->
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>

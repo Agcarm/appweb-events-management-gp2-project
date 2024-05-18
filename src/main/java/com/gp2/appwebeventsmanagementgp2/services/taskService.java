@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.domain.Page;
 
 import com.gp2.appwebeventsmanagementgp2.dto.TaskDto;
+import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.models.task;
 
 public interface TaskService {
@@ -23,4 +24,8 @@ public interface TaskService {
   public void deleteTask(Long Id);
 
   public task findByTitleTask(String title);
+
+  public List<task> findByContactTask(contact contacts);
+
+  public task clearContact(Long taskId);
 }
