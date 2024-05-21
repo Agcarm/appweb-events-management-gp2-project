@@ -29,4 +29,6 @@ public interface EventService {
 	Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end);
 
 	double calculateProgression(Long Id);
+
+    long countPaidEvents();
 }

@@ -106,6 +106,10 @@ public class UserController {
 		model.addAttribute("venueList", vService.findAll());
         model.addAttribute("typeList", tService.listAll());
 		model.addAttribute("contactList", cService.getAllcontacts());
+        
+        
+        model.addAttribute("paidEventCount", eService.countPaidEvents());
+        model.addAttribute("totalEvents", eService.findAll().size());
 		return "index";
 	}
 

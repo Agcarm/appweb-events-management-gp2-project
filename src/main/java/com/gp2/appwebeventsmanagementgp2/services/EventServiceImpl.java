@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 import java.util.stream.Collectors;
 
-
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -99,7 +98,8 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end) {
 		Iterable<event> MyEvents = eventRepository.findAllByStartDateBetween(start, end);
-		return StreamSupport.stream(MyEvents.spliterator(), false).map(event::toDayPilotEvent).collect(Collectors.toList());
+		return StreamSupport.stream(MyEvents.spliterator(), false).map(event::toDayPilotEvent)
+				.collect(Collectors.toList());
 	}
 
 	public double calculateProgression(Long Id) {
@@ -108,7 +108,7 @@ public class EventServiceImpl implements EventService {
 		System.out.println(tasks);
 		int totalTasks = tasks.size();
 		int accomplishedTasks = 0;
-		
+
 		for (task evenTask : tasks) {
 			if (evenTask.getStatus().equals("Completed")) {
 				accomplishedTasks++;
@@ -116,12 +116,16 @@ public class EventServiceImpl implements EventService {
 		}
 
 		// Calculate the progression as a percentage
-		if(totalTasks==0){
+		if (totalTasks == 0) {
 			return 0;
 		}
-		
+
 		double progression = (double) accomplishedTasks / totalTasks * 100;
 		return progression;
+	}
+
+	public long countPaidEvents() {
+		return eventRepository.countByPaidEventTrue();
 	}
 
 }

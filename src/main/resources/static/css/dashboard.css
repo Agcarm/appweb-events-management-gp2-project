@@ -410,6 +410,16 @@
         align-items: center;
         overflow-y:auto;
     }
+  
+div.photo{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 20px;
+      min-width: 400px;
+      min-height: 300px ;
+      background-color: #aba1a1;
+    }
 
     .overlayTask{
 
@@ -420,7 +430,9 @@
   background-color: #ffffff;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 80%;
 }
+
 
 h1 {
   text-align: center;
@@ -611,4 +623,15 @@ place-items: center;
   transition: opacity 0.5s ease-in-out;
   color: red; /* Set the error message text color to red */
   font-weight: bold;
+}
+
+
+
+/* youmbi and carmela were here */
+/*-------------------------------------------------------------------------------------*/
+/*-----------------------------  CSS FOR THE NAVIGATION BAR ----------------------------*/
+
+.ultimate{
+  /* display: flex;
+  justify-content: space-between; */
 }
