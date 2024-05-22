@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -29,7 +31,7 @@ import lombok.NoArgsConstructor;
 public class activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "activityId")
+    @Column(name = "IdActivity")
     private Long id;
 
     @NotBlank(message = "Name is mandatory")
@@ -52,6 +54,7 @@ public class activity {
         joinColumns = @JoinColumn(name = "activity_id"),
         inverseJoinColumns = @JoinColumn(name = "contact_id")
     )
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<contact> participants = new ArrayList<>();
 
     public void setParticipant(contact participant){
