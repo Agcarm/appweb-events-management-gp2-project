@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,34 +35,28 @@ public class activityRestController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<?> CreateEvent(@RequestBody ActivityDto activity) {
+    public ResponseEntity<activity> CreateActivity(@RequestBody ActivityDto activity) {
         activity a = aService.save(activity);
-
-        // Set the location header for the newly created resource
-        HttpHeaders responseHeaders = new HttpHeaders();
-        URI newEventUri = ServletUriComponentsBuilder
-        .fromCurrentRequest()
-        .path("/{id}")
-        .buildAndExpand(a.getId())
-        .toUri();
-        responseHeaders.setLocation(newEventUri);
-        return new ResponseEntity<>(null, responseHeaders, HttpStatus.
-        CREATED);
+        return new ResponseEntity<>(a, HttpStatus.OK);
     }
 
     @GetMapping("/{name}")
-    public activity GetEventByName(@PathVariable String name){
+    public activity GetActivityByName(@PathVariable String name){
         return aService.findByName(name);
     }
 
     @GetMapping("/activity{id}")
-    public activity GetEvent(@PathVariable Long id){
+    public activity GetActivity(@PathVariable Long id){
         return aService.findById(id);
     }
 
-    @Transactional
     @PostMapping("/edit/{id}")
     public activity updateActivity(@PathVariable Long id, @RequestBody ActivityDto activityDto){
         return aService.update(id, activityDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public void deleteActivity(@PathVariable("id") Long id){
+        aService.delete(id);
     }
 }

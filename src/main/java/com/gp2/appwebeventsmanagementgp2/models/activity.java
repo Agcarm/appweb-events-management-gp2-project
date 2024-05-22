@@ -9,6 +9,7 @@ import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -48,17 +49,12 @@ public class activity {
     @Column
     private LocalDateTime end;
 
-    @ManyToMany
-    @JoinTable(
-        name = "activity_participant",
-        joinColumns = @JoinColumn(name = "activity_id"),
-        inverseJoinColumns = @JoinColumn(name = "contact_id")
-    )
+    @ManyToMany(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<contact> participants = new ArrayList<>();
 
-    public void setParticipant(contact participant){
-        participants.add(participant);
+    public void setParticipants(List<contact> participants){
+        this.participants.addAll(participants);
     }
 
     public activity(@NotBlank(message = "Name is mandatory") String name,
@@ -68,6 +64,7 @@ public class activity {
         this.name = name;
         this.start = start;
         this.end = end;
-        this.participants = participants;
+        this.participants.addAll(participants);
     }
+    
 }

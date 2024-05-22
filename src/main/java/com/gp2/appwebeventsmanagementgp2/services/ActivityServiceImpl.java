@@ -34,6 +34,7 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public activity save(ActivityDto activityDto) {
         List<contact> contacts = new ArrayList<>();
+        System.out.println(activityDto.getParticipants());
         for (contact c : activityDto.getParticipants()) {
             if (cservice.getContactById(c.getContactId()) == null){
                contacts.add(cservice.saveContact(c));
@@ -65,9 +66,8 @@ public class ActivityServiceImpl implements ActivityService{
     }
 
     @Override
-    public activity delete(Long activityId) {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'delete'");
+    public void delete(Long activityId) {
+        aRepository.deleteById(activityId);
     }
 
     @Override
