@@ -1,4 +1,84 @@
-* {
+/*JUST FOR TESTING AFTER REMOVE*/
+.main{
+    display: flex;
+}
+main{
+    width: 75%;
+}
+.actionBtns{
+    display: flex;
+    justify-content: flex-end;
+    gap: 20px;
+    padding: 0 20px;
+    margin-top: 30px;
+}
+.main-tables{
+    position: relative;
+    width: 96%;
+    height: 70%;
+    margin: auto;
+    margin-top: 50px;
+    padding: 20px 40px;
+    background-color: var(--white);
+    box-shadow: 0 3px 20px rgba(0, 0, 0, 0.10);
+    border-radius: 50px;
+}
+.table-lists{
+    position: relative;
+    margin: 20px 0;
+}
+.table-lists .tab{
+    color: #4B4B4B;
+    border: none;
+    background-color: transparent;
+    font-size: 18px;
+    font-weight: medium;
+    margin-right: 20px;
+    margin-bottom: 7px;
+}
+.table-lists .tab.active{
+    color: var(--black1);
+    font-weight: bold;
+}
+.line{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 87px;
+    height: 4px;
+    border-radius: 5px;
+    background-color: var(--blue);
+    transition: all 0.3s ease-in-out;
+}
+.pagination{
+    position: absolute;
+    bottom: 10px;
+    left: 40%;
+}
+aside{
+    background-color: brown;
+}
+
+
+/*COMMON STYLES*/
+.main-btn{
+    padding: 10px 12px;
+    background-color: var(--blue);
+    color: var(--white);
+    font-size: 12px;
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.filters{
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
+    border: none;
+}
+
+/* * {
     font-family: "Poppins","Ubuntu", sans-serif !important;
     margin: 0;
     padding: 0;
@@ -15,7 +95,7 @@ a{
     text-decoration: none;
 }
 /*Main Body stylization*/
-.table-tabs{
+/* .table-tabs{
     margin-top: 50px;
     height: 80vh;
     padding: 10px 30px;
@@ -51,30 +131,7 @@ a{
     background-color: var(--blue);
     transition: all 0.3s ease-in-out;
 }
-.tabTable{
-    display: none;
-}
-.tabTable.active{
-    display: table;
-    animation: moving 0.8s ease;
-}
-@keyframes moving{
-    from{transform: translateX(40px); opacity: 0; }
-    to{transform: translateX(0px); opacity: 1;}
-}
-table *{
-    padding: 10px;
-}
-table{
-    border-spacing: 0;
-}
-.tablehead{
-    background-color: var(--blue);
-    color: white;
-    th{
-        font-weight: 600;
-    }
-}
+
 
 main{
     padding: 0 20px;
@@ -139,41 +196,36 @@ aside{
         border-radius: 10px;
     }
 
-}
+} */
 
-.eventDetails{
-    overflow-x: hidden; /* Hide horizontal scrollbar */
-    overflow-y: auto; /* Add vertical scrollbar */
+/* .eventDetails{
+    overflow-x: hidden; 
+    overflow-y: auto; 
     width: 100%;
     padding: 0 10px;
-    /* Customizes the whole scrollbar */
-    /*For firefox*/
-    /* scrollbar-width: thin; 
+} */
 
-    scrollbar-color: #555; */
-}
-
-
+/* 
 ::-webkit-scrollbar {
-    width: 7px; /* width of the entire scrollbar */
-}
+    width: 7px;
+} */
 
 /* Customizes the track (progress bar) */
-::-webkit-scrollbar-track {
-    background: transparent; /* color of the tracking area */
-}
+/* ::-webkit-scrollbar-track {
+    background: transparent; 
+} */
 
 /* Customizes the handle (scrollable thumb) */
-::-webkit-scrollbar-thumb {
-    background: #9d6ca5; /* color of the scroll thumb */
-    border-radius: 6px; /* roundness of the scroll thumb */
-}
+/* ::-webkit-scrollbar-thumb {
+    background: #9d6ca5; 
+    border-radius: 6px; 
+} */
 
 /* Handle on hover or active */
-::-webkit-scrollbar-thumb:hover {
-    background: #97649f; /* color when hovered over */
-}
-
+/* ::-webkit-scrollbar-thumb:hover {
+    background: #97649f; 
+} */
+/* 
 .eventTitle, .eventImage{
     width: 100%;
 }
@@ -314,4 +366,4 @@ nav[aria-label="breadcrumb"] {
     background-color: transparent;
     width: 20px;
     font-size: 16px;
-}
+} */

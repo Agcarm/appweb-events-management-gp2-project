@@ -4,6 +4,9 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -45,10 +48,18 @@ public class activity {
     private LocalDateTime end;
 
     @ManyToMany(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<contact> participants = new ArrayList<>();
 
     public void setParticipants(List<contact> participants){
-        this.participants.addAll(participants);
+        for (contact c : participants) {
+            if (!this.participants.contains(c)) {
+                this.participants.add(c);
+            } else {
+                System.out.println(c.getName()+" is already there");
+            }
+        }
+        // this.participants.addAll(participants);
     }
 
     public activity(@NotBlank(message = "Name is mandatory") String name,
@@ -58,7 +69,7 @@ public class activity {
         this.name = name;
         this.start = start;
         this.end = end;
-        this.participants.addAll(participants);
+        this.participants = participants;
     }
 
     public activity(@NotBlank(message = "Name is mandatory") String name,

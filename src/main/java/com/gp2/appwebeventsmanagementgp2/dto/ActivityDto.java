@@ -22,7 +22,14 @@ public class ActivityDto {
         return participants;
     }
     public void setParticipants(List<contact> participants) {
-        this.participants.addAll(participants);
+        for (contact c : participants) {
+            if (!this.participants.contains(c)) {
+                this.participants.add(c);
+            } else {
+                System.out.println(c.getName()+" is already there");
+            }
+        }
+        // this.participants.addAll(participants);
     }
     public LocalDateTime getStart() {
         return start;
