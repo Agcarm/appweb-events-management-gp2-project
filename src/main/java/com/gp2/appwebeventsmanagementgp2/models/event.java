@@ -70,7 +70,7 @@ public class event {
     private Integer actualAttendees;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "idEvent")
+    @JoinColumn(name = "Idevent")
     @Column(nullable = true)
     private List<activity> activities = new ArrayList<>();
 

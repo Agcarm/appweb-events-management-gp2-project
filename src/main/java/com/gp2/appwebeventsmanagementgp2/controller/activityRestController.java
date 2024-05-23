@@ -51,12 +51,12 @@ public class activityRestController {
     
 
     @GetMapping("/{name}")
-    public activity GetEventByName(@PathVariable("name") String name){
+    public activity GetActivityByName(@PathVariable String name){
         return aService.findByName(name);
     }
 
     @GetMapping("/activity{id}")
-    public activity GetEvent(@PathVariable Long id){
+    public activity GetActivity(@PathVariable Long id){
         return aService.findById(id);
     }
 

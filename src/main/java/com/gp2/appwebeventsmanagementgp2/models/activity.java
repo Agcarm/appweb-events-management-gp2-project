@@ -6,9 +6,12 @@ import java.util.List;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -49,6 +52,8 @@ public class activity {
 
     @ManyToMany(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<contact> participants = new ArrayList<>();
 
     public void setParticipants(List<contact> participants){
@@ -69,7 +74,7 @@ public class activity {
         this.name = name;
         this.start = start;
         this.end = end;
-        this.participants = participants;
+        this.participants.addAll(participants);
     }
 
     public activity(@NotBlank(message = "Name is mandatory") String name,

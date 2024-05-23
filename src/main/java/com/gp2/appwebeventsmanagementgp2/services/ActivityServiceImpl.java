@@ -1,6 +1,7 @@
 package com.gp2.appwebeventsmanagementgp2.services;
 
 import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,6 +15,7 @@ import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.repositories.activityRepository;
 import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
 
+@Transactional
 @Transactional
 @Service
 public class ActivityServiceImpl implements ActivityService{
@@ -80,6 +82,8 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public void delete(Long activityId) {
         aRepository.deleteById(activityId);
+    public void delete(Long activityId) {
+        aRepository.deleteById(activityId);
     }
 
     @Override
@@ -90,7 +94,15 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public activity saveParticipants(Long activityId, List<contact> participants) {
         activity a = aRepository.findById(activityId).orElseThrow();
-        a.setParticipants(participants);
+        List<contact> contacts = new ArrayList<>();
+        for (contact c : participants) {
+            if (cservice.getContactById(c.getContactId()) == null){
+               contacts.add(cservice.saveContact(c));
+            }else{
+                contacts.add(c);
+            }
+        }
+        a.setParticipants(contacts);
         return aRepository.save(a);
-    }
+    }   
 }

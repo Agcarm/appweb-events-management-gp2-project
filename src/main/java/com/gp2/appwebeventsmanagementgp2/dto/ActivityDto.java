@@ -2,6 +2,7 @@ package com.gp2.appwebeventsmanagementgp2.dto;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact;
@@ -43,6 +44,13 @@ public class ActivityDto {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
+    public List<contact> getParticipants() {
+        return participants;
+    }
+    public void setParticipants(List<contact> participants) {
+        this.participants.addAll(participants);
+    }
+
 
     public ActivityDto() {
     }
@@ -52,4 +60,7 @@ public class ActivityDto {
         this.end = end;
         this.participants.addAll(participants);
     }
+    public ActivityDto() {
+    }
+    
 }
