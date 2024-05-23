@@ -41,22 +41,6 @@ public class budgetRestController {
         return "redirect:/admin-page";
     }
 
-    // @PostMapping("/createbudget")
-    // public ResponseEntity<?> createbudget(budgetDto tsk) {
-    // budget t = budgetservice.addbudget(tsk);
-
-    // // Set the location header for the newly created resource
-    // HttpHeaders responseHeaders = new HttpHeaders();
-    // URI newEventUri = ServletUriComponentsBuilder
-    // .fromCurrentRequest()
-    // .path("/{id}")
-    // .buildAndExpand(t.getId())
-    // .toUri();
-    // responseHeaders.setLocation(newEventUri);
-    // return new ResponseEntity<>(null, responseHeaders, HttpStatus.
-    // CREATED);
-    // }
-
     @GetMapping("/findall")
     public List<budget> findall() {
         return budgetservice.findAll();

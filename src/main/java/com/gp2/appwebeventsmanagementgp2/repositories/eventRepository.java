@@ -8,5 +8,4 @@ import com.gp2.appwebeventsmanagementgp2.models.event;
 public interface eventRepository extends JpaRepository<event, Long>{
     event findByName(String name);
     Iterable<event> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end);
-    
 }

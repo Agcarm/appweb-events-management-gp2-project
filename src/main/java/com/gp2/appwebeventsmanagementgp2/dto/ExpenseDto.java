@@ -104,9 +104,4 @@ public class ExpenseDto {
         this.date = date;
         this.budget = budget;
     }
-
-    public ExpenseDto() {
-    }
-
-    
 }

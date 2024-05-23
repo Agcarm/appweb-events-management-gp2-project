@@ -1,9 +1,5 @@
 package com.gp2.appwebeventsmanagementgp2.dto;
 
-import java.util.List;
-
-import com.gp2.appwebeventsmanagementgp2.models.expense;
-
 public class BudgetDto {
 
     private Long id;
@@ -60,7 +56,4 @@ public class BudgetDto {
 
     public BudgetDto() {
     }
-
-    
-
 }

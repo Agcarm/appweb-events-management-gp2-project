@@ -6,11 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Setter
 @Table(name = "type")
 public class type {
@@ -24,19 +28,6 @@ public class type {
 
     @Column(name = "colour", unique = true)
     private String colour;
-
-    public type(Long id, String name, String colour) {
-        this.id = id;
-        this.name = name;
-        this.colour = colour;
-        
-    }
-
-    public type() {
-    }
-
-    public type(Object object, String string, Object object2) {
-    }
 }
 
 
