@@ -3,6 +3,7 @@ package com.gp2.appwebeventsmanagementgp2.dto;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.gp2.appwebeventsmanagementgp2.models.activity;
 import com.gp2.appwebeventsmanagementgp2.models.type;
@@ -19,8 +20,8 @@ public class EventDto {
     private String description;
     private Integer estimatedAttendees;
     private Integer actualAttendees;
-    private List<activity> activities;
-    private List<task> tasks;
+    private List<activity> activities = new ArrayList<>();
+    private List<task> tasks = new ArrayList<>();
     private Date dateModified;
     private String status;
     private type eventType;

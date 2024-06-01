@@ -4,14 +4,15 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
@@ -29,9 +30,9 @@ import lombok.NoArgsConstructor;
 public class activity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "activityId")
+    @Column(name = "idActivity")
     private Long id;
-
+    
     @NotBlank(message = "Name is mandatory")
     @Column(unique = true, nullable = false)
     private String name;
@@ -46,16 +47,19 @@ public class activity {
     @Column
     private LocalDateTime end;
 
-    @ManyToMany
-    @JoinTable(
-        name = "activity_participant",
-        joinColumns = @JoinColumn(name = "activity_id"),
-        inverseJoinColumns = @JoinColumn(name = "contact_id")
-    )
+    @ManyToMany(fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<contact> participants = new ArrayList<>();
 
-    public void setParticipant(contact participant){
-        participants.add(participant);
+    public void setParticipants(List<contact> participants){
+        for (contact c : participants) {
+            if (!this.participants.contains(c)) {
+                this.participants.add(c);
+            } else {
+                System.out.println(c.getName()+" is already there");
+            }
+        }
+        // this.participants.addAll(participants);
     }
 
     public activity(@NotBlank(message = "Name is mandatory") String name,
@@ -67,4 +71,13 @@ public class activity {
         this.end = end;
         this.participants = participants;
     }
+
+    public activity(@NotBlank(message = "Name is mandatory") String name,
+            @NotNull(message = "StartDateandTime is mandatory") @FutureOrPresent(message = "StartDateandTime must be in the future") LocalDateTime start,
+            @NotNull(message = "EndDateandTime is mandatory") @FutureOrPresent(message = "EndDateandTime must be in the future") LocalDateTime end) {
+        this.name = name;
+        this.start = start;
+        this.end = end;
+    }
+
 }

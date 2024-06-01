@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 @RequestMapping("/contactRest")
 @RestController
@@ -38,5 +40,15 @@ public class contactRestController {
     @DeleteMapping("/{id}/delete")
     public void deleteContact(@PathVariable("id") Long contactId) {
         contactService.deleteContact(contactId);
+    }
+
+    @GetMapping("/getByName/{name}")
+    public contact getContact(@PathVariable("name") String name) {
+        return contactService.findByName(name).get();
+    }
+    
+    @GetMapping("/{id}")
+    public contact getContact(@PathVariable("id") Long contactId){
+        return contactService.getContactById(contactId);
     }
 }

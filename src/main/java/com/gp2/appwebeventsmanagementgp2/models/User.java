@@ -8,12 +8,17 @@ import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import jakarta.persistence.UniqueConstraint;
 
 
 @Entity
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "users", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User {
 
@@ -27,68 +32,27 @@ public class User {
     @NotBlank(message = "Email cannot be blank")
 	private String email;
 
-    // @NotBlank(message = "Password cannot be null")
-	@Column(name = "password")
-	// @Size(min=4, max=50, message="Password must be between 4 and 15 characters")
+    @NotBlank(message = "Password cannot be null")
+	@Column(name = "password", nullable = false)
 	private String password;
 
+	@NotBlank
 	@Column(name = "role")
 	private String role;
 
-	// @Size(min = 4, max = 15, message="Password must be between 4 and 5 characters")
-	// @NotBlank(message = "Fullname cannot be null")
+	@Size(min = 4, max = 15, message="Fullname must be between 4 and 5 characters")
+	@NotBlank(message = "Fullname cannot be null")
 	@Column(name = "fullname")
 	private String fullname;
 
-	public User() {
-		super();
-	}
-
-	public User(String email, String password, String role, String fullname) {
-
+	public User(
+			@Email(message = "Please enter a valid email address") @NotBlank(message = "Email cannot be blank") String email,
+			@NotBlank(message = "Password cannot be null") @Size(min = 4, max = 50, message = "Password must be between 4 and 15 characters") String password,
+			@NotBlank String role,
+			@Size(min = 4, max = 15, message = "Fullname must be between 4 and 5 characters") @NotBlank(message = "Fullname cannot be null") String fullname) {
 		this.email = email;
 		this.password = password;
 		this.role = role;
-		this.fullname = fullname;
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public String getRole() {
-		return role;
-	}
-
-	public void setRole(String role) {
-		this.role = role;
-	}
-
-	public String getFullname() {
-		return fullname;
-	}
-
-	public void setFullname(String fullname) {
 		this.fullname = fullname;
 	}
 
@@ -96,14 +60,4 @@ public class User {
 	public String toString() {
 		return "User [email=" + email + ", role=" + role + ", fullname=" + fullname + "]";
 	}
-
-
-
-
-
-
-
-
-
-
 }

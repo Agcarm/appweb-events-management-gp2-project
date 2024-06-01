@@ -1,5 +1,8 @@
 package com.gp2.appwebeventsmanagementgp2.models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotBlank;
@@ -32,6 +35,7 @@ public class budget {
 
     @OneToOne
     @JoinColumn(name = "event_id", referencedColumnName = "eventId")
+    @OnDelete(action = OnDeleteAction.SET_NULL)
     private event budgetEvent;
 
     public budget(@NotBlank String title, @DecimalMin("0.0") double estimatedAmount,
@@ -42,11 +46,9 @@ public class budget {
         this.budgetEvent = budgetEvent;
     }
 
-    public budget(@NotBlank String title, @DecimalMin("0.0") double estimatedAmount,
-            @DecimalMin("0.0") double actualAmount) {
+    public budget(@NotBlank String title, @DecimalMin("0.0") double estimatedAmount, event budgetEvent) {
         this.title = title;
         this.estimatedAmount = estimatedAmount;
-        this.actualAmount = actualAmount;
+        this.budgetEvent = budgetEvent;
     }
-    
 }

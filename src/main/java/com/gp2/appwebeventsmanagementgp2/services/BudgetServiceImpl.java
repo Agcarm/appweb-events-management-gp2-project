@@ -21,8 +21,12 @@ public class BudgetServiceImpl implements BudgetService {
     @Override
     public budget addBudget(BudgetDto budgetDto) {
         System.out.println(budgetDto);
-        budget bud = new budget(budgetDto.getTitle(), budgetDto.getEstimatedAmount(),
-                budgetDto.getActualAmount());
+        budget bud = new budget(
+            budgetDto.getTitle(),
+            budgetDto.getEstimatedAmount(),
+            budgetDto.getActualAmount(),
+            budgetDto.getBudgetEvent()
+        );
         return budgetRepo.save(bud);
     }
 
@@ -51,7 +55,7 @@ public class BudgetServiceImpl implements BudgetService {
         budget.setTitle(budgetDto.getTitle());
         budget.setEstimatedAmount(budgetDto.getEstimatedAmount());
         budget.setActualAmount(budgetDto.getActualAmount());
-
+        budget.setBudgetEvent(budgetDto.getBudgetEvent());
 
         return budgetRepo.save(budget);
     }

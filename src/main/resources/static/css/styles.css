@@ -16,9 +16,13 @@
   --blue3: #9effec;
   --white: #fff;
   --gray: #f5f5f5;
-  --black1: #222;
+  --black1: #111;
   --black2: #999;
-  --black3: #4b4b4b;
+  --black3: #707070;
+}
+
+a{
+  text-decoration: none;
 }
 
 body {
