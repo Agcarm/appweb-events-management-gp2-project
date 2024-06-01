@@ -1,7 +1,9 @@
 package com.gp2.appwebeventsmanagementgp2.services;
 
 import java.util.ArrayList;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,10 @@ import com.gp2.appwebeventsmanagementgp2.models.activity;
 import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.repositories.activityRepository;
 import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
+import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
 
+
+@Transactional
 @Transactional
 @Service
 public class ActivityServiceImpl implements ActivityService{
@@ -21,7 +26,30 @@ public class ActivityServiceImpl implements ActivityService{
     @Autowired
     activityRepository aRepository;
 
+
     @Autowired
+    private contactService cService;
+
+    @Override
+    public activity save(ActivityDto activityDto) {
+        /*verify if the given contacts exists else save it */
+        List<contact> savedParticipants = new ArrayList<>();
+        for (contact participant : activityDto.getParticipants()) {
+            if (cService.getContactById(participant.getContactId()) == null) {
+                savedParticipants.add(cService.saveContact(participant));
+            }
+            else {
+                savedParticipants.add(participant);
+            }
+        }
+        activity newActivity = new activity(
+            activityDto.getName(),
+            activityDto.getStart(),
+            activityDto.getEnd(),
+            savedParticipants
+        );
+        return aRepository.save(newActivity);
+    }
     private contactService cService;
 
     @Override
@@ -74,14 +102,28 @@ public class ActivityServiceImpl implements ActivityService{
         }
         a.setParticipants(savedParticipants);
 
+
+        /*verify if the updated contact exists else save it */
+        List<contact> savedParticipants = new ArrayList<>();
+        for (contact participant : activityDto.getParticipants()) {
+            if (cService.getContactById(participant.getContactId()) == null) {
+                savedParticipants.add(cService.saveContact(participant));
+            }
+            else {
+                savedParticipants.add(participant);
+            }
+        }
+        a.setParticipants(savedParticipants);
+
         return aRepository.save(a);
     }
 
     @Override
     public void delete(Long activityId) {
         aRepository.deleteById(activityId);
+    public void delete(Long activityId) {
+        aRepository.deleteById(activityId);
     }
-
     @Override
     public activity findByName(String name) {
         return aRepository.findByName(name);
@@ -90,7 +132,15 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public activity saveParticipants(Long activityId, List<contact> participants) {
         activity a = aRepository.findById(activityId).orElseThrow();
-        a.setParticipants(participants);
+        List<contact> contacts = new ArrayList<>();
+        for (contact c : participants) {
+            if (cService.getContactById(c.getContactId()) == null){
+               contacts.add(cService.saveContact(c));
+            }else{
+                contacts.add(c);
+            }
+        }
+        a.setParticipants(contacts);
         return aRepository.save(a);
-    }
+    }   
 }

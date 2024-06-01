@@ -17,10 +17,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
+@RequestMapping("/budgetRest")
 @RequestMapping("/budgetRest")
 @RestController
 public class budgetRestController {
@@ -30,13 +32,17 @@ public class budgetRestController {
 
     @Autowired
     ExpenseService eService;
+    @Autowired
+    ExpenseService eService;
 
     @PostMapping("/createbudget")
-    public ResponseEntity<budget> createbudget(BudgetDto bud) {
+    public ResponseEntity<budget> createbudget(@RequestBody BudgetDto bud) {
         return new ResponseEntity<>(budgetservice.addBudget(bud), HttpStatus.OK);
     }
 
     @GetMapping("/findall")
+    public ResponseEntity<List<budget>> findall() {
+        return new ResponseEntity<>(budgetservice.findAll(), HttpStatus.OK);
     public ResponseEntity<List<budget>> findall() {
         return new ResponseEntity<>(budgetservice.findAll(), HttpStatus.OK);
     }
@@ -69,9 +75,8 @@ public class budgetRestController {
     }
 
     @DeleteMapping("/{Id}/delete")
-    public String deleteBudget(Long Id) {
+    public String deleteBudget(@PathVariable Long Id) {
         budgetservice.deleteBudget(Id);
         return "Budget deleted successfully";
     }
-
 }

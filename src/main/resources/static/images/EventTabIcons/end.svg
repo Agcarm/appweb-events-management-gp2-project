@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="41" viewBox="0 0 45 41">
+  <g id="end" transform="translate(-1529 -881)">
+    <g id="Rectangle_112" data-name="Rectangle 112" transform="translate(1529 881)" fill="rgba(249,79,149,0.17)" stroke="#f94f95" stroke-width="1">
+      <rect width="45" height="41" stroke="none"/>
+      <rect x="0.5" y="0.5" width="44" height="40" fill="none"/>
+    </g>
+    <g id="endDate" transform="translate(1539 890)">
+      <path id="Path_28" data-name="Path 28" d="M23.707,16.325a1,1,0,0,0-1.414,0l-5.627,5.628L13.978,19.3a1,1,0,0,0-1.435,1.4l2.744,2.7a1.876,1.876,0,0,0,1.345.6h.033A1.873,1.873,0,0,0,18,23.447l5.707-5.708a1,1,0,0,0,0-1.414Z" fill="#f94f95"/>
+      <path id="Path_29" data-name="Path 29" d="M11.09,21.959A10,10,0,1,1,22,12c0,.307-.015.611-.041.911A1,1,0,0,0,22.866,14a.989.989,0,0,0,1.085-.907C23.983,12.73,24,12.367,24,12A12,12,0,1,0,10.91,23.951H11a1,1,0,0,0,.089-2Z" fill="#f94f95"/>
+      <path id="Path_30" data-name="Path 30" d="M11,7v4.586L8.293,14.293a1,1,0,1,0,1.414,1.414l3-3A1,1,0,0,0,13,12V7a1,1,0,0,0-2,0Z" fill="#f94f95"/>
+    </g>
+  </g>
+</svg>

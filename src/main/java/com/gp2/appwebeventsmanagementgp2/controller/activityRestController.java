@@ -3,6 +3,7 @@ package com.gp2.appwebeventsmanagementgp2.controller;
 import java.net.URI;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.ArrayList;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,6 +24,8 @@ import com.gp2.appwebeventsmanagementgp2.dto.ActivityDto;
 import com.gp2.appwebeventsmanagementgp2.models.activity;
 import com.gp2.appwebeventsmanagementgp2.models.contact;
 import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
+import com.gp2.appwebeventsmanagementgp2.models.contact;
+import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
 import com.gp2.appwebeventsmanagementgp2.services.ActivityService;
 
 @RestController
@@ -32,11 +36,14 @@ public class activityRestController {
     ActivityService aService;
     @Autowired
     contactRepository cRepository;
+    @Autowired
+    contactRepository cRepository;
 
     @GetMapping("/all")
     public ResponseEntity<List<activity>> getAllActivities(){
         return new ResponseEntity<>(aService.findAll(), HttpStatus.OK);
     }
+ 
  
     @PostMapping("/create")
     public ResponseEntity<activity> createActivity(@RequestBody ActivityDto activityDto) {
@@ -51,18 +58,24 @@ public class activityRestController {
     
 
     @GetMapping("/{name}")
-    public activity GetEventByName(@PathVariable("name") String name){
+    public activity GetActivityByName(@PathVariable String name){
         return aService.findByName(name);
     }
 
     @GetMapping("/activity{id}")
-    public activity GetEvent(@PathVariable Long id){
+    public activity GetActivity(@PathVariable Long id){
         return aService.findById(id);
     }
 
     @PostMapping("/edit/{id}")
     public activity updateActivity(@PathVariable Long id, @RequestBody ActivityDto activityDto){
         return aService.update(id, activityDto);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    public String deleteActivity(@PathVariable("id") Long id){
+        aService.delete(id);
+        return "Successfully deleted";
     }
 
     @DeleteMapping("/delete/{id}")

@@ -15,22 +15,26 @@ table *{
     padding: 10px;
 }
 table{
-    border-spacing: 0;
-
+    border-spacing: 0px 10px;
+    text-align: left;
+    width: 100%;
     input{
         width: 18px;
         height: 18px;
     }
+}
+.hidden-head{
+    color: var(--white);
 }
 .tablehead{
     position: relative;
     background-color: var(--white);
     color: var(--black3);
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.16);
-    margin-bottom: 20px;
     z-index: 5;
     th{
         font-weight: 400;
+        height: 68px;
     }
 }
 

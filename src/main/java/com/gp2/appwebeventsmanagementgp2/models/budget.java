@@ -21,7 +21,7 @@ public class budget {
     @Column(name = "budgetId")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "title is obligatory")
     @Column(name = "title", nullable = false)
     private String title;
 

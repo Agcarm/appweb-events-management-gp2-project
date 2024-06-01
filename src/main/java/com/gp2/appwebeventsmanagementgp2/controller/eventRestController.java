@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -75,7 +76,7 @@ public class eventRestController {
         return  eService.updateEvent(id, updatedEvent);
     }
     
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String postMethodName(@PathVariable("id") Long id) {
         eService.deleteEvent(id);
         return "successful";
@@ -96,5 +97,11 @@ public class eventRestController {
     public double calculateProgression(@PathVariable("id") Long id) {
      double prog = eService.calculateProgression(id);
         return prog; // Redirect to the contact list page
+    }
+
+    @GetMapping("/hello")
+    public String hello(){
+        System.out.println("hello");
+        return "hello";
     }
 }

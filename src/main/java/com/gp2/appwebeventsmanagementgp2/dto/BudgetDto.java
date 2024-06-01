@@ -1,6 +1,7 @@
 package com.gp2.appwebeventsmanagementgp2.dto;
 
 import com.gp2.appwebeventsmanagementgp2.models.event;
+import com.gp2.appwebeventsmanagementgp2.models.event;
 
 public class BudgetDto {
 
@@ -8,6 +9,7 @@ public class BudgetDto {
     private String title;
     private double estimatedAmount;
     private double actualAmount;
+    private event budgetEvent;
     private event budgetEvent;
 
     public Long getId() {
@@ -49,15 +51,25 @@ public class BudgetDto {
     public void setBudgetEvent(event budgetEvent) {
         this.budgetEvent = budgetEvent;
     }
+    public event getBudgetEvent() {
+        return budgetEvent;
+    }
 
+    public void setBudgetEvent(event budgetEvent) {
+        this.budgetEvent = budgetEvent;
+    }
+
+    public BudgetDto(Long id, String title, double estimatedAmount, double actualAmount, event budgetEvent) {
     public BudgetDto(Long id, String title, double estimatedAmount, double actualAmount, event budgetEvent) {
         this.id = id;
         this.title = title;
         this.estimatedAmount = estimatedAmount;
         this.actualAmount = actualAmount;
         this.budgetEvent = budgetEvent;
+        this.budgetEvent = budgetEvent;
     }
 
+    public BudgetDto(String title, double estimatedAmount, double actualAmount, event budgetEvent) {
     public BudgetDto(String title, double estimatedAmount, double actualAmount, event budgetEvent) {
         this.title = title;
         this.estimatedAmount = estimatedAmount;
@@ -69,9 +81,22 @@ public class BudgetDto {
         this.title = title;
         this.estimatedAmount = estimatedAmount;
         this.budgetEvent = budgetEvent;
+        this.budgetEvent = budgetEvent;
+    }
+
+    public BudgetDto(String title, double estimatedAmount, event budgetEvent) {
+        this.title = title;
+        this.estimatedAmount = estimatedAmount;
+        this.budgetEvent = budgetEvent;
     }
 
     public BudgetDto() {
+    }
+
+    @Override
+    public String toString() {
+        return "BudgetDto [id=" + id + ", title=" + title + ", estimatedAmount=" + estimatedAmount + ", actualAmount="
+                + actualAmount + ", budgetEvent=" + budgetEvent + "]";
     }
 
 }
