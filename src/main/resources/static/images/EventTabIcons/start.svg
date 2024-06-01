@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="45" height="41" viewBox="0 0 45 41">
+  <g id="start" transform="translate(-1529 -881)">
+    <g id="Rectangle_112" data-name="Rectangle 112" transform="translate(1529 881)" fill="rgba(102,232,193,0.17)" stroke="#66e8c1" stroke-width="1">
+      <rect width="45" height="41" stroke="none"/>
+      <rect x="0.5" y="0.5" width="44" height="40" fill="none"/>
+    </g>
+    <g id="startDate" transform="translate(1539.485 889.489)">
+      <path id="Path_31" data-name="Path 31" d="M23,18H20V15a1,1,0,0,0-2,0v3H15a1,1,0,0,0,0,2h3v3a1,1,0,0,0,2,0V20h3a1,1,0,0,0,0-2Z" fill="#66e8c1"/>
+      <path id="Path_32" data-name="Path 32" d="M11,7v4.586L8.293,14.293a1,1,0,1,0,1.414,1.414l3-3A1,1,0,0,0,13,12V7a1,1,0,0,0-2,0Z" fill="#66e8c1"/>
+      <path id="Path_33" data-name="Path 33" d="M14.728,21.624a9.985,9.985,0,1,1,6.9-6.895,1,1,0,1,0,1.924.542,11.989,11.989,0,1,0-8.276,8.277,1,1,0,1,0-.544-1.924Z" fill="#66e8c1"/>
+    </g>
+  </g>
+</svg>

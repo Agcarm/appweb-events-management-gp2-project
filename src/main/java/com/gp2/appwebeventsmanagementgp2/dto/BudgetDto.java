@@ -74,4 +74,10 @@ public class BudgetDto {
     public BudgetDto() {
     }
 
+    @Override
+    public String toString() {
+        return "BudgetDto [id=" + id + ", title=" + title + ", estimatedAmount=" + estimatedAmount + ", actualAmount="
+                + actualAmount + ", budgetEvent=" + budgetEvent + "]";
+    }
+
 }

@@ -12,6 +12,7 @@ import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -88,6 +89,9 @@ public class event {
 
     @Column(name = "image")
     private String imageUrl;
+
+    @DecimalMin(value = "0.0")
+    private Double price;
 
 
     public void setTask(task t){

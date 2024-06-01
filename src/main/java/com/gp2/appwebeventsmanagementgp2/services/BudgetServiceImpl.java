@@ -62,6 +62,7 @@ public class BudgetServiceImpl implements BudgetService {
 
     @Override
     public void deleteBudget(Long Id) {
+        System.out.println("This is the id I am working with: "+Id);
         budgetRepo.deleteById(Id);
     }
 

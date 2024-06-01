@@ -44,16 +44,8 @@ public class ActivityDto {
     public void setEnd(LocalDateTime end) {
         this.end = end;
     }
-    public List<contact> getParticipants() {
-        return participants;
-    }
-    public void setParticipants(List<contact> participants) {
-        this.participants.addAll(participants);
-    }
 
-
-    public ActivityDto() {
-    }
+   
     public ActivityDto(String name, LocalDateTime start, LocalDateTime end, List<contact> participants) {
         this.name = name;
         this.start = start;

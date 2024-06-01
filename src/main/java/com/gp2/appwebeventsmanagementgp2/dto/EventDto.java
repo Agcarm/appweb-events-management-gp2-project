@@ -27,6 +27,7 @@ public class EventDto {
     private type eventType;
     private Boolean paidEvent;
     private String imageUrl;
+    private Double price;
 
 
     public String getName() {
@@ -116,7 +117,13 @@ public class EventDto {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    
+    public Double getPrice() {
+        return price;
+    }
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public EventDto(String name, venue eventVenue, type eventType, String description, Integer estimatedAttendees) {
         this.name = name;
         this.eventVenue = eventVenue;
@@ -124,5 +131,6 @@ public class EventDto {
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
     }
-
+    public EventDto() {
+    }
 }

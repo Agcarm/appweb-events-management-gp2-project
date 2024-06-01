@@ -32,7 +32,7 @@ public class budgetRestController {
     ExpenseService eService;
 
     @PostMapping("/createbudget")
-    public ResponseEntity<budget> createbudget(BudgetDto bud) {
+    public ResponseEntity<budget> createbudget(@RequestBody BudgetDto bud) {
         return new ResponseEntity<>(budgetservice.addBudget(bud), HttpStatus.OK);
     }
 
@@ -69,9 +69,8 @@ public class budgetRestController {
     }
 
     @DeleteMapping("/{Id}/delete")
-    public String deleteBudget(Long Id) {
+    public String deleteBudget(@PathVariable Long Id) {
         budgetservice.deleteBudget(Id);
         return "Budget deleted successfully";
     }
-
 }

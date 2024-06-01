@@ -46,3 +46,4 @@ tabLists.forEach((tab, index) => {
 });
 
 
+/*Aside parameters */

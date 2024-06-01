@@ -1,7 +1,10 @@
 package com.gp2.appwebeventsmanagementgp2.models;
 
+import java.util.List;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -34,8 +37,9 @@ public class contact {
     private String country;
 
 	@Column
-    public int phoneNumber ;
+    private int phoneNumber;
 
+	
 	public contact(Long contactId, @NotBlank String name, @Email String email) {
 		this.contactId = contactId;
 		this.name = name;
@@ -48,6 +52,4 @@ public class contact {
 		this.country = country;
 		this.phoneNumber = phoneNumber;
 	}
-
-
 }

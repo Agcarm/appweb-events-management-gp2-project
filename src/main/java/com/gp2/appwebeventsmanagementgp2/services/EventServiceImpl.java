@@ -61,6 +61,7 @@ public class EventServiceImpl implements EventService {
 		existingevent.setDateModified(Date.valueOf(LocalDate.now()));
 		existingevent.setEventType(updatedEvent.getEventType());
 		existingevent.setImageUrl(updatedEvent.getImageUrl());
+		existingevent.setPrice(updatedEvent.getPrice());
 		return eventRepository.save(existingevent);
 	}
 
