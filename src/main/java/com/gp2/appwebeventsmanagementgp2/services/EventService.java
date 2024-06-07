@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
 import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
+import com.gp2.appwebeventsmanagementgp2.models.expense;
 
 public interface EventService {
     void saveEvent(event event);
@@ -23,6 +24,8 @@ public interface EventService {
 	void deleteEvent(Long id);
 
     event findByName(String name);
+
+	public List<event> findAllSort(String field);
 
 	Page<event> findAllPages(int offset, int pageSize);
 

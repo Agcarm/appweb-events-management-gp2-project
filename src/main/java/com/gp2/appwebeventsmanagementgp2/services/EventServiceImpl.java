@@ -15,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
+import com.gp2.appwebeventsmanagementgp2.models.expense;
 import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
 
@@ -89,6 +91,11 @@ public class EventServiceImpl implements EventService {
 		e.setStatus("not started");
 		return eventRepository.save(e);
 	}
+
+	@Override
+	public List<event> findAllSort(String field) {
+        return eventRepository.findAll(Sort.by(Sort.Direction.DESC, field));
+    }
 
 	@Override
 	public Page<event> findAllPages(int offset, int pageSize) {
