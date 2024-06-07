@@ -3,6 +3,7 @@ package com.gp2.appwebeventsmanagementgp2.dto;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.ArrayList;
 
 import com.gp2.appwebeventsmanagementgp2.models.activity;
 import com.gp2.appwebeventsmanagementgp2.models.type;
@@ -19,13 +20,14 @@ public class EventDto {
     private String description;
     private Integer estimatedAttendees;
     private Integer actualAttendees;
-    private List<activity> activities;
-    private List<task> tasks;
+    private List<activity> activities = new ArrayList<>();
+    private List<task> tasks = new ArrayList<>();
     private Date dateModified;
     private String status;
     private type eventType;
     private Boolean paidEvent;
     private String imageUrl;
+    private Double price;
 
 
     public String getName() {
@@ -115,7 +117,13 @@ public class EventDto {
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
     }
-    
+    public Double getPrice() {
+        return price;
+    }
+    public void setPrice(Double price) {
+        this.price = price;
+    }
+
     public EventDto(String name, venue eventVenue, type eventType, String description, Integer estimatedAttendees) {
         this.name = name;
         this.eventVenue = eventVenue;
@@ -123,5 +131,6 @@ public class EventDto {
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
     }
-
+    public EventDto() {
+    }
 }

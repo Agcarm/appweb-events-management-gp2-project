@@ -9,25 +9,25 @@ import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Table(name = "type")
-public class type {
+@Table(name = "contactType")
+public class contactType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idtype")
     private Long id;
 
-    @Column(name = "name", unique = true)
+    @Column(unique = true, nullable = false)
     private String name;
 
-    @Column(name = "colour", unique = true)
-    private String colour;
+    @Column(nullable = false)
+    private String type;
+
+    public contactType(String name, String type) {
+        this.name = name;
+        this.type = type;
+    }
 }
-
-

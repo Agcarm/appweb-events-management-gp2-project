@@ -4,6 +4,8 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RestController;
 import com.gp2.appwebeventsmanagementgp2.dto.BudgetDto;
@@ -14,52 +16,29 @@ import com.gp2.appwebeventsmanagementgp2.services.ExpenseService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 
-@RequestMapping("/budget")
+@RequestMapping("/budgetRest")
 @RestController
 public class budgetRestController {
 
     @Autowired
     BudgetService budgetservice;
 
-     @Autowired
-    private ExpenseService eService;
-
-    @GetMapping("/budget")
-    public String showBudget(Model model) {
-        model.addAttribute("budgetList", budgetservice.findAll());
-        model.addAttribute("expenseList", eService.findAll());
-        return "Budget"; // Thymeleaf template name
-    }
+    @Autowired
+    ExpenseService eService;
 
     @PostMapping("/createbudget")
-    public String createbudget(BudgetDto bud) {
-        budgetservice.addBudget(bud);
-        return "redirect:/admin-page";
+    public ResponseEntity<budget> createbudget(@RequestBody BudgetDto bud) {
+        return new ResponseEntity<>(budgetservice.addBudget(bud), HttpStatus.OK);
     }
 
-    // @PostMapping("/createbudget")
-    // public ResponseEntity<?> createbudget(budgetDto tsk) {
-    // budget t = budgetservice.addbudget(tsk);
-
-    // // Set the location header for the newly created resource
-    // HttpHeaders responseHeaders = new HttpHeaders();
-    // URI newEventUri = ServletUriComponentsBuilder
-    // .fromCurrentRequest()
-    // .path("/{id}")
-    // .buildAndExpand(t.getId())
-    // .toUri();
-    // responseHeaders.setLocation(newEventUri);
-    // return new ResponseEntity<>(null, responseHeaders, HttpStatus.
-    // CREATED);
-    // }
-
     @GetMapping("/findall")
-    public List<budget> findall() {
-        return budgetservice.findAll();
+    public ResponseEntity<List<budget>> findall() {
+        return new ResponseEntity<>(budgetservice.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/sort/{field}")
@@ -89,10 +68,9 @@ public class budgetRestController {
         return budgetservice.editBudget(id, editbudget);
     }
 
-    @GetMapping("/{Id}/delete")
-    public String deleteTask(Long Id) {
+    @DeleteMapping("/{Id}/delete")
+    public String deleteBudget(@PathVariable Long Id) {
         budgetservice.deleteBudget(Id);
-        return "Task deleted successfully";
+        return "Budget deleted successfully";
     }
-
 }

@@ -5,29 +5,31 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Table(name = "type")
-public class type {
+@Table(name = "contactTypeMapping")
+public class contactTypeMapping {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idtype")
     private Long id;
 
-    @Column(name = "name", unique = true)
-    private String name;
+    @ManyToOne
+    @JoinColumn(name = "contact_id")
+    private contact contact;
 
-    @Column(name = "colour", unique = true)
-    private String colour;
+    @ManyToOne
+    @JoinColumn(name = "type_id")
+    private contactType contactType;
+
+    @Column(nullable = false)
+    private String role;
 }
-
-

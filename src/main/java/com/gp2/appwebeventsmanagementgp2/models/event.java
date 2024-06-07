@@ -2,6 +2,7 @@ package com.gp2.appwebeventsmanagementgp2.models;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -11,6 +12,7 @@ import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
+import jakarta.validation.constraints.DecimalMin;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -22,12 +24,14 @@ import jakarta.persistence.Table;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "event")
 public class event {
     @Id
@@ -67,13 +71,13 @@ public class event {
     private Integer actualAttendees;
 
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "activityId")
+    @JoinColumn(name = "Idevent")
     @Column(nullable = true)
-    private List<activity> activities;
+    private List<activity> activities = new ArrayList<>();
 
     @ManyToMany(fetch = FetchType.EAGER)
     @Column(nullable = true)
-    private List<task> tasks;
+    private List<task> tasks = new ArrayList<>();
 
     private Date dateModified;
 
@@ -86,7 +90,24 @@ public class event {
     @Column(name = "image")
     private String imageUrl;
 
+    @DecimalMin(value = "0.0")
+    private Double price;
 
+
+    public void setTask(task t){
+        tasks.add(t);
+    }
+
+    public void setActivity(activity a){
+        activities.add(a);
+    }
+
+    public void setTasks(List<task> tasks){
+        this.tasks.addAll(tasks);
+    }
+    public void setActivities(List<activity> activities){
+        this.activities.addAll(activities);
+    }
 
     public event(@NotBlank String name, venue eventVenue, type eventType,
             @Size(min = 3, max = 500, message = "Description must be minimum 3 characters, and maximum 500 characters long") String description,
@@ -98,14 +119,17 @@ public class event {
         this.estimatedAttendees = estimatedAttendees;
     }
 
-    public event(Long id, String name, LocalDateTime startDate, LocalDateTime endDate, venue eventVenue,
-            String description, Integer estimatedAttendees, Integer actualAttendees, List<activity> activities,
-            List<task> tasks, Date dateModified, String status, type eventType, Boolean paidEvent) {
+    public event(Long id, @NotBlank String name, @FutureOrPresent LocalDateTime startDate,
+            @FutureOrPresent LocalDateTime endDate, venue eventVenue, type eventType,
+            @Size(min = 3, max = 500, message = "Description must be minimum 3 characters, and maximum 500 characters long") String description,
+            Integer estimatedAttendees, Integer actualAttendees, List<activity> activities, List<task> tasks,
+            Date dateModified, String status, Boolean paidEvent) {
         this.id = id;
         this.name = name;
         this.startDate = startDate;
         this.endDate = endDate;
         this.eventVenue = eventVenue;
+        this.eventType = eventType;
         this.description = description;
         this.estimatedAttendees = estimatedAttendees;
         this.actualAttendees = actualAttendees;
@@ -113,14 +137,29 @@ public class event {
         this.tasks.addAll(tasks);
         this.dateModified = dateModified;
         this.status = status;
-        this.eventType = eventType;
         this.paidEvent = paidEvent;
     }
 
-    public void setTasks(List<task> tasks) {
+    public event(@NotBlank String name, @FutureOrPresent LocalDateTime startDate,
+            @FutureOrPresent LocalDateTime endDate, venue eventVenue, type eventType,
+            @Size(min = 3, max = 500, message = "Description must be minimum 3 characters, and maximum 500 characters long") String description,
+            Integer estimatedAttendees, Integer actualAttendees, List<activity> activities, List<task> tasks,
+            Date dateModified, String status, Boolean paidEvent, String imageUrl) {
+        this.name = name;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.eventVenue = eventVenue;
+        this.eventType = eventType;
+        this.description = description;
+        this.estimatedAttendees = estimatedAttendees;
+        this.actualAttendees = actualAttendees;
+        this.activities.addAll(activities);
         this.tasks.addAll(tasks);
+        this.dateModified = dateModified;
+        this.status = status;
+        this.paidEvent = paidEvent;
+        this.imageUrl = imageUrl;
     }
-
 
     public DayPilotEventDto toDayPilotEvent() {
         DayPilotEventDto dpe = new DayPilotEventDto();

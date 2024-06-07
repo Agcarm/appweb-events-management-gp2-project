@@ -11,14 +11,19 @@
 }
 
 :root {
-  --blue: #9500ff;
+  /* --blue: #9500ff; */
+  --blue: #4aa3fc;
   --blue2: #4aa3fc;
   --blue3: #9effec;
   --white: #fff;
   --gray: #f5f5f5;
-  --black1: #222;
+  --black1: #111;
   --black2: #999;
-  --black3: #4b4b4b;
+  --black3: #707070;
+}
+
+a{
+  text-decoration: none;
 }
 
 body {
@@ -34,8 +39,8 @@ body {
 /* ===================== Main ===================== */
 .main {
     position: absolute;
-    width: calc(100% - 300px);
-    left: 300px;
+    width: calc(100% - 220px);
+    left: 220px;
     min-height: 100vh;
     background: var(--white);
     transition: 0.5s;

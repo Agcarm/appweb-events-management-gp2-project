@@ -18,7 +18,7 @@ public class budget {
     @Column(name = "budgetId")
     private Long id;
 
-    @NotBlank
+    @NotBlank(message = "title is obligatory")
     @Column(name = "title", nullable = false)
     private String title;
 
@@ -42,11 +42,9 @@ public class budget {
         this.budgetEvent = budgetEvent;
     }
 
-    public budget(@NotBlank String title, @DecimalMin("0.0") double estimatedAmount,
-            @DecimalMin("0.0") double actualAmount) {
+    public budget(@NotBlank String title, @DecimalMin("0.0") double estimatedAmount, event budgetEvent) {
         this.title = title;
         this.estimatedAmount = estimatedAmount;
-        this.actualAmount = actualAmount;
+        this.budgetEvent = budgetEvent;
     }
-    
 }

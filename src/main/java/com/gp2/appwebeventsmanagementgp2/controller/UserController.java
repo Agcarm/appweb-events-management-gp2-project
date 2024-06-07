@@ -1,7 +1,6 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
 import java.security.Principal;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +14,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.dto.UserDto;
+import com.gp2.appwebeventsmanagementgp2.models.User;
 import com.gp2.appwebeventsmanagementgp2.services.EventService;
 import com.gp2.appwebeventsmanagementgp2.services.UserService;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
@@ -61,14 +61,6 @@ public class UserController {
             return "register"; // Return registration form with error
         }
 
-        try {
-            userService.save(userDto);
-            model.addAttribute("message", "Registered Successfully! Now Login!");
-        } catch (Exception e) {
-            // Handle any potential exceptions during user saving
-            model.addAttribute("message", "Registration failed! Please try again.");
-        }
-
         if (userDto.getFullname() == null || userDto.getFullname().isEmpty()) {
             model.addAttribute("message", "Fullname cannot be empty");
             return "register"; // Return registration form with error
@@ -82,24 +74,16 @@ public class UserController {
             model.addAttribute("message", "Registered Successfully! Now Login!");
         } catch (Exception e) {
             // Handle any potential exceptions during user saving
-            model.addAttribute("message", "Registration Successfully! Now Login!");
+            model.addAttribute("message", "Registration failed! Please try again.");
         }
 
         return "register";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "login";
-    }
-
-    // @GetMapping("user-page")
-    // public String userPage (Model model, Principal principal) {
-    // UserDetails userDetails =
-    // userDetailsService.loadUserByUsername(principal.getName());
-    // model.addAttribute("user", userDetails);
-    // return "user";
-    // }
+	@GetMapping({"/login",""})
+	public String login() {
+		return "login";
+	}
 
     @GetMapping("admin-page")
     public <taService> String adminPage(Model model, Principal principal) {

@@ -93,6 +93,10 @@ function displayPages(pageNo, TotalperPage) {
                 totalPagesEvent = data.totalPages
                 printPageNumber(currentPageEvent,totalPagesEvent);
                 data.content.forEach((element, index) => {
+                    let paid = 'no';
+                    if (element.paidEvent==true) {
+                        paid = 'yes';
+                    }
                     if (index===0) {
                         activeTable.querySelector('tbody').innerHTML += `
                         <tr class="table-primary selected">
@@ -102,11 +106,12 @@ function displayPages(pageNo, TotalperPage) {
                             </td>
                             <td>`+element.name+`</td>
                             <td>`+element.eventType.name+`</td>
-                            <td>`+element.eventVenue.name+`</td>
+                            <td>`+paid+`</td>
                             <td>`+element.status+`</td>
-                            <td>`+element.startDate+`</td>
                             <td>`+element.estimatedAttendees+`</td>
                             <td>`+element.dateModified+`</td>
+                            <td><a href=""><img src="/images/EventTabIcons/modify.svg"></a></td>
+                            <td><a href="/events/`+element.id+`/delete"><img src="/images/EventTabIcons/trash.svg"></a></td>
                         </tr>
                         `
                         selectedRow = activeTable.querySelector('tbody tr');
@@ -118,13 +123,14 @@ function displayPages(pageNo, TotalperPage) {
                                 <label for="row-1"></label>
                                 <input type="radio" name="row-1" title="selectRow">
                             </td>
-                            <td>`+element.name+`</td>
+                            <td><strong>`+element.name+`</strong></td>
                             <td>`+element.eventType.name+`</td>
-                            <td>`+element.eventVenue.name+`</td>
+                            <td>`+paid+`</td>
                             <td>`+element.status+`</td>
-                            <td>`+element.startDate+`</td>
                             <td>`+element.estimatedAttendees+`</td>
                             <td>`+element.dateModified+`</td>
+                            <td><a href=""><img src="/images/EventTabIcons/modify.svg"></a></td>
+                            <td><a href="/events/`+element.id+`/delete"><img src="/images/EventTabIcons/trash.svg"></a></td>
                         </tr>
                         `
                     }
@@ -188,6 +194,7 @@ var selectedRow;
 var checkboxes;
 var rows;
 const description = document.querySelector('.info');
+const cardSide = document.querySelector('.cardSide');
 
 // Function to select a row
 function SelectCheckbox() {
@@ -223,6 +230,7 @@ function remakeSelected() {
 
 // Function to retrieve the first cell value of the selected row
 function fnselect(row) {
+    cardSide.style.display = "flex";
     let cells = row.querySelectorAll('td');
     rowName = cells[1].textContent;
     fetch("http://localhost:8080/eventRest/"+rowName)

@@ -4,56 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" th:href="@{/css/navStyle.css}">
-    <link rel="stylesheet" th:href="@{css/topBar.css}">
+    <link rel="stylesheet" th:href="@{/css/topBar.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
     <link rel="stylesheet" th:href="@{/css/eventTab.css}">
     <link rel="stylesheet" th:href="@{/css/listStyle.css}">
-    <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
-    <link rel="stylesheet" th:href="@{/css/CEF.css}">
     <title>Events EMS</title>
 </head>
 <body>
     <div th:replace="~{navigation :: navigation}"></div>
-    <div class="container">
-        <div class="main">
-            <div class="topbar" th:replace="~{topBar :: topBar}">
+    <div class="container main">
+        <main>
+            <div class="topbar" th:replace="~{topBar :: topBar}"></div>
+            <div class="breadCrumb">
+                <ul>
+                    <li class="active"><a href="#">Events > </a></li>
+                    <li><a href="">Sheet</a></li>
+                </ul>
             </div>
-            <main>
-                <div class="table-responsive table-tabs">
-                    <div class="label">
-                        <h2>Events</h2>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-md-8">
-                                    <nav style="--bs-breadcrumb-divider:'>'" aria-label="breadcrumb">
-                                        <ul>
-                                            <li class="breadcrumb-item">
-                                                <a th:href= "@{/admin-page}">Home</a>
-                                            </li>
-                                            <li class="breadcrumb-item active" aria-current="page">Event
-                
-                                            </li>
-                                        </ul>
-                                    </nav>
-                            </div>
-                        </div>
-                        
-                     </div>
-                    <div class="table-lists">
-                        <button type="button" class="tab active">Event List</button>
-                        <button type="button" class="tab">Task List</button>
-                        <button type="button" class="tab">Venue List</button>
-                        <div class="line"></div>
-                        <button type="button" id="displayFormBtn" class="btn myprimarybtn">create event</button>
+            <div class="actionBtns">
+                <select class="filters" title="filters">
+                    <option selected>Select or Create Venue</option>
+                    <option>Recent</option>
+                </select>
+                <a href="" class="main-btn"><img src="/images/EventTabIcons/plus.svg" alt=""> create event</a>
+            </div>
+            <div class="container main-tables">
+                <div class="table-lists">
+                    <button type="button" class="tab active">Event List</button>
+                    <button type="button" class="tab">Task List</button>
+                    <button type="button" class="tab">Venue List</button>
+                    <div class="line"></div>
+                </div>
 
-                    </div>
+                <table th:replace="~{Lists :: eventList}" id="dataTable"></table>
+                <table th:replace="~{Lists :: taskList}" id="dataTable"></table>
+                <table th:replace="~{Lists :: venueList}" id="dataTable"></table>
 
-                    <table th:replace="~{Lists :: eventList}" id="dataTable"></table>
-                    <table th:replace="~{Lists :: taskList}" id="dataTable"></table>
-                    <table th:replace="~{Lists :: venueList}" id="dataTable"></table>
-
-                    <div class="pagination">
+                <div class="pagination">
+                    <div>
                         <div type="button" class="page" id="previous"><ion-icon name="chevron-back-outline"></ion-icon></div>
                         <span class="pageNumber">
                             <input type="text" title="currentPageNumber" name="currentPN" id="currentPN">
@@ -63,45 +51,128 @@
                         <div type="button" class="page" id="next"><ion-icon name="chevron-forward-outline"></ion-icon></div>
                     </div>
                 </div>
-            </main>
-        </div>
-        <aside class="info">
-            <div class="Details">
-                <div class="userImg">
-                    <img th:src="@{/manager-images/profile.jpg}" alt="">
-                </div>
-                <div>
-                    <span class="username">Welcome, </span>
-                    <span class="username" th:text="${user.fullname}"></span>
-                </div> 
             </div>
-            <div class="eventDetails">
-                <div class="eventTitle"></div>
-                <div class="eventImage" th:replace="~{Lists :: eventImage}"></div>
-                <div class="eventStartDate">
-                    <span class="DateTitle">Date: </span>
-                    <span class="startDate"></span>
-                </div>
-                <div class="eventEndDate">
-                    <span class="DateTitle">End Date: </span>
-                    <span class="endDate"></span>
-                </div>
-                <div class="eventVenue">
-                    <span class="venueTitle">Venue: </span>
-                    <span class="venue"></span>
-                </div>
-                <button type="button" id="editV">editVenue</button>
-                <div class="progress-bar">
-                    <div class="progress-bar-fill" ></div>
-                </div>
-                <p class="descriptionTitle">Description</p>
-                <div class="eventDescription"></div>
+        </main>
+        <aside>
+            <div class="user">
+                <img src="/manager-images/profile.jpg" alt="userProfile">
             </div>
-            <button type="button" class="btn myprimarybtn">view sheet</button>
-            <button type="button" class="btn myprimarybtn">edit event</button>
+            <div class="username">Welcome, <span>Carmela</span></div>
+            <div class="cardSide">
+                <div class="tasks">
+                    <span class="title-card">Tasks</span>
+                    <span class="circle card-task">24</span>
+                </div>
+                <div class="budget">
+                    <span class="title-card">Budget</span>
+                    <span class="card-budget">250.000 FCFA</span>
+                </div>
+                <div class="activities">
+                    <span class="title-card">Activities</span>
+                    <span class="circle card-activities">600</span>
+                </div>
+            </div>
+            <div class="eventInfo">
+                <div class="image"></div>
+                <div class="info1">
+                    <div class="titleInfo">
+                        <p>Mountain climbing</p>
+                        <a href="" title="downlaod sheet"><img src="/images/EventTabIcons/download.svg" alt=""></a>
+                    </div>
+                    <a href="" class="event-card-info venue" title="venue">
+                        <img src="/images/EventTabIcons/venue.svg" alt="">
+                        <div>
+                            <h6>Venue</h6>
+                            <p>Acacia</p>
+                            <p class="break">RFRQ+CCQ, Yaoundé,Cameroon</p>
+                        </div>
+                        <div class="separator"></div>
+                        <div>
+                            <h6>Latitude</h6>
+                            <p class="break">12.565463232354</p>
+                        </div>
+                        <div class="separator"></div>
+                        <div>
+                            <h6>Longitude</h6>
+                            <p class="break">45.045859632451</p>
+                        </div>
+                    </a>
+                    <div class="event-card-info dates">
+                        <a href="" class="Date" title="startDate">
+                            <img src="/images/EventTabIcons/start.svg" alt="">
+                            <div>
+                                <h6>Venue</h6>
+                                <p>Acacia</p>
+                                <p>RFRQ+CCQ, Yaoundé,Cameroon</p>
+                            </div>
+                        </a>
+                        <a href="" class="Date" title="endDate">
+                            <img src="/images/EventTabIcons/end.svg" alt="">
+                            <div>
+                                <h6>Venue</h6>
+                                <p>Acacia</p>
+                                <p>RFRQ+CCQ, Yaoundé,Cameroon</p>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="info2">
+                    <div class="taskInfo">
+                        <p>Tasks</p>
+                        <div class="progression">
+                            <div class="progressBar"></div>
+                        </div>
+                        <p>30%</p>
+                    </div>
+                    <hr>
+                    <a href="" class="taskCard">
+                        <h6 class="taskTitle">Cleaning Room306</h6>
+                        <div class="taskBody">
+                            <img src="" alt="">
+                            <div class="assignee">
+                                <p>John Doe</p>
+                                <p>Junior Enterprise</p>
+                            </div>
+                            <div>
+                                <p>Before 12/12/2021</p>
+                                <p class="status">Ongoing</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="" class="taskCard">
+                        <h6 class="taskTitle">Cleaning Room306</h6>
+                        <div class="taskBody">
+                            <img src="" alt="">
+                            <div class="assignee">
+                                <p>John Doe</p>
+                                <p>Junior Enterprise</p>
+                            </div>
+                            <div>
+                                <p>Before 12/12/2021</p>
+                                <p class="status">Ongoing</p>
+                            </div>
+                        </div>
+                    </a>
+                    <a href="" class="taskCard">
+                        <h6 class="taskTitle">Cleaning Room306</h6>
+                        <div class="taskBody">
+                            <img src="" alt="">
+                            <div class="assignee">
+                                <p>John Doe</p>
+                                <p>Junior Enterprise</p>
+                            </div>
+                            <div>
+                                <p>Before 12/12/2021</p>
+                                <p class="status">Ongoing</p>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="sheet">
+                <a href="">view sheet</a>
+            </div>
         </aside>
-    </div>
-    <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
     </div>
     <script th:src="@{/js/eventTab.js}"></script>
     <script th:src="@{/js/nav.js}"></script>

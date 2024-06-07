@@ -11,7 +11,7 @@ public interface ActivityService {
     public activity findById(Long activityId);
     public activity save(ActivityDto activityDto);
     public activity update(Long activityId, ActivityDto activityDto);
-    public activity delete(Long activityId);
+    public void delete(Long activityId);
 
     public activity findByName(String name);
     public activity saveParticipants(Long activityId, List<contact> participants);

@@ -12,8 +12,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -77,7 +77,7 @@ public class eventRestController {
         return  eService.updateEvent(id, updatedEvent);
     }
     
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public String postMethodName(@PathVariable("id") Long id) {
         eService.deleteEvent(id);
         return "successful";
