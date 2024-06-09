@@ -1,6 +1,7 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
 import java.net.URI;
+import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDateTime;
 
@@ -99,9 +100,26 @@ public class eventRestController {
         return prog; // Redirect to the contact list page
     }
 
-    @GetMapping("/hello")
-    public String hello(){
-        System.out.println("hello");
-        return "hello";
+
+    @GetMapping("/actualattendees")
+    public List<Integer> getActual() {
+        List<Integer> listActual = new ArrayList<>();
+        
+        for (event eve : eService.findAll()) {
+            listActual.add(eve.getActualAttendees());
+            
+        }
+        return listActual;
+    }
+    
+    @GetMapping("/estimatedattendees")
+    public List<Integer> getEstimated() {
+        List<Integer> listActual = new ArrayList<>();
+        
+        for (event eve : eService.findAll()) {
+            listActual.add(eve.getEstimatedAttendees());
+            
+        }
+        return listActual;
     }
 }

@@ -20,34 +20,37 @@ import com.gp2.appwebeventsmanagementgp2.services.UserService;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
 import com.gp2.appwebeventsmanagementgp2.services.typeService;
 import com.gp2.appwebeventsmanagementgp2.services.venueService;
+import com.gp2.appwebeventsmanagementgp2.services.TaskService;
 
 import jakarta.validation.Valid;
-
 
 @Controller
 public class UserController {
 
-	@Autowired
-	UserDetailsService userDetailsService;
-	@Autowired
-	EventService eService;
-	@Autowired
+    @Autowired
+    UserDetailsService userDetailsService;
+    @Autowired
+    EventService eService;
+    @Autowired
     venueService vService;
     @Autowired
     typeService tService;
 
-	@Autowired
-	private UserService userService;
+    @Autowired
+    TaskService taService;
+
+    @Autowired
+    private UserService userService;
 
     @Autowired
     private contactService cService;
 
-	@GetMapping("/registration")
-	public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
-		return "register";
-	}
+    @GetMapping("/registration")
+    public String getRegistrationPage(@ModelAttribute("user") UserDto userDto) {
+        return "register";
+    }
 
-	@PostMapping("/registration")
+    @PostMapping("/registration")
     public String saveUser(@Valid @ModelAttribute("user") UserDto userDto, Model model) {
         // Password length validation
         if (userDto.getPassword() == null || userDto.getPassword().isEmpty()) {
@@ -82,22 +85,27 @@ public class UserController {
 		return "login";
 	}
 
-	@GetMapping("admin-page")
-	public String adminPage (Model model, Principal principal) {
-		UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
+    @GetMapping("admin-page")
+    public <taService> String adminPage(Model model, Principal principal) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
         EnvironmentVariables.setUser(userDetails);
-		model.addAttribute("user", userDetails);
-		model.addAttribute("eventList", eService.findAll());
-		model.addAttribute("venueList", vService.findAll());
-        model.addAttribute("typeList", tService.listAll());
-		model.addAttribute("contactList", cService.getAllcontacts());
-		return "index";
-	}
+        model.addAttribute("user", userDetails);
+        model.addAttribute("eventList", eService.findAllSort("dateModified"));
+        model.addAttribute("venueList", vService.findAll());
 
+        model.addAttribute("taskList", taService.findAll());
+
+        model.addAttribute("typeList", tService.listAll());
+        model.addAttribute("contactList", cService.getAllcontacts());
+
+        model.addAttribute("paidEventCount", eService.countPaidEvents());
+        model.addAttribute("totalEvents", eService.findAll().size());
+        return "index";
+    }
 
     @GetMapping("/managerImages/{name}")
-    public String managerImages(@PathVariable("name") String name){
-        return EnvironmentVariables.getEventImages()+"/"+name;
+    public String managerImages(@PathVariable("name") String name) {
+        return EnvironmentVariables.getEventImages() + "/" + name;
     }
 
 }

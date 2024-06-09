@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.stream.StreamSupport;
 import java.util.stream.Collectors;
 
-
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -16,11 +15,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.config.Task;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.dto.DayPilotEventDto;
 import com.gp2.appwebeventsmanagementgp2.dto.EventDto;
 import com.gp2.appwebeventsmanagementgp2.models.event;
+import com.gp2.appwebeventsmanagementgp2.models.expense;
 import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.eventRepository;
 
@@ -93,6 +94,11 @@ public class EventServiceImpl implements EventService {
 	}
 
 	@Override
+	public List<event> findAllSort(String field) {
+        return eventRepository.findAll(Sort.by(Sort.Direction.DESC, field));
+    }
+
+	@Override
 	public Page<event> findAllPages(int offset, int pageSize) {
 		return eventRepository.findAll(PageRequest.of(offset, pageSize));
 	}
@@ -100,7 +106,8 @@ public class EventServiceImpl implements EventService {
 	@Override
 	public Iterable<DayPilotEventDto> findAllByStartDateBetween(LocalDateTime start, LocalDateTime end) {
 		Iterable<event> MyEvents = eventRepository.findAllByStartDateBetween(start, end);
-		return StreamSupport.stream(MyEvents.spliterator(), false).map(event::toDayPilotEvent).collect(Collectors.toList());
+		return StreamSupport.stream(MyEvents.spliterator(), false).map(event::toDayPilotEvent)
+				.collect(Collectors.toList());
 	}
 
 	public double calculateProgression(Long Id) {
@@ -109,7 +116,7 @@ public class EventServiceImpl implements EventService {
 		System.out.println(tasks);
 		int totalTasks = tasks.size();
 		int accomplishedTasks = 0;
-		
+
 		for (task evenTask : tasks) {
 			if (evenTask.getStatus().equals("Completed")) {
 				accomplishedTasks++;
@@ -117,12 +124,16 @@ public class EventServiceImpl implements EventService {
 		}
 
 		// Calculate the progression as a percentage
-		if(totalTasks==0){
+		if (totalTasks == 0) {
 			return 0;
 		}
-		
+
 		double progression = (double) accomplishedTasks / totalTasks * 100;
 		return progression;
+	}
+
+	public long countPaidEvents() {
+		return eventRepository.countByPaidEventTrue();
 	}
 
 }
