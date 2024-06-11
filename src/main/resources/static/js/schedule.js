@@ -62,6 +62,7 @@ calendar.onBeforeEventRender = (args) => {
 
     // Find the cell corresponding to the first day of the event
     var cell = calendar.cells.find(function(cell) {
+        console.log(cell);
         return cell.start.getTime() === firstDay.getTime();
     });
     

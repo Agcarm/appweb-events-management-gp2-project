@@ -1,6 +1,7 @@
 /*JUST FOR TESTING AFTER REMOVE*/
-.main{
+div.container.main{
     display: flex;
+    padding: 0;
 }
 main{
     width: 65%;
