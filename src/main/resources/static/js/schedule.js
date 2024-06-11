@@ -56,25 +56,26 @@ calendar.onBeforeEventRender = (args) => {
       }
     }
 
-    // Find the first day of the event
-    var firstDay = new Date(args.data.start);
-    firstDay.setHours(0, 0, 0, 0);
+    // // Extract the start date from the event data
+    // var startDate = new Date(args.data.start);
 
-    // Find the cell corresponding to the first day of the event
-    var cell = calendar.cells.find(function(cell) {
-        console.log(cell);
-        return cell.start.getTime() === firstDay.getTime();
-    });
-    
-    if (cell) {
-        // Find all events in the cell
-        var eventsInCell = calendar.events.forCell(cell);
+    // // Find the first day of the event
+    // var firstDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
 
-        // If there are more than 1 event in the cell, hide the event
-        if (eventsInCell.length > 1) {
-            args.data.cssClass = "hidden-event";
-        }
-    }
+    // // Find the cell corresponding to the first day of the event
+    // var cell = calendar.cells.find(function(cell) {
+    //     return cell.start.getTime() === firstDay.getTime();
+    // });
+
+    // if (cell) {
+    //     // Find all events in the cell
+    //     var eventsInCell = calendar.events.forCell(cell);
+
+    //     // If there are more than 1 event in the cell, hide the event
+    //     if (eventsInCell.length > 1) {
+    //         args.data.cssClass = "hidden-event";
+    //     }
+    // }
     // ...
 };
 

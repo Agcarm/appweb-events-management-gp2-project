@@ -95,7 +95,7 @@ div.month_default_event_inner{
     border-radius: 50px;
     font-size: 10px;
     margin: 10px 10px 0 10px;
-    height: 10px;
+    height: 5px;
     color: var(--white);
 }
 div.month_default_event_continueleft div.month_default_event_inner{
@@ -228,7 +228,7 @@ div.month_default_event_inner{
 
 .eventTitle{
     position: absolute;
-    top: -130%;
+    top: -190%;
     width: 100%;
     color: #000;
     white-space: nowrap;
