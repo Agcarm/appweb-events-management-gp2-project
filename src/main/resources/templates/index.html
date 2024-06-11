@@ -7,7 +7,7 @@
     <title>Dashboard EMS</title>
     <!-- ======= Styles ====== -->
     <link rel="stylesheet" th:href="@{css/dashboard.css}">
-    <link rel="stylesheet" th:href="@{/css/topBar.css}">
+    <link rel="stylesheet" th:href="@{css/topBar.css}">
     <link rel="stylesheet" th:href="@{css/navStyle.css}">
     <link rel="stylesheet" th:href="@{css/styles.css}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
@@ -18,246 +18,127 @@
     <!-- =============== Navigation ================ -->
     <div class="navigation" th:replace="~{navigation :: navigation}">
     </div>
-    <div class="container">
-        <!-- ========================= Main ==================== -->
-        <div class="main">
-            <div class="topbar" th:replace="~{topBar :: topBar}">
-        </div>
+    <div class="container main">    
+        <div class="topbar" th:replace="~{topBar :: topBar}"></div>
+        <h1>Dashboard</h1>
+        <div class="container content">
+            <main class="left">
 
-            <!-- ======================= Cards ================== -->
-            <div class="cardBox">
-                <div class="card">
-                    <div>
-                        <div class="numbers">1,504</div>
-                        <div class="cardName">Attendees</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="eye-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">80</div>
-                        <div class="cardName">Sales</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="cart-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">284</div>
-                        <div class="cardName">School Population</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="chatbubbles-outline"></ion-icon>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <div>
-                        <div class="numbers">$7,842</div>
-                        <div class="cardName">Budget</div>
-                    </div>
-
-                    <div class="iconBx">
-                        <ion-icon name="cash-outline"></ion-icon>
-                    </div>
-                </div>
-            </div>
-
-            <!-- ================ Order Details List ================= -->
-            <div class="details">
-                <div class="recentOrders">
-                    <div class="cardHeader">
-                        <h2>Some Events</h2>
-                        <div class="carHeaderleft">
-                            <a href="#"><img src="./assets/imgs/icons8_downloading_updates_24px.png" alt=""
-                                    style="scale: 1.45; margin-right: 10px; margin-top: 2px;"></a>
-                            <a href="#" id="displayFormBtn" class="btn">Create an Event</a>
-                            <a href="#" id="displayFormBtnTask" class="btn">Go to Task</a>
-                            <button id="downloadBtn" class="btn" style="border: none; cursor: pointer;">PDF Downlaod</button>
-                            <div class="container">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                            <nav style="--bs-breadcrumb-divider:'>'" aria-label="breadcrumb">
-                                                <ol class="breadcrumb">
-                                                <li class="breadcrumb-item active" aria-current="page">home
-                    
-                                                </li>
-                                            
-                                            </ol> 
-                                            </nav>
-                                    </div>
-                                </div>
-                             </div>
-
+                
+                <div class="cardzBox">
+                    <div class="cardz">
+                        <div>
+                            <div class="numbers" th:text="${totalEvents}"></div>
+                            <div class="cardName">Events</div>
+                        </div>
+    
+                        <div class="iconBx">
+                            <ion-icon name="calendar-number-outline"></ion-icon>
                         </div>
                     </div>
-
-                    <table id="myTable">
-                        <thead>
+                    <div class="cardz">
+                        <div>
+                            <div class="numbers">1,504</div>
+                            <div class="cardName">Budget</div>
+                        </div>
+    
+                        <div class="iconBx">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </div>
+                    </div>
+    
+                    
+    
+                    <div class="cardz">
+                        <div>
+                            <div class="numbers" th:text="${paidEventCount}"></div>
+                            <div class="cardName">Attendees</div>
+                        </div>
+    
+                        <div class="iconBx">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </div>
+                    </div>
+                </div>    
+                <div class="photo"></div>
+                <div class="container table">
+                    <div class="buttonToAdd"><button class="btn-table myprimarybtn">add event</button></div>
+                    <table class="tabTable active" id="eventRest" th:fragment="eventList">
+                        <thead class="tablehead">
                             <tr>
-                                <td>Name</td>
-                                <td>Price</td>
-                                <td>Payment</td>
-                                <td>Status</td>
+                                <th></th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Status</th>
+                                <th>Date Modified</th>
+                                
                             </tr>
                         </thead>
+                        <tbody class="table-group-divider">
+                            <tr th:each="event, stat : ${eventList}" th:if="${stat.count <= 4}" class="table-primary">
+                                <td scope="row" class="check">
+                                    <label for="row-1"></label>
+                                    <input type="radio" name="radiobtn" id="1">
+                                </td>
+                                <td th:text="${event.getName()}"></td>
+                                <td th:text="${event.getEventType().getName()}"></td>
+                                <td th:text="${event.getStatus()}"></td>
+                                <td th:text="${event.getDateModified()}"></td>
+                                <td>
+                                    <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                        <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </td>
 
-                        <tbody>
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Star Refrigerator</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status delivered">Delivered</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Dell Laptop</td>
-                                <td>$110</td>
-                                <td>Due</td>
-                                <td><span class="status pending">Pending</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Apple Watch</td>
-                                <td>$1200</td>
-                                <td>Paid</td>
-                                <td><span class="status return">Return</span></td>
-                            </tr>
-
-                            <tr>
-                                <td>Addidas Shoes</td>
-                                <td>$620</td>
-                                <td>Due</td>
-                                <td><span class="status inProgress">In Progress</span></td>
-                            </tr>
+                                
                         </tbody>
                     </table>
                 </div>
+            </main>
+            <aside class="side">
+                <div class="tasksList">
+                    <div class="buttonToAddt"><h1>Some Tasks</h1><button class="btn-table myprimarybtn">add Task</button></div>
+                    <table class="tabTable active" id="taskRest" th:fragment="taskList">
+                        <thead class="tablehead">
+                            <tr>
 
-                <!-- ================= New Customers ================ -->
-                <div class="recentCustomers">
-                    <div class="cardHeader">
-                        <h2>Progression Bar</h2>
-                    </div>
+                                <th>Name</th>
+                                <th>Status</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            <tr th:each="task, stat : ${taskList}" th:if="${stat.count <= 4}" class="table-primary">
+                               
+                                <td th:text="${task.getTitle()}"></td>
+                                <td th:text="${task.getStatus()}"></td>
+                                <td>
+                                    <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                        <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    </svg>
+                                </td>
 
-                    <table>
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer01.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>David <br> <span>Italy</span></h4>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td width="60px">
-                                <div class="imgBx"><img src="assets/imgs/customer02.jpg" alt=""></div>
-                            </td>
-                            <td>
-                                <h4>Amit <br> <span>India</span></h4>
-                            </td>
-                        </tr>
+                                
+                        </tbody>
                     </table>
                 </div>
-            </div>
-        </div>
+                <div class="graphics">
+                    <div>
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
+            </aside>
+  
     </div>
+        <!-- ========================= Main ==================== -->
+       
 
-    <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
+    <!-- <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
     </div>
-    <div id="overlayTask" class="overlayTask"  th:replace="~{task :: task}"></div>
-
+    <div id="overlayTask" class="overlayTask"  th:replace="~{task :: task}"></div> -->
+    
     <!-- =========== Scripts =========  -->
     <script src="../js/nav.js"></script>
     <!-- ====== ionicons ======= -->
@@ -279,6 +160,107 @@
             })
         }
         </script>
+     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+     <script th:inline="javascript">
+         /*<![CDATA[*/
+         var ctx = document.getElementById('myChart').getContext('2d');
+         var eventList = /*[[${eventList}]]*/ 'default';
+         var labels = eventList.map(function(e) { return e.id; });
+         var estimatedData = eventList.map(function(e) { return e.estimatedAttendees; });
+         var actualData = eventList.map(function(e) { return e.actualAttendees; });
+         var hover = eventList.map(function(e) { return e.name; });
+         
+     
+         var myChart = new Chart(ctx, {
+             type: 'line',
+             data: {
+                 labels: labels,
+                 datasets: [{
+                     label: 'Estimated Attendees',
+                     data: estimatedData,
+                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                     borderColor: 'rgba(75, 192, 192, 1)',
+                     borderWidth: 1
+                 },
+                 {
+                     label: 'Actual Attendees',
+                     data: actualData,
+                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                     borderColor: 'rgba(255, 99, 132, 1)',
+                     borderWidth: 1
+                 }]
+             },
+             options: {
+                 scales: {
+                     y: {
+                         beginAtZero: true
+                     }
+                 },
+// 
+tooltips: {
+    callbacks: {
+        title: function(tooltipItem, data) {
+            var event = eventList[tooltipItem[0].index];
+            return event.name;
+        },
+        label: function(tooltipItem, data) {
+            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+            return 'Value: ' + value;
+        }
+    }
+}
+
+
+             }
+         });
+         /*]]>*/
+     </script>
+     <script th:inline="javascript">
+        /*<![CDATA[*/
+        // Get all radio buttons
+        var radios = document.querySelectorAll('input[type=radio]');
+    
+        // Add a 'change' event listener to each radio button
+        for (var i = 0; i < radios.length; i++) {
+            radios[i].addEventListener('change', function() {
+                // Get the selected event
+                var event = eventList.find(function(e) { return e.id == this.value; });
+    
+                // Update the 'numbers' div with the estimated attendees of the selected event
+                document.querySelector('.cardz .numbers').textContent = event.estimatedAttendees;
+    
+                // Get the task table body
+                var tbody = document.querySelector('#taskRest tbody');
+    
+                // Clear the current tasks
+                tbody.innerHTML = '';
+    
+                // Add a new row for each task of the selected event
+                for (var j = 0; j < event.tasks.length; j++) {
+                    var task = event.tasks[j];
+    
+                    // Create a new row and cells
+                    var row = document.createElement('tr');
+                    var nameCell = document.createElement('td');
+                    var statusCell = document.createElement('td');
+    
+                    // Set the text of the cells
+                    nameCell.textContent = task.title;
+                    statusCell.textContent = task.status;
+    
+                    // Add the cells to the row
+                    row.appendChild(nameCell);
+                    row.appendChild(statusCell);
+    
+                    // Add the row to the table body
+                    tbody.appendChild(row);
+                }
+            });
+        }
+        /*]]>*/
+    </script>
+       
+        
 </body>
 
 </html>
