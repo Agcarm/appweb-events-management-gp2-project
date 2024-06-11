@@ -23,7 +23,7 @@
             </div>
             <div class="actionBtns">
                 <select class="filters" title="filters">
-                    <option selected>Select or Create Venue</option>
+                    <option selected>Date modified</option>
                     <option>Recent</option>
                 </select>
                 <a href="" class="main-btn"><img src="/images/EventTabIcons/plus.svg" alt=""> create event</a>
@@ -36,9 +36,11 @@
                     <div class="line"></div>
                 </div>
 
-                <table th:replace="~{Lists :: eventList}" id="dataTable"></table>
-                <table th:replace="~{Lists :: taskList}" id="dataTable"></table>
-                <table th:replace="~{Lists :: venueList}" id="dataTable"></table>
+                <div class="tableContainer">
+                    <table th:replace="~{Lists :: eventList}" id="dataTable"></table>
+                    <table th:replace="~{Lists :: taskList}" id="dataTable"></table>
+                    <table th:replace="~{Lists :: venueList}" id="dataTable"></table>
+                </div>
 
                 <div class="pagination">
                     <div>
@@ -57,11 +59,11 @@
             <div class="user">
                 <img src="/manager-images/profile.jpg" alt="userProfile">
             </div>
-            <div class="username">Welcome, <span>Carmela</span></div>
+            <div class="username">Welcome, <span th:text="${user.fullname}"></span></div>
             <div class="cardSide">
                 <div class="tasks">
                     <span class="title-card">Tasks</span>
-                    <span class="circle card-task">24</span>
+                    <span class="circle card-task"></span>
                 </div>
                 <div class="budget">
                     <span class="title-card">Budget</span>
@@ -69,114 +71,116 @@
                 </div>
                 <div class="activities">
                     <span class="title-card">Activities</span>
-                    <span class="circle card-activities">600</span>
+                    <span class="circle card-activities"></span>
                 </div>
             </div>
             <div class="eventInfo">
                 <div class="image"></div>
                 <div class="info1">
                     <div class="titleInfo">
-                        <p>Mountain climbing</p>
+                        <p class="titleInfo-title"></p>
                         <a href="" title="downlaod sheet"><img src="/images/EventTabIcons/download.svg" alt=""></a>
                     </div>
                     <a href="" class="event-card-info venue" title="venue">
                         <img src="/images/EventTabIcons/venue.svg" alt="">
                         <div>
                             <h6>Venue</h6>
-                            <p>Acacia</p>
-                            <p class="break">RFRQ+CCQ, Yaoundé,Cameroon</p>
+                            <p class="break venue-name"></p>
+                            <p class="break venue-address"></p>
                         </div>
                         <div class="separator"></div>
                         <div>
                             <h6>Latitude</h6>
-                            <p class="break">12.565463232354</p>
+                            <p class="break latitude"></p>
                         </div>
                         <div class="separator"></div>
                         <div>
                             <h6>Longitude</h6>
-                            <p class="break">45.045859632451</p>
+                            <p class="break longitude"></p>
                         </div>
                     </a>
-                    <div class="event-card-info dates">
-                        <a href="" class="Date" title="startDate">
+                    <div class="dates">
+                        <a href="" class="event-card-info Date" title="startDate">
                             <img src="/images/EventTabIcons/start.svg" alt="">
                             <div>
-                                <h6>Venue</h6>
-                                <p>Acacia</p>
-                                <p>RFRQ+CCQ, Yaoundé,Cameroon</p>
+                                <h6>Start Date</h6>
+                                <p>19/05/2024 at 21:27</p>
                             </div>
                         </a>
-                        <a href="" class="Date" title="endDate">
+                        <a href="" class="event-card-info Date"title="endDate">
                             <img src="/images/EventTabIcons/end.svg" alt="">
                             <div>
-                                <h6>Venue</h6>
-                                <p>Acacia</p>
-                                <p>RFRQ+CCQ, Yaoundé,Cameroon</p>
+                                <h6>End Date</h6>
+                                <p>19/05/2024 at 21:27</p>
                             </div>
                         </a>
                     </div>
                 </div>
-                <div class="info2">
+                <div class="info1">
                     <div class="taskInfo">
-                        <p>Tasks</p>
+                        <p class="titleInfo-title">Tasks</p>
                         <div class="progression">
                             <div class="progressBar"></div>
                         </div>
-                        <p>30%</p>
+                        <p class="percentage"></p>
                     </div>
                     <hr>
-                    <a href="" class="taskCard">
-                        <h6 class="taskTitle">Cleaning Room306</h6>
-                        <div class="taskBody">
-                            <img src="" alt="">
-                            <div class="assignee">
-                                <p>John Doe</p>
-                                <p>Junior Enterprise</p>
+                    <div class="taskCards">
+                        <a href="" class="taskCard">
+                            <h6 class="taskTitle">Cleaning Room306</h6>
+                            <div class="taskBody">
+                                <img src="/images/EventTabIcons/Club.svg" alt="">
+                                <div class="assignee">
+                                    <p>John Doe</p>
+                                    <p>Junior Enterprise</p>
+                                </div>
+                                <div>
+                                    <p>Before 12/12/2021</p>
+                                    <p class="status">Ongoing</p>
+                                </div>
                             </div>
-                            <div>
-                                <p>Before 12/12/2021</p>
-                                <p class="status">Ongoing</p>
+                        </a>
+                        <a href="" class="taskCard">
+                            <h6 class="taskTitle">Cleaning Room306</h6>
+                            <div class="taskBody">
+                                <img src="/images/EventTabIcons/JuniorEnterprise.svg" alt="">
+                                <div class="assignee">
+                                    <p>John Doe</p>
+                                    <p>Junior Enterprise</p>
+                                </div>
+                                <div>
+                                    <p>Before 12/12/2021</p>
+                                    <p class="status">Ongoing</p>
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                    <a href="" class="taskCard">
-                        <h6 class="taskTitle">Cleaning Room306</h6>
-                        <div class="taskBody">
-                            <img src="" alt="">
-                            <div class="assignee">
-                                <p>John Doe</p>
-                                <p>Junior Enterprise</p>
+                        </a>
+                        <a href="" class="taskCard">
+                            <h6 class="taskTitle">Cleaning Room306</h6>
+                            <div class="taskBody">
+                                <img src="/images/EventTabIcons/Association.svg" alt="">
+                                <div class="assignee">
+                                    <p>John Doe</p>
+                                    <p>Junior Enterprise</p>
+                                </div>
+                                <div>
+                                    <p>Before 12/12/2021</p>
+                                    <p class="status">Ongoing</p>
+                                </div>
                             </div>
-                            <div>
-                                <p>Before 12/12/2021</p>
-                                <p class="status">Ongoing</p>
-                            </div>
-                        </div>
-                    </a>
-                    <a href="" class="taskCard">
-                        <h6 class="taskTitle">Cleaning Room306</h6>
-                        <div class="taskBody">
-                            <img src="" alt="">
-                            <div class="assignee">
-                                <p>John Doe</p>
-                                <p>Junior Enterprise</p>
-                            </div>
-                            <div>
-                                <p>Before 12/12/2021</p>
-                                <p class="status">Ongoing</p>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="sheet">
-                <a href="">view sheet</a>
+                <a href="" class="secondaryBtn">view sheet</a>
             </div>
         </aside>
     </div>
+
     <script th:src="@{/js/eventTab.js}"></script>
     <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/lists.js}"></script>
+    
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
     <script th:src="@{/js/searchbar.js}"></script>

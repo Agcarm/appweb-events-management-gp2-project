@@ -8,6 +8,7 @@
   padding: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  line-height: 1.4;
 }
 
 :root {
@@ -24,6 +25,10 @@
 
 a{
   text-decoration: none;
+}
+
+hr{
+  margin: 15px 0;
 }
 
 body {

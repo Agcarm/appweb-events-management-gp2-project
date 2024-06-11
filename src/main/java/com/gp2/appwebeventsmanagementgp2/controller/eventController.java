@@ -96,7 +96,8 @@ public class eventController {
     
 
     @GetMapping("/calendar")
-    public String ScheduleTab() {
+    public String ScheduleTab(Model model) {
+		model.addAttribute("user",EnvironmentVariables.getUser());
         return "schedule";
     }
 }

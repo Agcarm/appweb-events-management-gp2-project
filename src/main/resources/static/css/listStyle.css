@@ -23,7 +23,7 @@ table{
         height: 18px;
     }
 }
-.hidden-head{
+th.hidden-head{
     color: var(--white);
 }
 .tablehead{

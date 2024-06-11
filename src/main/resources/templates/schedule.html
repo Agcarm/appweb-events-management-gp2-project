@@ -3,38 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" th:href="@{/css/schedule.css}">
     <link rel="stylesheet" th:href="@{/css/navStyle.css}">
-    <link rel="stylesheet" th:href="@{/css/listStyle.css}">
     <link rel="stylesheet" th:href="@{/css/styles.css}">
-    <link rel="stylesheet" th:href="@{/css/dashboard.css}">
-    <link rel="stylesheet" th:href="@{/css/CEF.css}">
+    <link rel="stylesheet" th:href="@{/css/topBar.css}">
     <link rel="stylesheet" th:href="@{/css/schedule.css}">
     <title>Document</title>
 </head>
 <body>
     <div th:replace="~{navigation :: navigation}"></div>
-    <div class="container">
-        <div class="main">
-            <div class="scheduleCalendar">
+    <div  class="container main">
+        <div class="topbar" th:replace="~{topBar :: topBar}"></div>
+        <div class="scheduleCalendar">
+            <div class="left">
+                <button type="button" class="create">create event</button>
                 <div id="miniCalendar"></div>
-                <div class="calendar">
-                    <!-- monthly calendar control placeholder -->
-                    <div class="calendarButton">
-                        <button type="button">Year</button>
-                        <button type="button" class="active">Month</button>
-                        <button type="button">Week</button>
-                        <button type="button">Day</button>
-                    </div>
-                    <div id="calendar"></div>
-                </div> 
+                <div id="colors"></div>
+                <div class="tasks"></div>
             </div>
+            <div class="calendar">
+                <!-- monthly calendar control placeholder -->
+                <div class="calendarButton">
+                    <button type="button">Year</button>
+                    <button type="button" class="active">Month</button>
+                    <button type="button">Week</button>
+                    <button type="button">Day</button>
+                </div>
+                <div id="calendar"></div>
+            </div> 
         </div>
-       
     </div>
 
     <!-- DayPilot library -->
     <script th:src="@{/js/daypilot/daypilot-all.min.js}"></script>
+    <script src="/js/daypilot/daypilot-all.src.js"></script>
     <script th:src="@{/js/schedule.js}"></script>
     <script th:src="@{/js/nav.js}"></script>
     <script th:src="@{/js/lists.js}"></script>

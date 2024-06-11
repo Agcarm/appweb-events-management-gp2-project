@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -89,7 +90,10 @@ public class eventRestController {
 
     @GetMapping("/loadCalendar")
     @JsonSerialize(using = LocalDateTimeSerializer.class)
-    public Iterable<DayPilotEventDto> LoadEventsToCalendar(@RequestParam("start") LocalDateTime start, @RequestParam("end") LocalDateTime end) {
+    public Iterable<DayPilotEventDto> LoadEventsToCalendar(
+        @RequestParam("start") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime start, 
+        @RequestParam("end") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime end
+    ) {
         return eService.findAllByStartDateBetween(start, end);
     }
     

@@ -1,5 +1,5 @@
 /*PAGINATION */
-var elmtperpage = 8;
+var elmtperpage = 5;
 var totalPagesTask;
 window.currentPageTask = 0;
 
@@ -232,6 +232,8 @@ function remakeSelected() {
 function fnselect(row) {
     cardSide.style.display = "flex";
     let cells = row.querySelectorAll('td');
+    let taskCards = document.querySelector(".taskCards");
+    taskCards.innerHTML = '';
     rowName = cells[1].textContent;
     fetch("http://localhost:8080/eventRest/"+rowName)
     .then((response) => {
@@ -242,13 +244,46 @@ function fnselect(row) {
         }
     })
     .then(data => {
-        description.querySelector('.eventTitle').textContent = data.name;
-        description.querySelector('.eventDescription').textContent = data.description;
-        description.querySelector('.eventImage').innerHTML = '<img src="/manager-images/'+data.imageUrl+'" alt="'+data.imageUrl+'"  height="250px">';
+        const startDate = parseLocalDateTime(data.startDate);
+        const endDate = parseLocalDateTime(data.endDate);
+
+        document.querySelector(".cardSide .circle.card-task").textContent = data.tasks.length;
+        document.querySelector(".cardSide .circle.card-activities").textContent = data.activities.length;
+        document.querySelector('.image').innerHTML = '<img src="/manager-images/'+data.imageUrl+'" alt="'+data.imageUrl+'">';
+        document.querySelector('.titleInfo-title').textContent = data.name;
+
         progression(data.id);
-        description.querySelector('.startDate').innerHTML = data.startDate;
-        description.querySelector('.endDate').innerHTML = data.endDate;
-        description.querySelector('.venue').innerHTML = data.eventVenue.name;
+        document.querySelectorAll('.dates a p')[0].innerHTML = formatDateTime(startDate);
+        document.querySelectorAll('.dates a p')[1].innerHTML = formatDateTime(endDate);
+        document.querySelector('.venue-name').textContent = data.eventVenue.name;
+        document.querySelector('.venue-address').textContent = data.eventVenue.address;
+        document.querySelector(".latitude").textContent = data.eventVenue.latitude;
+        document.querySelector(".longitude").textContent = data.eventVenue.longitude;
+
+        data.tasks.forEach(task => {
+            var classStatus = "inProgress";
+            if (task.status.toLowerCase()==="completed") {
+                classStatus = "completed";
+            } else if(task.status.toLowerCase()==="pending"){
+                classStatus = "pending";
+            }
+            taskCards.innerHTML+= `
+            <a href="" class="taskCard">
+                <h6 class="taskTitle">`+task.title+`</h6>
+                <div class="taskBody">
+                    <img src="/images/EventTabIcons/Club.svg" alt="">
+                    <div class="assignee">
+                        <p>`+task.contacts.name+`</p>
+                        <p>Junior Enterprise</p>
+                    </div>
+                    <div>
+                        <p>`+formatDate(task.deadline)+`</p>
+                        <p class="status `+classStatus+`">`+task.status+`</p>
+                    </div>
+                </div>
+            </a>
+            `;
+        });
     })
     .catch((error) => console.error("FETCH ERROR:", error));
 }
@@ -264,7 +299,35 @@ function progression(params) {
     })
 
     .then(data => {
-        description.querySelector('.progress-bar-fill').style.width=data+ "%";        
+        document.querySelector('.progressBar').style.width=data+ "%";
+        document.querySelector(".percentage").textContent = Math.ceil(parseFloat(data))+ "% done";        
     })
 
+}
+
+
+
+function formatDateTime(date) {
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0'); // Months are zero-indexed
+    const year = date.getFullYear();
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+
+    return `${day}/${month}/${year} at ${hours}:${minutes}`;
+}
+
+function parseLocalDateTime(localDateTime) {
+    // Convert the localDateTime string to a JavaScript Date object
+    return new Date(localDateTime);
+}
+
+function formatDate(inputDate) {
+    // Convert LocalDateTime to a JavaScript Date object
+    let date = new Date(inputDate);
+    
+    // Get the date part in dd/mm/yyyy format
+    let formattedDate = date.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    
+    return "Before "+formattedDate;
 }
