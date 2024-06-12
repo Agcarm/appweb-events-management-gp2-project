@@ -60,7 +60,15 @@
                         </div>
                     </div>
                 </div>    
-                <div class="photo"></div>
+                <div class="photo">
+                    <div id="slider">
+                        <div th:each="image : ${images}" class="slide">
+                            <img th:src="@{/manager-images/{image}(image=${image})}" />
+                        </div>
+                    </div>
+                </div>
+                
+                
                 <div class="container table">
                     <div class="buttonToAdd"><button class="btn-table myprimarybtn">add event</button></div>
                     <table class="tabTable active" id="eventRest" th:fragment="eventList">
@@ -258,6 +266,20 @@ tooltips: {
             });
         }
         /*]]>*/
+
+var slider = document.getElementById('slider');
+var slides = slider.getElementsByClassName('slide');
+var index = 0;
+
+function nextSlide() {
+    slides[index].classList.remove('active');
+    index = (index + 1) % slides.length;
+    slides[index].classList.add('active');
+}
+
+setInterval(nextSlide, 3000); // Change slide every 3 seconds
+
+
     </script>
        
         
