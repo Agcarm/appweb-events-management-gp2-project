@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gp2.appwebeventsmanagementgp2.configurations.EnvironmentVariables;
 import com.gp2.appwebeventsmanagementgp2.models.contact ;
 import com.gp2.appwebeventsmanagementgp2.services.contactService;
 
@@ -21,6 +22,7 @@ public class contactController {
 
     @GetMapping({"/", ""})
     public String showContactS(Model model) {
+        model.addAttribute("user",EnvironmentVariables.getUser());
         model.addAttribute("contactList",contactService.getAllcontacts());
         return "Contact";
     }
