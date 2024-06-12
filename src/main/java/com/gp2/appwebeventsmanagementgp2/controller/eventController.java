@@ -100,4 +100,24 @@ public class eventController {
 		model.addAttribute("user",EnvironmentVariables.getUser());
         return "schedule";
     }
+
+
+    @GetMapping("/eventSheet")
+    public String getEventSheet(Model model) {
+		model.addAttribute("user",EnvironmentVariables.getUser());
+        return "eventSheet";
+    }
+    
+
+    @GetMapping("/analytics")
+    public String getAnalytics(Model model) {
+		model.addAttribute("user",EnvironmentVariables.getUser());
+        return "Analytics";
+    }
+    
+    @GetMapping("/report")
+    public String getReports(Model model) {
+		model.addAttribute("user",EnvironmentVariables.getUser());
+        return "Report";
+    }
 }

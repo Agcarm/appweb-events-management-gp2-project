@@ -77,8 +77,8 @@
                         <tbody class="table-group-divider">
                             <tr th:each="event, stat : ${eventList}" th:if="${stat.count <= 4}" class="table-primary">
                                 <td scope="row" class="check">
-                                    <label for="row-1"></label>
-                                    <input type="radio" name="radiobtn" id="1">
+                                    <label for="radiobtn"></label>
+                                    <input type="radio" name="radiobtn" title="2" id="1">
                                 </td>
                                 <td th:text="${event.getName()}"></td>
                                 <td th:text="${event.getEventType().getName()}"></td>

@@ -123,7 +123,7 @@ function displayPages(pageNo, TotalperPage) {
                                 <label for="row-1"></label>
                                 <input type="radio" name="row-1" title="selectRow">
                             </td>
-                            <td><strong>`+element.name+`</strong></td>
+                            <td>`+element.name+`</td>
                             <td>`+element.eventType.name+`</td>
                             <td>`+paid+`</td>
                             <td>`+element.status+`</td>

@@ -71,6 +71,7 @@ public class UserController {
 
         try {
             userService.save(userDto);
+            EnvironmentVariables.setEmail(userDto.getEmail());
             model.addAttribute("message", "Registered Successfully! Now Login!");
         } catch (Exception e) {
             // Handle any potential exceptions during user saving

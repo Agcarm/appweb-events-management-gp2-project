@@ -55,27 +55,6 @@ calendar.onBeforeEventRender = (args) => {
       `;
       }
     }
-
-    // // Extract the start date from the event data
-    // var startDate = new Date(args.data.start);
-
-    // // Find the first day of the event
-    // var firstDay = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
-
-    // // Find the cell corresponding to the first day of the event
-    // var cell = calendar.cells.find(function(cell) {
-    //     return cell.start.getTime() === firstDay.getTime();
-    // });
-
-    // if (cell) {
-    //     // Find all events in the cell
-    //     var eventsInCell = calendar.events.forCell(cell);
-
-    //     // If there are more than 1 event in the cell, hide the event
-    //     if (eventsInCell.length > 1) {
-    //         args.data.cssClass = "hidden-event";
-    //     }
-    // }
     // ...
 };
 
@@ -161,3 +140,106 @@ fetch("http://localhost:8080/typeRest/all")
     });
 })
 .catch((error) => console.error("FETCH ERROR:", error));
+
+
+/*WEEK CALENDAR */
+var weekCalendar = new DayPilot.Calendar("weekCalendar");
+weekCalendar.viewType = "Week";
+weekCalendar.startDate = DayPilot.Date.today().addDays(7);
+// ...
+weekCalendar.init();
+
+
+/*DAILY CALENDAR */
+var dailyCalendar = new DayPilot.Calendar("dailyCalendar");
+dailyCalendar.viewType = "Day";
+dailyCalendar.startDate = "2022-03-25";
+// ...
+dailyCalendar.init();
+
+
+/*YEARLY */
+const yearlyCalendar = new DayPilot.Calendar("yearlyCalendar", {
+  viewType: "Resources",
+  scale: "Day",
+  days: 31,
+  heightSpec: "Full",
+  columnWidthSpec: "Auto",
+  headerLevels: 1,
+  headerHeight: 30,
+  cellHeight: 30,
+  columnMarginLeft: 45,
+  columnWidthMin: 200,
+  durationBarVisible: false,
+  onTimeRangeSelected: async (args) => {
+    const modal = await DayPilot.Modal.prompt("Create a new event:", "Event 1");
+    const yearlyCalendar = args.control;
+    yearlyCalendar.clearSelection();
+    if (modal.canceled) { return; }
+    yearlyCalendar.events.add({
+      start: args.start,
+      end: args.end,
+      id: DayPilot.guid(),
+      text: modal.result,
+      resource: args.resource
+    });
+  },
+  onBeforeTimeHeaderRender: args => {
+    const day = args.header.date.toString("d");
+    args.header.html = day;
+  },
+  onBeforeCellRender: args => {
+    const belongsToCurrentMonth = args.cell.y + 1 === args.cell.start.getDay();
+
+    if (belongsToCurrentMonth) {
+      args.cell.properties.areas = [
+        { top: 0, left: 2, bottom: 0, width: 40, fontColor: "#666666", text: args.cell.start.toString("d ddd"), verticalAlignment: "center" }
+      ];
+    }
+    else {
+      args.cell.properties.backColor = "#dddddd";
+    }
+  },
+});
+yearlyCalendar.init();
+
+const app = {
+  loadColumns() {
+    const columns = [];
+    const startDate = DayPilot.Date.today().firstDayOfYear();
+    // one column per month
+    for (let i = 0; i < 12; i++) {
+      const start = startDate.addMonths(i);
+      const name = start.toString("MMMM");
+      columns.push({name, start});
+    }
+    yearlyCalendar.update({startDate, columns});
+  },
+  init() {
+    this.loadColumns();
+  }
+};
+app.init();
+
+
+
+
+/*SWITCH CALENDARS */
+document.querySelectorAll(".cal").forEach(cal=>{
+  cal.style.display = "none";
+});
+document.querySelector("."+document.querySelector(".calendarButton button.active").textContent).style.display = "block";
+document.querySelector(".calendarButton").querySelectorAll("button").forEach(button=>{
+  button.addEventListener("click",()=>{
+     document.querySelectorAll(".cal").forEach(cal=>{
+        cal.style.display = "none";
+     });
+      console.log("."+button.textContent);
+
+     document.querySelector("."+button.textContent).style.display = "block";
+     document.querySelectorAll(".calendarButton button").forEach(butt=>{
+        butt.classList.remove("active");
+     })
+     button.classList.add("active");
+  })
+})

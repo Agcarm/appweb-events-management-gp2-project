@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" th:href="@{/css/topBar.css}">
+    <link rel="stylesheet" th:href="@{/css/navStyle.css}">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" th:href="@{/css/analytics.css}">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.js"></script>
+    <title>Report</title>
+</head>
+<body>
+    <div class="navigation" th:replace="~{navigation :: navigation}">
+    </div>
+    <div class="container main">
+        <div class="topbar" th:replace="~{topBar :: topBar}">
+        </div>
+        <main>
+            <div><button type="button">download</button></div>
+            <div class="report">
+                
+            </div>
+        </main>
+    </div>
+</body>
+</html>

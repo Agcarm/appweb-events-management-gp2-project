@@ -70,3 +70,32 @@
     align-items: center;
     gap: 10px;
   }
+
+  .settingsModal{
+    display: none;
+  }
+
+  .modal{
+    height: 400px;
+    width: 100px;
+    background-color: #c5c5c5;
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 10px 20px;
+  }
+
+  .manager{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .modal a{
+    width: 100%;
+    height: 50px;
+  }
+  .modal a:hover{
+    background-color: var(--blue);
+    opacity: 0.4;
+    transition: all 0.5s linear;
+  }

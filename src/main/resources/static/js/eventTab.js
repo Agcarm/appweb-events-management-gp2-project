@@ -47,3 +47,21 @@ tabLists.forEach((tab, index) => {
 
 
 /*Aside parameters */
+
+
+
+var titleEvent = document.querySelector(".titleEvent").textContent;
+var opt = {
+    margin: 0,
+    filename: titleEvent+'PDF' ,
+    image: {type: 'jpeg',quality:0.98} ,
+    html2canvas :{scale : 2.5},
+    jsPDF :{unit:'in',format:'letter',orientation:'portrait'}
+
+}
+window.onload=function(){
+    document.getElementById("downloadBtn").addEventListener("click",()=>{
+        const invoice = this.document.getElementById("mySheet");
+        html2pdf().from(mySheet).set(opt).save();
+    })
+}

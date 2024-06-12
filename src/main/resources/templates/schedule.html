@@ -28,7 +28,30 @@
                     <button type="button">Week</button>
                     <button type="button">Day</button>
                 </div>
-                <div id="calendar"></div>
+                <div class="cal Month">
+                    <div id="calendar"></div>
+                </div>
+                <div class="cal Week">
+                    <div class="space">
+                        Week:
+                        <a href="javascript:weekCalendar.startDate = weekCalendar.startDate.addDays(-7); weekCalendar.update();">Previous</a>
+                        |
+                        <a href="javascript:weekCalendar.startDate = weekCalendar.startDate.addDays(7); weekCalendar.update();">Next</a>
+                    </div>
+                    <div id="weekCalendar"></div>
+                </div>
+                <div class="cal Day">
+                    <div class="space">
+                        Day:
+                        <a href="javascript:dailyCalendar.startDate = dailyCalendar.startDate.addDays(-1); dailyCalendar.update();">Previous</a>
+                        |
+                        <a href="javascript:dailyCalendar.startDate = dailyCalendar.startDate.addDays(1); dailyCalendar.update();">Next</a>
+                    </div>
+                    <div id="dailyCalendar"></div>
+                </div>
+                <div class="cal Year">
+                    <div id="yearlyCalendar"></div>
+                </div>
             </div> 
         </div>
     </div>

@@ -16,4 +16,17 @@
         </div>
     </div>
 </div>
+<div class="settingsModal" th:fragment= "settingsModal">
+    <div class="modal">
+        <div class="manager">
+            <div class="user">
+                <img src="/manager-images/profile.jpg"  alt="">
+            </div>
+            <div class="username" th:text="${user.fullname}"></div>
+        </div>
+        <a href="">Profile</a>
+        <a href="">Security</a>
+        <a href="">Notifications</a>
+    </div>
+</div>
 <script th:src="@{/js/searchbar.js}"></script>
