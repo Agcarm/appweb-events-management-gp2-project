@@ -1,6 +1,9 @@
 package com.gp2.appwebeventsmanagementgp2.controller;
 
+import java.io.File;
 import java.security.Principal;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -81,10 +84,10 @@ public class UserController {
         return "register";
     }
 
-	@GetMapping({"/login",""})
-	public String login() {
-		return "login";
-	}
+    @GetMapping({ "/login", "" })
+    public String login() {
+        return "login";
+    }
 
     @GetMapping("admin-page")
     public <taService> String adminPage(Model model, Principal principal) {
@@ -101,6 +104,19 @@ public class UserController {
 
         model.addAttribute("paidEventCount", eService.countPaidEvents());
         model.addAttribute("totalEvents", eService.findAll().size());
+
+        // File folder = new File("src/main/resources/static/images");
+        File folder = new File(EnvironmentVariables.getEventImages());
+        File[] listOfFiles = folder.listFiles();
+        List<String> images = new ArrayList<>();
+
+        for (File file : listOfFiles) {
+            if (file.isFile() && file.getName().startsWith("isj")) {
+                images.add(file.getName());
+            }
+        }
+
+        model.addAttribute("images", images);
         return "index";
     }
 
