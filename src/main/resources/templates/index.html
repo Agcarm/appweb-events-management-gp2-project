@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -14,24 +15,25 @@
 
 </head>
 
+
 <body>
     <!-- =============== Navigation ================ -->
     <div class="navigation" th:replace="~{navigation :: navigation}">
     </div>
-    <div class="container main">    
+    <div class="container main">
         <div class="topbar" th:replace="~{topBar :: topBar}"></div>
         <h1>Dashboard</h1>
         <div class="container content">
             <main class="left">
 
-                
+
                 <div class="cardzBox">
                     <div class="cardz">
                         <div>
                             <div class="numbers" th:text="${totalEvents}"></div>
                             <div class="cardName">Events</div>
                         </div>
-    
+
                         <div class="iconBx">
                             <ion-icon name="calendar-number-outline"></ion-icon>
                         </div>
@@ -41,25 +43,25 @@
                             <div class="numbers">1,504</div>
                             <div class="cardName">Budget</div>
                         </div>
-    
+
                         <div class="iconBx">
                             <ion-icon name="cash-outline"></ion-icon>
                         </div>
                     </div>
-    
-                    
-    
+
+
+
                     <div class="cardz">
                         <div>
                             <div class="numbers" th:text="${paidEventCount}"></div>
                             <div class="cardName">Attendees</div>
                         </div>
-    
+
                         <div class="iconBx">
                             <ion-icon name="people-outline"></ion-icon>
                         </div>
                     </div>
-                </div>    
+                </div>
                 <div class="photo">
                     <div id="slider">
                         <div th:each="image : ${images}" class="slide">
@@ -67,8 +69,25 @@
                         </div>
                     </div>
                 </div>
-                
-                
+                <div class="card totalEvents card-1">
+                    <p>Total Events: <span th:text="${totalEvents}"></span></p>
+                </div>
+                <div class="card totalExpenses card-1">
+                    <p>Total Expenses: <span th:text="${totalExpenses}"></span></p>
+                </div>
+
+                <div class="budgetEstimActual card card-2"><canvas id="budgetChart"></canvas></div>
+
+                <div class="card totalEvents card-1">
+                    <canvas id="taskChart"></canvas>
+                </div>
+
+                <div class="eventEstimActual card card-3"><canvas id="eventChart"></canvas></div>
+
+                <div class="eventPerVenuePie card card-3"><canvas id="venueChart"></canvas></div>
+
+                <div class="EventPervenue card card-3"><canvas id="contactChart"></canvas></div>
+
                 <div class="container table">
                     <div class="buttonToAdd"><button class="btn-table myprimarybtn">add event</button></div>
                     <table class="tabTable active" id="eventRest" th:fragment="eventList">
@@ -79,7 +98,7 @@
                                 <th>Type</th>
                                 <th>Status</th>
                                 <th>Date Modified</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
@@ -93,42 +112,54 @@
                                 <td th:text="${event.getStatus()}"></td>
                                 <td th:text="${event.getDateModified()}"></td>
                                 <td>
-                                    <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                        <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    <svg width="25px" height="25px" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none"
+                                            stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" />
+                                        <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                                            stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" />
                                     </svg>
                                 </td>
 
-                                
+
                         </tbody>
                     </table>
                 </div>
             </main>
             <aside class="side">
                 <div class="tasksList">
-                    <div class="buttonToAddt"><h1>Some Tasks</h1><button class="btn-table myprimarybtn">add Task</button></div>
+                    <div class="buttonToAddt">
+                        <h1>Some Tasks</h1><button class="btn-table myprimarybtn">add Task</button>
+                    </div>
                     <table class="tabTable active" id="taskRest" th:fragment="taskList">
                         <thead class="tablehead">
                             <tr>
 
                                 <th>Name</th>
                                 <th>Status</th>
-                                
+
                             </tr>
                         </thead>
                         <tbody class="table-group-divider">
                             <tr th:each="task, stat : ${taskList}" th:if="${stat.count <= 4}" class="table-primary">
-                               
+
                                 <td th:text="${task.getTitle()}"></td>
                                 <td th:text="${task.getStatus()}"></td>
                                 <td>
-                                    <svg width="25px" height="25px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
-                                        <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8" stroke="#000000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/>
+                                    <svg width="25px" height="25px" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M20,16v4a2,2,0,0,1-2,2H4a2,2,0,0,1-2-2V6A2,2,0,0,1,4,4H8" fill="none"
+                                            stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" />
+                                        <polygon fill="none" points="12.5 15.8 22 6.2 17.8 2 8.3 11.5 8 16 12.5 15.8"
+                                            stroke="#000000" stroke-linecap="round" stroke-linejoin="round"
+                                            stroke-width="2" />
                                     </svg>
                                 </td>
 
-                                
+
                         </tbody>
                     </table>
                 </div>
@@ -138,151 +169,365 @@
                     </div>
                 </div>
             </aside>
-  
-    </div>
-        <!-- ========================= Main ==================== -->
-       
 
-    <!-- <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
+        </div>
+        <!-- ========================= Main ==================== -->
+
+
+        <!-- <div id="overlay" class="overlay"  th:replace="~{createEventForm :: createEventForm}">
     </div>
     <div id="overlayTask" class="overlayTask"  th:replace="~{task :: task}"></div> -->
-    
-    <!-- =========== Scripts =========  -->
-    <script src="../js/nav.js"></script>
-    <!-- ====== ionicons ======= -->
-    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
-    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
-    <script>
-        var opt = {
-            margin: 1 ,
-            filename: 'Event PDF' ,
-            image: {type: 'jpeg',quality:0.98} ,
-            html2canvas :{scale : 2},
-            jsPDF :{unit:'in',format:'letter',orientation:'portrait'}
 
-        }
-        window.onload=function(){
-            document.getElementById("downloadBtn").addEventListener("click",()=>{
-                const invoice = this.document.getElementById("myTable");
-                html2pdf().from(myTable).set(opt).save();
-            })
-        }
+        <!-- =========== Scripts =========  -->
+        <script src="../js/nav.js"></script>
+        <!-- ====== ionicons ======= -->
+        <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+        <script>
+            var opt = {
+                margin: 1,
+                filename: 'Event PDF',
+                image: { type: 'jpeg', quality: 0.98 },
+                html2canvas: { scale: 2 },
+                jsPDF: { unit: 'in', format: 'letter', orientation: 'portrait' }
+
+            }
+            window.onload = function () {
+                document.getElementById("downloadBtn").addEventListener("click", () => {
+                    const invoice = this.document.getElementById("myTable");
+                    html2pdf().from(myTable).set(opt).save();
+                })
+            }
         </script>
-     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-     <script th:inline="javascript">
-         /*<![CDATA[*/
-         var ctx = document.getElementById('myChart').getContext('2d');
-         var eventList = /*[[${eventList}]]*/ 'default';
-         var labels = eventList.map(function(e) { return e.id; });
-         var estimatedData = eventList.map(function(e) { return e.estimatedAttendees; });
-         var actualData = eventList.map(function(e) { return e.actualAttendees; });
-         var hover = eventList.map(function(e) { return e.name; });
-         
-     
-         var myChart = new Chart(ctx, {
-             type: 'line',
-             data: {
-                 labels: labels,
-                 datasets: [{
-                     label: 'Estimated Attendees',
-                     data: estimatedData,
-                     backgroundColor: 'rgba(75, 192, 192, 0.2)',
-                     borderColor: 'rgba(75, 192, 192, 1)',
-                     borderWidth: 1
-                 },
-                 {
-                     label: 'Actual Attendees',
-                     data: actualData,
-                     backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                     borderColor: 'rgba(255, 99, 132, 1)',
-                     borderWidth: 1
-                 }]
-             },
-             options: {
-                 scales: {
-                     y: {
-                         beginAtZero: true
-                     }
-                 },
-// 
-tooltips: {
-    callbacks: {
-        title: function(tooltipItem, data) {
-            var event = eventList[tooltipItem[0].index];
-            return event.name;
-        },
-        label: function(tooltipItem, data) {
-            var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
-            return 'Value: ' + value;
-        }
-    }
-}
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var eventList = /*[[${eventList}]]*/ 'default';
+            var labels = eventList.map(function (e) { return e.id; });
+            var estimatedData = eventList.map(function (e) { return e.estimatedAttendees; });
+            var actualData = eventList.map(function (e) { return e.actualAttendees; });
+            var hover = eventList.map(function (e) { return e.name; });
 
 
-             }
-         });
-         /*]]>*/
-     </script>
-     <script th:inline="javascript">
-        /*<![CDATA[*/
-        // Get all radio buttons
-        var radios = document.querySelectorAll('input[type=radio]');
-    
-        // Add a 'change' event listener to each radio button
-        for (var i = 0; i < radios.length; i++) {
-            radios[i].addEventListener('change', function() {
-                // Get the selected event
-                var event = eventList.find(function(e) { return e.id == this.value; });
-    
-                // Update the 'numbers' div with the estimated attendees of the selected event
-                document.querySelector('.cardz .numbers').textContent = event.estimatedAttendees;
-    
-                // Get the task table body
-                var tbody = document.querySelector('#taskRest tbody');
-    
-                // Clear the current tasks
-                tbody.innerHTML = '';
-    
-                // Add a new row for each task of the selected event
-                for (var j = 0; j < event.tasks.length; j++) {
-                    var task = event.tasks[j];
-    
-                    // Create a new row and cells
-                    var row = document.createElement('tr');
-                    var nameCell = document.createElement('td');
-                    var statusCell = document.createElement('td');
-    
-                    // Set the text of the cells
-                    nameCell.textContent = task.title;
-                    statusCell.textContent = task.status;
-    
-                    // Add the cells to the row
-                    row.appendChild(nameCell);
-                    row.appendChild(statusCell);
-    
-                    // Add the row to the table body
-                    tbody.appendChild(row);
+            var myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Estimated Attendees',
+                        data: estimatedData,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    },
+                    {
+                        label: 'Actual Attendees',
+                        data: actualData,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    // 
+                    tooltips: {
+                        callbacks: {
+                            title: function (tooltipItem, data) {
+                                var event = eventList[tooltipItem[0].index];
+                                return event.name;
+                            },
+                            label: function (tooltipItem, data) {
+                                var value = data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index];
+                                return 'Value: ' + value;
+                            }
+                        }
+                    }
+
+
                 }
             });
+            /*]]>*/
+        </script>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            // Get all radio buttons
+            var radios = document.querySelectorAll('input[type=radio]');
+
+            // Add a 'change' event listener to each radio button
+            for (var i = 0; i < radios.length; i++) {
+                radios[i].addEventListener('change', function () {
+                    // Get the selected event
+                    var event = eventList.find(function (e) { return e.id == this.value; });
+
+                    // Update the 'numbers' div with the estimated attendees of the selected event
+                    document.querySelector('.cardz .numbers').textContent = event.estimatedAttendees;
+
+                    // Get the task table body
+                    var tbody = document.querySelector('#taskRest tbody');
+
+                    // Clear the current tasks
+                    tbody.innerHTML = '';
+
+                    // Add a new row for each task of the selected event
+                    for (var j = 0; j < event.tasks.length; j++) {
+                        var task = event.tasks[j];
+
+                        // Create a new row and cells
+                        var row = document.createElement('tr');
+                        var nameCell = document.createElement('td');
+                        var statusCell = document.createElement('td');
+
+                        // Set the text of the cells
+                        nameCell.textContent = task.title;
+                        statusCell.textContent = task.status;
+
+                        // Add the cells to the row
+                        row.appendChild(nameCell);
+                        row.appendChild(statusCell);
+
+                        // Add the row to the table body
+                        tbody.appendChild(row);
+                    }
+                });
+            }
+            /*]]>*/
+
+            var slider = document.getElementById('slider');
+            var slides = slider.getElementsByClassName('slide');
+            var index = 0;
+
+            function nextSlide() {
+                slides[index].classList.remove('active');
+                index = (index + 1) % slides.length;
+                slides[index].classList.add('active');
+            }
+
+            setInterval(nextSlide, 3000); // Change slide every 3 seconds
+
+            /*<![CDATA[*/
+            var ctx = document.getElementById('budgetChart').getContext('2d');
+            var budgets = /*[[${budgets}]]*/[];
+            var labels = budgets.map(function (budget) { return budget.title; });
+            var estimatedAmounts = budgets.map(function (budget) { return budget.estimatedAmount; });
+            var actualAmounts = budgets.map(function (budget) { return budget.actualAmount; });
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Estimated Amount',
+                        data: estimatedAmounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }, {
+                        label: 'Actual Amount',
+                        data: actualAmounts,
+                        backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            /*]]>*/
+
+            /*<![CDATA[*/
+            var ctx = document.getElementById('taskChart').getContext('2d');
+            var events = /*[[${events}]]*/[];
+            var labels = events.map(function (event) { return event.name; });
+            var taskCounts = events.map(function (event) { return event.tasks.length; });
+            var chart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Number of Tasks',
+                        data: taskCounts,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+            /*]]>*/
+
+            /*<![CDATA[*/
+var ctx = document.getElementById('eventChart').getContext('2d');
+var events = /*[[${events}]]*/ [];
+var labels = events.map(function(event) { return event.name; });
+var actualAttendeesData = events.map(function(event) { return event.actualAttendees; });
+var estimatedAttendeesData = events.map(function(event) { return event.estimatedAttendees; });
+var chart = new Chart(ctx, {
+    type: 'line',
+    data: {
+        labels: labels,
+        datasets: [{
+            label: 'Actual Attendees',
+            data: actualAttendeesData,
+            backgroundColor: 'rgba(75, 192, 192, 0.2)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+        },
+        {
+            label: 'Estimated Attendees',
+            data: estimatedAttendeesData,
+            backgroundColor: 'rgba(153, 102, 255, 0.2)',
+            borderColor: 'rgba(153, 102, 255, 1)',
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
         }
-        /*]]>*/
+    }
+});
+/*]]>*/
 
-var slider = document.getElementById('slider');
-var slides = slider.getElementsByClassName('slide');
-var index = 0;
+ /*<![CDATA[*/
+    var events = /*[[${events}]]*/ [];
+    var venues = {};
 
-function nextSlide() {
-    slides[index].classList.remove('active');
-    index = (index + 1) % slides.length;
-    slides[index].classList.add('active');
-}
+    // Count the number of events per venue
+    events.forEach(function(event) {
+        var venueName = event.eventVenue.name;
+        if (venues[venueName]) {
+            venues[venueName]++;
+        } else {
+            venues[venueName] = 1;
+        }
+    });
 
-setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    // Prepare the data for the pie chart
+    var labels = Object.keys(venues);
+    var data = Object.values(venues);
+
+    var ctx = document.getElementById('venueChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Events',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Percentage of Events per Venue'
+                }
+            }
+        }
+    });
+    /*]]>*/
+
+      /*<![CDATA[*/
+      var tasks = /*[[${tasks}]]*/ [];
+    var contacts = {};
+
+    // Count the number of tasks per contact
+    tasks.forEach(function(task) {
+        var contactName = task.contacts.name;
+        if (contacts[contactName]) {
+            contacts[contactName]++;
+        } else {
+            contacts[contactName] = 1;
+        }
+    });
+
+    // Prepare the data for the pie chart
+    var labels = Object.keys(contacts);
+    var data = Object.values(contacts);
+
+    var ctx = document.getElementById('contactChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Number of Tasks',
+                data: data,
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.2)',
+                    'rgba(54, 162, 235, 0.2)',
+                    'rgba(255, 206, 86, 0.2)',
+                    'rgba(75, 192, 192, 0.2)',
+                    'rgba(153, 102, 255, 0.2)',
+                    'rgba(255, 159, 64, 0.2)'
+                ],
+                borderColor: [
+                    'rgba(255, 99, 132, 1)',
+                    'rgba(54, 162, 235, 1)',
+                    'rgba(255, 206, 86, 1)',
+                    'rgba(75, 192, 192, 1)',
+                    'rgba(153, 102, 255, 1)',
+                    'rgba(255, 159, 64, 1)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            responsive: true,
+            plugins: {
+                legend: {
+                    position: 'top',
+                },
+                title: {
+                    display: true,
+                    text: 'Percentage of Tasks per Contact'
+                }
+            }
+        }
+    });
+    /*]]>*/
+        </script>
 
 
-    </script>
-       
-        
 </body>
 
 </html>
