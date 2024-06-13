@@ -10,7 +10,7 @@
 
 </head>
 <body>
-    <div id="overlay" class="overlay"  th:fragment="createEventForm">
+    <div id="overlay" class="overlay"  th:fragment="createEventForm" style="display: none;">
         <div class="form-container">
             <h2 style="margin-bottom: 30px;"><center>Fill out the form then Click "Submit" to create an Event:</center></h2>
             <form id="myForm" class="createEventForm" th:action="@{/events/create}" method="post" onsubmit="return validateEstimatedAttendees();" enctype="multipart/form-data">

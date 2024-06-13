@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.gp2.appwebeventsmanagementgp2.models.contact;
+import com.gp2.appwebeventsmanagementgp2.models.contactTypeMapping;
 import com.gp2.appwebeventsmanagementgp2.models.task;
 import com.gp2.appwebeventsmanagementgp2.repositories.contactRepository;
 
@@ -18,6 +19,8 @@ public class contactServiceImpl implements contactService {
 	private contactRepository contactRepository ;
 	@Autowired
 	private TaskService tservice;
+	@Autowired
+	private contactTypeMappingService cMappingService;
 
 	@Override
 	public List<contact> getAllcontacts() {
@@ -55,6 +58,9 @@ public class contactServiceImpl implements contactService {
 		tasks.forEach(tsk ->
 			tservice.clearContact(tsk.getId())
 		);
+		for (contactTypeMapping cMapping : cMappingService.findByContact(c)) {
+			cMappingService.deleteMapping(cMapping);
+		}
 		contactRepository.deleteById(contact_id);
 	}
 

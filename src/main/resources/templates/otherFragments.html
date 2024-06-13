@@ -1,9 +1,9 @@
 <div id="overlay" class="overlay" style="flex-direction: column;" th:fragment="contactForm">
-    <form class="form-container" id="contactForm" th:action= "@{/contacts/save-project}" method="post" style="padding: 25px;border-radius: 20px;">
+    <form class="form-container" id="contactForm" th:action= "@{/contacts/save-project}" th:object="${contactForm}" method="post" style="padding: 25px;border-radius: 20px;">
         <h2><center>Fill the Contact Form</center></h2>
       <div class="form-group">
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" placeholder="Your name please" required>
+        <input type="text" id="name"  name="name" placeholder="Your name please" required>
       </div>
       <div class="form-group">
         <label for="email">Email:</label>
@@ -25,7 +25,11 @@
           <!-- Add more options as needed -->
         </select>
       </div>
-
+      <div class="addType">
+        <p>Add Contact Type</p>
+        <div id="contactTypeContainer"></div>
+        <button type="button" title="addRole" id="addType" onclick="addContactType()"><ion-icon name="add-circle-outline"></ion-icon></button>
+      </div>
     <div class="formbuto">
         <button type="submit" class="fbtn" onsubmit="return confirm('Are you sure you wish to Create?');">Submit</button>
           <button id="closeFormBtn" class="fbtn" style="background-color: rgb(200, 1, 1);">Close</button>

@@ -32,7 +32,7 @@
 </style>
 
 <body>
-    <div id="overlayTask" class="overlayTask" th:fragment="task">
+    <div id="overlayTask" class="overlayTask" th:fragment="task" style="display: none;">
         <div class="container">
             <h1>Task Form</h1>
             <form id="myForm" th:action="@{/task/createtask}" method="post">

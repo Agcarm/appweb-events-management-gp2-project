@@ -32,6 +32,7 @@
      overlay.style.display = 'none';
 });
 
+
 const displayFormBtnTask = document.getElementById('displayFormBtnTask');
  const overlayTask = document.getElementById('overlayTask');
  const closeFormBtnTask = document.getElementById('closeFormBtnTask');
