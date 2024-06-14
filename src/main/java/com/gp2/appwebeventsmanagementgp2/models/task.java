@@ -35,7 +35,6 @@ public class task {
     @Column(name = "title", unique = true, nullable = false)
     private String title;
 
-    @FutureOrPresent
     @Column(name = "deadline", nullable = true)
     private LocalDateTime deadline;
    

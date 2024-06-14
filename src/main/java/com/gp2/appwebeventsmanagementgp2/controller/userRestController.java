@@ -36,7 +36,7 @@ public class userRestController {
 
     @PostMapping("/create")
     @Transactional
-    public ResponseEntity<?> CreateEvent(@RequestBody UserDto user) {
+    public ResponseEntity<?> CreateUser(@RequestBody UserDto user) {
         User u= userService.save(user);
 
         // Set the location header for the newly created resource

@@ -47,7 +47,7 @@ public class activity {
     @Column
     private LocalDateTime end;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private List<contact> participants = new ArrayList<>();
 
