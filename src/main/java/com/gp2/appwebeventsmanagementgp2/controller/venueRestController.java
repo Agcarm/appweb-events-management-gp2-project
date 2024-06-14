@@ -16,19 +16,24 @@ public class venueRestController {
     private venueService service;
 
     @GetMapping("/")
-    public List<venue> viewHomePage() {
+    public List<venue> getAllVenues() {
         List<venue> listvenue = service.findAll();
         return listvenue;
     }
 
     @PostMapping("/new")
-    public venue add(@RequestBody venue newVenue) {
+    public venue addVenue(@RequestBody venue newVenue) {
         return service.saveVenue(newVenue);
     }
 
     @GetMapping("/edit/{id}")
-    public venue showEditvenuePage(@PathVariable(name = "id") long id) {
+    public venue getVenueById(@PathVariable(name = "id") long id) {
         return service.getVenueById(id);
+    }
+
+    @PostMapping("/update/{id}")
+    public void editVenue(@PathVariable(name = "id") long id, @RequestBody venue venue) {
+        service.updateVenue(id, venue);
     }
 
     @DeleteMapping("/delete/{id}")

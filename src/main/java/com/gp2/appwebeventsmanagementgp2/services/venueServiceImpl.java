@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 
 import com.gp2.appwebeventsmanagementgp2.models.venue;
 import com.gp2.appwebeventsmanagementgp2.repositories.venueRepository;
-import com.gp2.appwebeventsmanagementgp2.services.venueService;
 
 @Service
 public class venueServiceImpl implements venueService{

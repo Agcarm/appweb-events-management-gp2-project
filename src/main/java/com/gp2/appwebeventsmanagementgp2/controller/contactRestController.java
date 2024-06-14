@@ -49,7 +49,7 @@ public class contactRestController {
     }
 
     @GetMapping("/getByName/{name}")
-    public contact getContact(@PathVariable("name") String name) {
+    public contact getContactByName(@PathVariable("name") String name) {
         return contactService.findByName(name).get();
     }
     

@@ -260,8 +260,13 @@ function fnselect(row) {
         document.querySelector(".latitude").textContent = data.eventVenue.latitude;
         document.querySelector(".longitude").textContent = data.eventVenue.longitude;
 
+        console.log(data.tasks);
         data.tasks.forEach(task => {
             var classStatus = "inProgress";
+            var assignee = "none";
+            if ( task.contacts !== null) {
+                assignee = task.contacts.name;
+            }
             if (task.status.toLowerCase()==="completed") {
                 classStatus = "completed";
             } else if(task.status.toLowerCase()==="pending"){
@@ -273,7 +278,7 @@ function fnselect(row) {
                 <div class="taskBody">
                     <img src="/images/EventTabIcons/Club.svg" alt="">
                     <div class="assignee">
-                        <p>`+task.contacts.name+`</p>
+                        <p>`+assignee+`</p>
                         <p>Junior Enterprise</p>
                     </div>
                     <div>

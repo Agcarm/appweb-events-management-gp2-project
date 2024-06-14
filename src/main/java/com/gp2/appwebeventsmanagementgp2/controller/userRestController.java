@@ -50,11 +50,4 @@ public class userRestController {
         return new ResponseEntity<>(null, responseHeaders, HttpStatus.
         CREATED);
     }
-
-    @GetMapping("/sort/{field}")
-    public List<event> sort(@PathVariable("field")  String field) {
-        return eventService.findAllSort(field);
-    }
-    
-
 }

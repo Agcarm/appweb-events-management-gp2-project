@@ -50,7 +50,7 @@ tabLists.forEach((tab, index) => {
 
 
 
-var titleEvent = document.querySelector(".titleEvent").textContent;
+var titleEvent = document.querySelector(".titleInfo-title").textContent;
 var opt = {
     margin: 0,
     filename: titleEvent+'PDF' ,

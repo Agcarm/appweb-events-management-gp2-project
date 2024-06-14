@@ -80,7 +80,7 @@ public class expenseRestController {
     }
 
     @PostMapping("/edit/{id}")
-    public expense postMethodName(@PathVariable("id") Long id, @ModelAttribute("expense") ExpenseDto editexpense) {
+    public expense editExpense(@PathVariable("id") Long id, @ModelAttribute("expense") ExpenseDto editexpense) {
         return expenseservice.editExpense(id, editexpense);
     }
 

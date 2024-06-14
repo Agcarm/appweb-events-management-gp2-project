@@ -64,7 +64,7 @@ public class budgetRestController {
     }
 
     @PostMapping("/edit/{id}")
-    public budget postMethodName(@PathVariable("id") Long id, @ModelAttribute("budget") BudgetDto editbudget) {
+    public budget editBudget(@PathVariable("id") Long id, @ModelAttribute("budget") BudgetDto editbudget) {
         return budgetservice.editBudget(id, editbudget);
     }
 

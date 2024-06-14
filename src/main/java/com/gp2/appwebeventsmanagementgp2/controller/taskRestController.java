@@ -30,7 +30,7 @@ public class taskRestController {
     TaskService taskservice;
     
     @PostMapping("/createtask")
-    public ResponseEntity<?> createtask(TaskDto tsk) {
+    public ResponseEntity<?> createtask(@RequestBody TaskDto tsk) {
         task t = taskservice.addTask(tsk);
 
         // Set the location header for the newly created resource
